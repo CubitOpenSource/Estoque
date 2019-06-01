@@ -5,7 +5,9 @@
     "autoload": {
         "psr-4": {
             "": "src2/",
-            "RoutePlanner\\": "src/",
+            "IvanFilho\\Database\\": [
+                "packages/ivanfilho/database/src/"
+            ],
             "CubitOpenSource\\Database\\": [
                 "classes/database/"
             ],

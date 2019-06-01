@@ -1,24 +1,24 @@
 <?php
+
+use \PackageLoader\PackageLoader;
+use \CubitOpenSource\Database\DB_Admin;
+
 include __DIR__ ."/PackageLoader.php";
 
-$loader = new PackageLoader\PackageLoader();
+$loader = new PackageLoader();
 $loader->load(__DIR__ ."/CubitOpenSource/Estoque");
 
-$pD = new CubitOpenSource\Database\ProdutoDAO();
+$dbAdmin = new DB_Admin();
 
-# insert
-/*$pD->insert(array(
-	"id" => "1",
-	"name" => "Biscoito Nikito 60g",
-	"description" => "Nikito P"
+/*$dbAdmin->findTable("products")->insert(array(
+	"name" => "Produto 3",
+	"description" => "No description"
 ));*/
 
-# get
-$array = $pD->get();
+/*$dbAdmin->findTable("products")->update(array(
+	"id" => "4",
+	"name" => "Produto 0004",
+	"description" => "chocolate"
+));*/
 
-foreach ($array as $k => $produto) {
-	echo "Id: " . $produto->getId() ."  ";
-	echo "Nome: " .$produto->getName() ."  ";
-	echo "Description: " .$produto->getDescription() ."  ";
-}
-echo "<hr>";
+// $dbAdmin->findTable("products")->delete(2);
