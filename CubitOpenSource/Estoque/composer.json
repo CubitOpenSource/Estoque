@@ -6,6 +6,9 @@
         "psr-4": {
             "": "src2/",
             "RoutePlanner\\": "src/",
+            "CubitOpenSource\\Database\\": [
+                "classes/database/"
+            ],
             "CubitOpenSource\\Estoque\\": [
                 "classes/",
                 "packages/package-folder/src/",

@@ -12,7 +12,7 @@ class PackageLoader
     public function load($dir)
     {
         $this->dir = $dir;
-        echo "DIR: " .$this->dir ."<br>";
+        // echo "DIR: " .$this->dir ."<br>";
         
         $composer = $this->getComposerFile();
         
@@ -48,7 +48,7 @@ class PackageLoader
         $dir = $this->dir;
         // Foreach namespace specified in the composer, load the given classes
         foreach ($namespaces as $namespace => $classpaths) {
-            echo "'" .$namespace ."'<br>";
+            // echo "'" .$namespace ."'<br>";
 
             if (!is_array($classpaths)) {
                 $classpaths = array($classpaths);
@@ -62,11 +62,11 @@ class PackageLoader
                     }
                     $filename = preg_replace("#\\\\#", "/", $classname).".php";
 
-                    echo "<br>";
+                    // echo "<br>";
                     foreach ($classpaths as $classpath) {
                         $fullpath = $this->dir."/".$classpath."/$filename";
 
-                        echo "'" .$fullpath ."'<br>";
+                        // echo "'" .$fullpath ."'<br>";
                         
                         if (file_exists($fullpath)) {
                             include_once $fullpath;
