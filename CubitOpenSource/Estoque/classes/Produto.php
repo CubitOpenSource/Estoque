@@ -1,6 +1,6 @@
 <?php
 
-namespace CubitOpenSource\estoque\classes;
+namespace CubitOpenSource\Estoque;
 
 class Produto
 {
