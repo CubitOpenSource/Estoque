@@ -1,27 +1,50 @@
 <?php
-session_start();
-define("URL", "http://localhost/dev/cubit/Estoque/CubitOpenSource/Estoque/");
-
 use \PackageLoader\PackageLoader;
 use \CubitOpenSource\Database\DB_Admin;
 
-include "./PackageLoader.php";
+define("ENVIRONMENT", "dev");
+// define("DEBUG", true);
+
+include "PackageLoader.php";
 
 $loader = new PackageLoader();
 $loader->load(__DIR__ ."/CubitOpenSource/Estoque");
 
 $dbAdmin = new DB_Admin();
 
-/*$dbAdmin->findTable("products")->insert(array(
-	"name" => "Produto 3",
-	"description" => "No description"
-));*/
+switch (ENVIRONMENT) {
+	case "dev":
+		define("URL", "http://localhost/dev/cubit/estoque/");
+		define("DB_NAME", "estoque_db");
+		define("DB_HOST", "127.0.0.1");
+		define("DB_USER", "root");
+		define("DB_PASS", "");
+		define("DB_TYPE", "mysql");
+		break;
+	case "production":
+		define("URL", "http://localhost/dev/cubit/estoque/");
+		define("DB_NAME", "estoque_db");
+		define("DB_HOST", "127.0.0.1");
+		define("DB_USER", "root");
+		define("DB_PASS", "");
+		define("DB_TYPE", "mysql");
+		break;
+	default:
+		break;
+}
 
-/*$dbAdmin->findTable("products")->update(array(
-	"id" => "4",
-	"name" => "Produto 0004",
-	"description" => "chocolate"
-));*/
+function newClass(string $className, $params="")
+{
+	if (! class_exists($className)) {
+		throw new Exception("Error loading class '" .$className ."'", 1);
+	}
+	/*try {
+		$class = new $className($params);
 
-// $dbAdmin->findTable("products")->delete(2);
-// var_dump($dbAdmin->findTable("products")->getAll());
+	} catch(\Exception $e) {
+		if (defined("DEBUG") && DEBUG === true) {
+			echo "" .$e->getMessage() .$util->getErrorWithLine("config.php", 43);
+		}
+	}*/
+	return new $className($params);
+}

@@ -1,0 +1,152 @@
+.main-container {
+	width: 100%;
+	max-width: 95%;
+	margin: 0 auto;
+}
+
+.card-shadow {
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	   -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.card-shadow.transition {
+	/* box-shadow transition */
+	-webkit-transition: box-shadow 300ms ease-in-out;
+	   -moz-transition: box-shadow 300ms ease-in-out;
+	    -ms-transition: box-shadow 300ms ease-in-out;
+	     -o-transition: box-shadow 300ms ease-in-out;
+	        transition: box-shadow 300ms ease-in-out;
+}
+.card-shadow.hover:hover {
+	-webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	   -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.btn {
+	display: inline-block;
+	margin: 0.5em 0;
+	padding: 0.4rem 0.4rem;
+	font-size: 0.9rem;
+	color: black;
+	cursor: pointer;
+}
+
+.btn:hover {
+	text-decoration: none;
+}
+
+.btn-default {
+	border: 1px solid gray;
+	border-radius: 2px;
+	background-color: lightgray;
+}
+
+.form-btn {
+	padding: 0.5rem;
+	font-size: 0.8rem;
+	background: whitesmoke;
+	border: 1px solid lightgray;
+	color: black;
+	/*cursor: pointer;*/
+}
+
+.form-btn:hover {
+	border: 1px solid #c6c6c6;
+	color: #222;
+	-webkit-transition: all 0;
+	-moz-transition: all 0;
+	-o-transition: all 0;
+	transition: all 0;
+	background-color: #f8f8f8;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#f8f8f8),to(#f1f1f1));
+	background-image: -webkit-linear-gradient(top,#f8f8f8,#f1f1f1);
+	background-image: -moz-linear-gradient(top,#f8f8f8,#f1f1f1);
+	background-image: -ms-linear-gradient(top,#f8f8f8,#f1f1f1);
+	background-image: -o-linear-gradient(top,#f8f8f8,#f1f1f1);
+	background-image: linear-gradient(top,#f8f8f8,#f1f1f1);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f8f8f8',EndColorStr='#f1f1f1')";
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1);
+	-moz-box-shadow: 0 1px 1px rgba(0,0,0,.1);
+	box-shadow: 0 1px 1px rgba(0,0,0,.1);
+	text-decoration: none;
+}
+
+.form-btn-primary:hover {
+	background-image: -moz-linear-gradient(top,#f57b54,#ff7043);
+    background-image: -ms-linear-gradient(top,#f57b54,#ff7043);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f57b54',EndColorStr='#ff7043')";
+    background-image: -o-linear-gradient(top,#f57b54,#ff7043);
+    background: -webkit-gradient(linear,left top,left bottom,from(#f57b54),to(#ff7043));
+    border: 1px solid #e64a19;
+    color: #fff;
+}
+
+.form-btn-primary {
+	background: #fb8f3d;
+    background-image: -moz-linear-gradient(top,#f57b54,#ff7043);
+    background-image: -ms-linear-gradient(top,#f57b54,#ff7043);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f57b54',EndColorStr='#ff7043')";
+    background-image: -o-linear-gradient(top,#f57b54,#ff7043);
+    background: -webkit-gradient(linear,left top,left bottom,from(#f57b54),to(#ff7043));
+    border: 1px solid #f84912;
+    color: #fff;
+}
+
+/* INPUT GROUP */
+.input-group {
+	display: flex;
+	margin: 0.5em 0;
+	box-shadow: 0 0 1px gray;
+	transition: box-shadow 0.2s linear;
+}
+
+.input-group.active  {
+	box-shadow: 0 0 6px rgba(35, 173, 278, 1);
+}
+
+.input-group label,
+.input-group span,
+.input-group a,
+.input-group input,
+.input-group select { padding: 0.5em 1em; }
+
+.input-group input,
+.input-group select {
+	width: 100%;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	background: white; 
+	border: none;
+	outline: none;
+}
+
+.input-group.grid-3-col {
+	display: grid;
+	grid-template-areas: "label input";
+	grid-template-columns: max-content auto min-content;
+	/*box-shadow: 0 0 2px red;*/
+	/*justify-content: center;*/
+}
+.input-group.grid-3-col label {
+	grid-area: label;
+	min-width: 140px;
+	text-align: right;
+	background-color: ghostwhite;
+	white-space: pre-wrap;
+}
+.input-group.grid-3-col input
+{
+	grid-area: input;
+}
+
+.error {
+	display: block;
+	margin: 0.75em 0 0.5em 0;
+	font-size: 0.9em;
+	color: red;
+}
+
+.error-icon {
+	color: red;
+}

@@ -4,17 +4,20 @@
     "description": "Load composer file",
     "autoload": {
         "psr-4": {
-            "": "src2/",
+            "": [
+                "../../",
+                "",
+                "mvc/models/",
+                "mvc/controllers/"
+            ],
             "IvanFilho\\Database\\": [
                 "packages/ivanfilho/database/src/"
             ],
             "CubitOpenSource\\Database\\": [
-                "classes/database/"
+                "mvc/models/database/"
             ],
             "CubitOpenSource\\Estoque\\": [
-                "classes/",
-                "packages/package-folder/src/",
-                "packages/package-folder1/src/"
+                "mvc/models/"
             ]
         }
     }
