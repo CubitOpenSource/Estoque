@@ -12,7 +12,7 @@ namespace IvanFilho\Database;
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Created: Mar 11, 2019.
-* Last Modified: Jun 1, 2019.
+* Last Modified: Jun 2, 2019.
 */
 
 class DB_Utils
@@ -73,10 +73,13 @@ class DB_Utils
 		return DB_Utils::getColumnByName($dao, $columnName);
 	}
 
-	public function createCondition($dao, $columnName, $value)
+	public function createCondition($dao, $columnName, $value, $like = false)
 	{		
 		$condition = DB_Utils::getColumnByName($dao, $columnName);
 		$condition->setValue($value);
+		if ($like) {
+			$condition->setExtra("like");
+		}
 		return $condition;
 	}
 

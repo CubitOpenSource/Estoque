@@ -22,3 +22,4 @@ $dbAdmin = new DB_Admin();
 ));*/
 
 // $dbAdmin->findTable("products")->delete(2);
+// var_dump($dbAdmin->findTable("products")->getAll());

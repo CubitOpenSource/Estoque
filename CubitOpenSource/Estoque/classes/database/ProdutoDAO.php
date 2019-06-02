@@ -17,7 +17,7 @@ use \CubitOpenSource\Estoque\Produto;
 * @author       CubitOpenSource <cubit.open.src@gmail.com>
 *
 * Created: Jun 1, 2019.
-* Last Modified: Jun 1, 2019.
+* Last Modified: Jun 2, 2019.
 */
 
 class ProdutoDAO extends DB_Table
@@ -42,46 +42,14 @@ class ProdutoDAO extends DB_Table
 		parent::delete($where);
 	}
 
-	public function get($id) {}
-
-	public function getAll() {}
-
-	/*public function getB($fields = array(), $where = array())
+	public function get($id)
 	{
-		$produtos = array();
-		$valores = array();
-		if (count($fields) == 0) {
-			$fields = array("*");
-		}
-		$sql = "SELECT " .implode(",", $fields) ." FROM `produtos`";
-		if (count($where) > 0) {
-			$tabelas = array_keys($where);
-			$valores = array_values($where);
-			$comp = array();
-			foreach ($tabelas as $tabela) {
-				$comp[] = $tabela ." = ?";
-			}
-			$sql .= implode(" AND ", $comp);
-		}
-		$sql = $this->db->prepare($sql);
-		$sql->execute($valores);
-		if ($sql->rowCount() > 0) {
-			foreach ($sql->fetchAll() as $item) {
-				$produtos[] = new Produto($item);
-			}
-		}
-		return $produtos;
+		$where[] = DB_Utils::createCondition($this, "id", $id);
+		return parent::selectOne(array(), $where);
 	}
-	public function insertB($fields = array())
+
+	public function getAll()
 	{
-		if (count($fields) > 0) {
-			$pseudoValues = array();
-			for ($i = 0; $i < count($fields); $i++) {
-				$pseudoValues[] = "?";
-			}
-			$sql = "INSERT INTO `produtos` (" .implode(",", array_keys($fields)).") VALUES (" .implode(",", $pseudoValues) .")";
-			$sql = $this->db->prepare($sql);
-			$sql->execute(array_values($fields));
-		}
-	}*/
+		return parent::selectAll();
+	}
 }

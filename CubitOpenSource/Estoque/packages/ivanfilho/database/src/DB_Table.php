@@ -28,7 +28,7 @@ define("CL", ":"); #Colon
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Created: Mar 11, 2019.
-* Last Modified: Jun 1, 2019.
+* Last Modified: Jun 2, 2019.
 */
 
 class DB_Table
@@ -92,6 +92,18 @@ class DB_Table
         $this->prepareValues("delete", array(), $whereColumnArray);
     }
 
+    protected function selectOne($selectColumnArray = array(), $whereColumnArray = array(), $asList = false)
+    {
+        $sql = $this->createSelectSQL($selectColumnArray , $whereColumnArray, 1);
+        return $this->select($sql, $whereColumnArray, $asList);
+    }
+
+    protected function selectAll($selectColumnArray = array(), $whereColumnArray = array(), $asList = false)
+    {
+        $sql = $this->createSelectSQL($selectColumnArray , $whereColumnArray);
+        return $this->select($sql, $whereColumnArray, $asList);
+    }
+
     private function prepareValues($operation = "", $array = array(), $whereColumnArray = array(), $includePK = false)
     {
         $fields = DB_Utils::getFieldsFromColumnArray($this->columns, $includePK, false);
@@ -134,6 +146,122 @@ class DB_Table
         $sql->execute();
     }
 
+    private function select($sql, $whereColumnArray=array(), $asList=false)
+    {
+        # echo $sql ."<br>"; #die();
+
+        if (is_array($whereColumnArray) && count($whereColumnArray) > 0) {
+            $sql = $this->db->prepare($sql);
+
+            foreach ($whereColumnArray as $column) {
+                $value = $column->getValue();
+
+                if ($column->getExtra() == "like") {
+                    $value = QT ."%" .$column->getValue() ."%" .QT;
+                }
+                # echo CL .$column->getName() ." = " .$value ."<br>";
+                $sql->bindValue(CL .$column->getName(), $value);
+            }
+
+            $sql->execute();
+        }
+        else {
+            $sql = $this->db->query($sql);
+        }
+
+        if ($sql->rowCount() == 1) {
+            #echo "Found 1";
+            if ($asList) {
+                #echo " as List.";
+                $list[] = $sql->fetch();
+                return $list;
+            }
+            return $sql->fetch();
+        }
+        elseif ($sql->rowCount() > 1) {
+            #echo "Found " .$sql->rowCount();
+            return $sql->fetchAll();
+        }
+        return false;
+    }
+
+    private function createSelectSQL($selectColumnArray=array(), $whereColumnArray=array(), $limit="", $additionalColumnArray=array(), $order=array())
+    {
+        $table = BQ .$this->tableName .BQ;
+        $select = $this->formatSelectClause($selectColumnArray);
+        $select = $this->formatAdditionalSelectClause($select, $additionalColumnArray);
+        $where = $this->formatWhereClause($whereColumnArray);
+
+        $sql = "SELECT " .$select ." FROM " .$table .$where;
+
+        #var_dump($order); die();
+
+        if (count($order) > 0) {
+            $sql .= " ORDER BY ";
+            foreach ($order as $o) {
+                $sql .= BQ .$o["column"]->getName() .BQ ." " .$o["criteria"] .COMMA;
+            }
+            $sql = DB_Utils::removeLastString($sql, COMMA);
+        }
+        #$sql .= (count($order) > 0) ? " ORDER BY " .BQ .$order["column"]->getName() .BQ ." " .$order["criteria"] : "";
+        $sql .= (! empty($limit)) ? " LIMIT " .$limit : "";
+        #$sql .= ($limit > 0) ? " LIMIT " .$limit : "";
+
+        return $sql;
+    }
+
+    private function formatSelectClause($columnArray=array())
+    {
+        $clause = "";
+
+        if (is_array($columnArray) && count($columnArray) > 0) {
+            foreach ($columnArray as $column) {
+                $clause .= BQ .$column->getName() .BQ .COMMA;
+            }
+        }
+
+        return (empty($clause)) ? "*" : $clause;
+    }
+
+    private function formatAdditionalSelectClause($selectClause, $additionalColumnArray=array())
+    {
+        $clause = $selectClause;
+
+        if (is_array($additionalColumnArray) && count($additionalColumnArray) > 0) {
+            $clause .= COMMA;
+            foreach ($additionalColumnArray as $additional) {
+                $table = $additional["name"];
+                $select = $additional["select"];
+                $where = $additional["where"];
+                $as = $additional["as"];
+                $limit = $additional["limit"];
+
+                $clause .= "(";
+                foreach ($select as $column) {
+                    $clause .= "SELECT " .BQ .$table .BQ ."." .BQ .$column->getName() .BQ ." FROM " .BQ .$table .BQ ." WHERE ";
+
+                    #echo $clause ."<br>";
+                    if (count($where) > 0) {
+                        foreach ($where as $whereColumn) {
+                            $clause .= BQ .$table .BQ ."." .BQ .$whereColumn->getName() .BQ ." = " .BQ .$this->tableName .BQ ."." .BQ .$this->findColumn($whereColumn->getValue())->getName() .BQ .AND_A;
+                        }
+                        $clause = DB_Utils::removeLastString($clause, AND_A);
+                    }
+
+                    if (! empty($limit)) {
+                        $clause .= " LIMIT " .$limit;
+                    }
+
+                    $clause .= ")";
+                    $clause .= " AS " .BQ .$as .BQ .COMMA;
+                }
+            }
+            $clause = DB_Utils::removeLastString($clause, COMMA);
+            # echo $clause; die();
+        }
+        return $clause;
+    }
+
     private function formatWhereClause($columnArray = "")
     {
         $clause = "";
@@ -141,7 +269,8 @@ class DB_Table
         if (! empty($columnArray)) {
             $clause .= " WHERE ";
             foreach ($columnArray as $column) {
-                $clause .= BQ .$column->getName() .BQ ." = " .CL .$column->getName() .AND_A;
+                $operator = ($column->getExtra() === "like") ? "LIKE" : "=";
+                $clause .= BQ .$column->getName() .BQ ." " .$operator ." " .CL .$column->getName() .AND_A;
             }
             $clause = DB_Utils::removeLastString($clause, AND_A);
         }
