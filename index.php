@@ -1,25 +1,13 @@
-<?php
+<?php $title = "Home Page"; ?>
+<?php include __DIR__ ."/CubitOpenSource/Estoque/template/page-top.php"; ?>
 
-use \PackageLoader\PackageLoader;
-use \CubitOpenSource\Database\DB_Admin;
+<h1>Sistema de Gestão de Estoque</h1>
 
-include __DIR__ ."/PackageLoader.php";
+<h3>Produtos</h3>
+<ul>
+	<li><a href="#">Cadastrar</a></li>
+	<li><a href="#">Listar</a></li>
+</ul>
 
-$loader = new PackageLoader();
-$loader->load(__DIR__ ."/CubitOpenSource/Estoque");
 
-$dbAdmin = new DB_Admin();
-
-/*$dbAdmin->findTable("products")->insert(array(
-	"name" => "Produto 3",
-	"description" => "No description"
-));*/
-
-/*$dbAdmin->findTable("products")->update(array(
-	"id" => "4",
-	"name" => "Produto 0004",
-	"description" => "chocolate"
-));*/
-
-// $dbAdmin->findTable("products")->delete(2);
-// var_dump($dbAdmin->findTable("products")->getAll());
+<?php include __DIR__ ."/CubitOpenSource/Estoque/template/page-bottom.php"; ?>
