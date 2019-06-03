@@ -15,6 +15,7 @@ class ProductController extends Controller
 
 	public function new()
 	{
-
+		$data = array();
+		$this->loadView("product-form", $data);
 	}
 }
