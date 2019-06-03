@@ -17,7 +17,7 @@ namespace IvanFilho\Database;
 
 class DB_Utils
 {
-	public static function getDefaultLength($dataType)
+	/*public static function getDefaultLength($dataType)
 	{
 		switch ($dataType) {
 		    case INT:
@@ -26,12 +26,10 @@ class DB_Utils
 		        return 128;
 		    case TEXT:
 		        return 255;
-		    case LONGTEXT:
-		        return 255;
 		    default:
 		        return 1;
 		}
-	}
+	}*/
 
 	public function getPseudoValuesFromColumnArray($columnArray, $includePK = true)
 	{

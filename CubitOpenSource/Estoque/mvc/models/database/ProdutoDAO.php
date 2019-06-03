@@ -26,8 +26,19 @@ class ProdutoDAO extends DB_Table
 	{
 		parent::__construct("products");
 		$this->addColumn(new Column("id", INT, 0, false, "AUTO_INCREMENT", "PRIMARY KEY"));
-		$this->addColumn(new Column("name", VARCHAR, 100));
-		$this->addColumn(new Column("description", VARCHAR, 200));
+		$this->addColumn(new Column("active", INT));
+		$this->addColumn(new Column("unity_id", INT));
+		$this->addColumn(new Column("brand_id", INT));
+		$this->addColumn(new Column("category_id", INT));
+		$this->addColumn(new Column("description", TEXT));
+		$this->addColumn(new Column("barcode", TEXT));
+		$this->addColumn(new Column("location", VARCHAR, 200));
+		$this->addColumn(new Column("image", TEXT));
+		$this->addColumn(new Column("stock", INT));
+		$this->addColumn(new Column("stock_min", INT));
+		$this->addColumn(new Column("price_cost", DECIMAL));
+		$this->addColumn(new Column("price_sell", DECIMAL));
+		$this->addColumn(new Column("gain_percent", DECIMAL));
 	}
 
 	public function update($array, $where = array())
@@ -42,14 +53,14 @@ class ProdutoDAO extends DB_Table
 		parent::delete($where);
 	}
 
-	public function get($id)
+	public function get($id, $asList = false)
 	{
 		$where[] = DB_Utils::createCondition($this, "id", $id);
-		return parent::selectOne(array(), $where);
+		return parent::selectOne(array(), $where, $asList);
 	}
 
 	public function getAll()
 	{
-		return parent::selectAll();
+		return parent::selectAll(array(), array(), true);
 	}
 }

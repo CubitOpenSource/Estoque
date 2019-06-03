@@ -4,8 +4,8 @@ abstract class Controller
 {
 	public function __construct($title, $defaultView, $defaultTemplate)
 	{
-		global $dbMan;
-		$this->dbMan = $dbMan;
+		global $dbAdmin;
+		$this->dbAdmin = $dbAdmin;
 		$this->util = new Util();
 		$this->title = $title;
 		$this->defaultView = $defaultView;

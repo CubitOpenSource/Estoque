@@ -3,5 +3,5 @@
 <h3>Produtos</h3>
 <ul>
 	<li><a href="<?= URL ?>product/new">Cadastrar</a></li>
-	<li><a href="#">Listar</a></li>
+	<li><a href="<?= URL ?>product/list">Listar</a></li>
 </ul>

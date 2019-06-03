@@ -6,6 +6,7 @@ use \IvanFilho\Database\Database;
 use \IvanFilho\Database\DB_Utils;
 
 define("INT", "INT");
+define("DECIMAL", "DECIMAL(8, 4)");
 define("VARCHAR", "VARCHAR");
 define("TEXT", "TEXT");
 define("DATE", "DATE");
@@ -66,7 +67,7 @@ class DB_Table
     {
         $fields = DB_Utils::getFieldsFromColumnArray($this->columns);
         $sql = "CREATE TABLE IF NOT EXISTS " .BQ .$this->tableName .BQ ." (" .$fields .")";
-        # echo $sql; die();
+        # die($sql);
         $this->db->query($sql);
     }
 
@@ -110,14 +111,22 @@ class DB_Table
         $pseudoValues = DB_Utils::getPseudoValuesFromColumnArray($this->columns, $includePK);
         $where = $this->formatWhereClause($whereColumnArray);
 
-        if ($operation == "insert")
+        if ($operation == "insert") {
             $sql = "INSERT INTO";
-        elseif ($operation == "update")
+        }
+        elseif ($operation == "update") {
             $sql = "UPDATE";
-        elseif ($operation == "delete")
+        }
+        elseif ($operation == "delete") {
             $sql = "DELETE FROM";
-        else
+        }
+        else {
             return false;
+        }
+
+        if (($operation != "delete") && is_array($array) && count($array) == 0) {
+            return false;
+        }
 
         $sql .= " " .BQ .$this->tableName .BQ;
         if (is_array($array) && count($array) > 0)
@@ -182,7 +191,8 @@ class DB_Table
             #echo "Found " .$sql->rowCount();
             return $sql->fetchAll();
         }
-        return false;
+
+        return ($asList) ? array() : false;
     }
 
     private function createSelectSQL($selectColumnArray=array(), $whereColumnArray=array(), $limit="", $additionalColumnArray=array(), $order=array())

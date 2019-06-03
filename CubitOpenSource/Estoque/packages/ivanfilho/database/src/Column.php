@@ -113,7 +113,7 @@ class Column
     public function setLength($length)
     {
         if ($length == 0) {
-            $length = DB_Utils::getDefaultLength($this->getDataType());
+            #$length = DB_Utils::getDefaultLength($this->getDataType());
         }
         elseif ($length == -1) {
             # Let SQL decide the default length for this datatype; 
