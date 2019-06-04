@@ -5,3 +5,7 @@
 	<li><a href="<?= URL ?>product/new">Cadastrar</a></li>
 	<li><a href="<?= URL ?>product/list">Listar</a></li>
 </ul>
+
+<footer>
+	&copy; 2019
+</footer>
