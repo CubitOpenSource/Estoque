@@ -14,7 +14,7 @@ use \PDO;
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Created: Mar 11, 2019.
-* Last Modified: Jun 1, 2019.
+* Last Modified: Jun 4, 2019.
 */
 
 class Database
@@ -32,7 +32,7 @@ class Database
 	private function __construct()
 	{
 		try {
-			$this->db = new PDO("mysql:dbname=estoque_db;host=localhost", "root", "");
+			$this->db = new PDO("mysql:dbname=" .DB_NAME .";host=" .DB_HOST, DB_USER, DB_PASS);
 			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		} catch(PDOException $e) {
 			die($e->getMessage());

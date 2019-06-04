@@ -15,6 +15,16 @@ function validation($array, $util)
 		$util->setErrorMessage("description", "Digite a descrição do produto.");
 	}
 
+	if (empty($array["price_cost"])) {
+		$res = false;
+		$util->setErrorMessage("price-cost", "Digite o preço de custo do produto.");
+	}
+
+	if (empty($array["price_sell"])) {
+		$res = false;
+		$util->setErrorMessage("price-sell", "Digite o preço de venda do produto.");
+	}
+
 	// TODO: check product with the same description
 
 	if ($res) {

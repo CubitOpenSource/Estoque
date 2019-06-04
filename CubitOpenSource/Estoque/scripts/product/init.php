@@ -16,6 +16,8 @@ $array["price_sell"] = isset($_POST["price-sell"]) ? $_POST["price-sell"] : (! e
 $array["stock"] = isset($_POST["stock"]) ? $_POST["stock"] : (! empty($p["stock"]) ? $p["stock"] : "");
 $array["stock_min"] = isset($_POST["stock-min"]) ? $_POST["stock-min"] : (! empty($p["stock_min"]) ? $p["stock_min"] : "");
 $array["image"] = isset($_POST["image"]) ? $_POST["image"] : (! empty($p["image"]) ? $p["image"] : "");
+$array["created_at"] = (! empty($p["created_at"])) ? $p["created_at"] : "";
+$array["updated_at"] = (! empty($p["updated_at"])) ? $p["updated_at"] : "";
 
 # Get product ID
 $allProducts = $this->dbAdmin->findTable("products")->getAll();

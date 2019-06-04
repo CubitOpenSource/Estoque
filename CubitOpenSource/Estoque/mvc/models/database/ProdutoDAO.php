@@ -26,6 +26,8 @@ class ProdutoDAO extends DB_Table
 	{
 		parent::__construct("products");
 		$this->addColumn(new Column("id", INT, 0, false, "AUTO_INCREMENT", "PRIMARY KEY"));
+		$this->addColumn(new Column("created_at", DATE));
+		$this->addColumn(new Column("updated_at", DATE));
 		$this->addColumn(new Column("active", INT));
 		$this->addColumn(new Column("unity_id", INT));
 		$this->addColumn(new Column("brand_id", INT));
@@ -41,8 +43,15 @@ class ProdutoDAO extends DB_Table
 		$this->addColumn(new Column("gain_percent", DECIMAL));
 	}
 
+	public function insert($array)
+	{
+		$array["created_at"] = date("Y-m-d");
+		parent::insert($array);
+	}
+
 	public function update($array, $where = array())
 	{
+		$array["updated_at"] = date("Y-m-d");
 		$where[] = DB_Utils::createCondition($this, "id", $array["id"]);
 		parent::update($array, $where);
 	}

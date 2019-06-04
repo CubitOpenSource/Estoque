@@ -5,17 +5,10 @@ use \CubitOpenSource\Database\DB_Admin;
 define("ENVIRONMENT", "dev");
 // define("DEBUG", true);
 
-include "PackageLoader.php";
-
-$loader = new PackageLoader();
-$loader->load(__DIR__ ."/CubitOpenSource/Estoque");
-
-$dbAdmin = new DB_Admin();
-
 switch (ENVIRONMENT) {
 	case "dev":
 		define("URL", "http://localhost/dev/cubit/estoque/");
-		define("DB_NAME", "estoque_db");
+		define("DB_NAME", "stock_db");
 		define("DB_HOST", "127.0.0.1");
 		define("DB_USER", "root");
 		define("DB_PASS", "");
@@ -23,7 +16,7 @@ switch (ENVIRONMENT) {
 		break;
 	case "production":
 		define("URL", "http://localhost/dev/cubit/estoque/");
-		define("DB_NAME", "estoque_db");
+		define("DB_NAME", "stock_db");
 		define("DB_HOST", "127.0.0.1");
 		define("DB_USER", "root");
 		define("DB_PASS", "");
@@ -32,6 +25,13 @@ switch (ENVIRONMENT) {
 	default:
 		break;
 }
+
+include "PackageLoader.php";
+
+$loader = new PackageLoader();
+$loader->load(__DIR__ ."/CubitOpenSource/Estoque");
+
+$dbAdmin = new DB_Admin();
 
 function newClass(string $className, $params="")
 {
