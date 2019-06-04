@@ -3,39 +3,55 @@
 
 	<form name="product" method="POST" enctype="multipart/form-data">
 
-		<div>
-			<label>Cógigo do Produto:</label>
-			<input disabled="on" type="number" name="id" min="1" autofocus="on" value="<?= $product["id"] ?>">
-
-			<label>Código de Barras:</label>
-			<input type="text" name="barcode" value="<?= $product["barcode"] ?>">	
+		<div class="flex-wrapper">
+			<div class="input-wrapper">
+				<label>Código</label>
+				<input disabled="on" type="number" name="id" min="1" autofocus="on" value="<?= $product["id"] ?>" style="width: 5em">
+			</div>
+			<div class="input-wrapper">
+				<label>Código de Barras</label>
+				<input type="text" name="barcode" value="<?= $product["barcode"] ?>">
+			</div>
 		</div>
+
+		<div class="flex-wrapper">
+			<div class="input-wrapper" style="width: 100%">
+				<label>Descrição:</label>
+				<input type="text" name="description" value="<?= $product["description"] ?>">
+				<span class="error"><?= $this->util->getErrorMessage("description") ?></span>
+			</div>
+			
+			<div class="input-wrapper">
+				<label>Unidade</label>
+				<div style="display: flex; align-items: center;">
+				<select name="unity">
+					<option value="0"></option>
+				</select>
+				<a id="add-product-unity" class="btn btn-option" href="#"><i class="fas fa-plus"></i></a>
+				</div>
+			</div>
+
+			<div class="input-wrapper">
+				<label>Marca:</label>
+				<select name="brand">
+					<option value="0"></option>
+				</select>
+			</div>
+
+			<div class="input-wrapper">
+				<label>Categoria:</label>
+				<select name="category">
+					<option value="0"></option>
+				</select>
+			</div>
+		</div>
+		<div class="input-wrapper">
+			<label>Imagem do Produto:</label>
+			<input type="file" name="image">
+		</div>
+
 		
 
-		<label>Unidade</label>
-		<select name="unity">
-			<option value="0"></option>
-		</select>
-		<a id="add-product-unity" class="btn btn-option" href="#"><i class="fas fa-plus"></i></a>
-
-		<label>Descrição:</label>
-		<input type="text" name="description" value="<?= $product["description"] ?>">
-		<span class="error"><?= $this->util->getErrorMessage("description") ?></span>
-
-		<label>Imagem do Produto:</label>
-		<input type="file" name="image">
-
-		<label>Marca:</label>
-		<select name="brand">
-			<option value="0"></option>
-		</select>
-
-		<label>Categoria:</label>
-		<select name="category">
-			<option value="0"></option>
-		</select>
-
-		
 		<fieldset>
 			<legend>Financeiro</legend>
 
@@ -82,7 +98,27 @@
 </section>
 
 <style>
-	input {
+	.flex-wrapper {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.flex-wrapper .input-wrapper {
+		margin: 1em 1em 1em 0;
+	}
+	.flex-wrapper .input-wrapper:last-child {
+		margin-right: 0;
+	}
+
+	.input-wrapper {
+		display: inline-table;
+	}
+	.input-wrapper label {
+		display: block;
+		width: 100%;
+		margin: 0.5rem 0;
+	}
+
+	select {
 		width: 100%;
 	}
 </style>
