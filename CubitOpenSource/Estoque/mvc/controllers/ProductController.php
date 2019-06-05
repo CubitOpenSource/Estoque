@@ -41,4 +41,16 @@ class ProductController extends Controller
 
 		$this->loadView("product-form", $data);
 	}
+
+	public function edit($id)
+	{
+		include "./CubitOpenSource/Estoque/scripts/product/init.php";
+		include "./CubitOpenSource/Estoque/scripts/product/form-submit.php";
+
+		$data = array(
+			"product" => $array
+		);
+
+		$this->loadView("product-form", $data);
+	}
 }

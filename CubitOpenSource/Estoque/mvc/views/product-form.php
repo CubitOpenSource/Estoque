@@ -1,55 +1,80 @@
+<script src="<?= URL ?>assets/js/util.js">
+	window.onload() = function() {
+		// 
+	}
+</script>
 <section class="main-container">
 	<h1>Novo Produto</h1>
 
 	<form name="product" method="POST" enctype="multipart/form-data">
+		<fieldset>
+			<legend>Geral</legend>
+			<div class="grid g-c2a">
+				<div class="input-wrapper">
+					<label>Código Automático</label>
+					<input style="width: 100%" disabled="on" type="number" name="id" min="1" autofocus="on" value="<?= $product["id"] ?>" style="width: 5em">
+				</div>
 
-		<div class="flex-wrapper">
-			<div class="input-wrapper">
-				<label>Código</label>
-				<input disabled="on" type="number" name="id" min="1" autofocus="on" value="<?= $product["id"] ?>" style="width: 5em">
-			</div>
-			<div class="input-wrapper">
-				<label>Código de Barras</label>
-				<input type="text" name="barcode" value="<?= $product["barcode"] ?>">
-			</div>
-		</div>
-
-		<div class="flex-wrapper">
-			<div class="input-wrapper" style="width: 100%">
-				<label>Descrição:</label>
-				<input type="text" name="description" value="<?= $product["description"] ?>">
-				<span class="error"><?= $this->util->getErrorMessage("description") ?></span>
-			</div>
-			
-			<div class="input-wrapper">
-				<label>Unidade</label>
-				<div style="display: flex; align-items: center;">
-				<select name="unity">
-					<option value="0"></option>
-				</select>
-				<a id="add-product-unity" class="btn btn-option" href="#"><i class="fas fa-plus"></i></a>
+				<div class="input-wrapper">
+					<label>Código de Barras</label>
+					<input type="text" name="barcode" value="<?= $product["barcode"] ?>">
 				</div>
 			</div>
 
-			<div class="input-wrapper">
-				<label>Marca:</label>
-				<select name="brand">
-					<option value="0"></option>
-				</select>
+			<div class="grid">
+				<div class="input-wrapper">
+					<label>Descrição do Produto</label>
+					<input style="width: 100%" type="text" name="description" value="<?= $product["description"] ?>">
+					<span class="error"><?= $this->util->getErrorMessage("description") ?></span>
+				</div>
+				
+				<div class="input-wrapper">
+					<label>Imagem do Produto</label>
+
+					<div class="grid g-c2a">
+						<div class="image-preview" style="display: flex; align-items: center; justify-content: center; width: 120px; height: 120px; border: 1px solid; overflow: hidden;">
+							<img id="image-preview" src="" style="max-width: 100%; max-height: 100%;">
+						</div>
+						<input id="file-input" type="file" name="image" onchange="updatePreviewImage.call(this)">
+					</div>
+				</div>
 			</div>
 
-			<div class="input-wrapper">
-				<label>Categoria:</label>
-				<select name="category">
-					<option value="0"></option>
-				</select>
-			</div>
-		</div>
-		<div class="input-wrapper">
-			<label>Imagem do Produto:</label>
-			<input type="file" name="image">
-		</div>
+			<div class="grid g-c3">
+				<div class="input-wrapper">
+					<label>Unidade</label>
+					
+					<div class="grid g-c2b">
+						<select name="unity">
+							<option value="0"></option>
+						</select>
+						<a id="add-product-unity" class="btn btn-option" href="#" style="display:block"><i class="fas fa-plus"></i></a>
+					</div>
+				</div>
 
+				<div class="input-wrapper">
+					<label>Marca</label>
+
+					<div class="grid g-c2b">
+						<select name="brand">
+							<option value="0"></option>
+						</select>
+						<a id="add-product-unity" class="btn btn-option" href="#" style="display:block"><i class="fas fa-plus"></i></a>
+					</div>
+				</div>
+
+				<div class="input-wrapper">
+					<label>Categoria</label>
+
+					<div class="grid g-c2b">
+						<select name="category">
+							<option value="0"></option>
+						</select>
+						<a id="add-product-unity" class="btn btn-option" href="#" style="display:block"><i class="fas fa-plus"></i></a>
+					</div>
+				</div>
+			</div>			
+		</fieldset>
 		
 
 		<fieldset>
@@ -98,6 +123,35 @@
 </section>
 
 <style>
+	.grid {
+		display: grid;
+		grid-gap: 1rem;
+		align-items: stretch;
+	}
+
+	.g-c2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.g-c2a { grid-template-columns: 0.5fr 1fr; }
+	.g-c2b { grid-template-columns: 1fr 0.1fr; }
+
+	.g-c3 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	label {
+		font-size: 1.25rem;
+	}
+
+	input {
+		font-size: 1.5rem;
+	}
+
+	select, input {
+		min-height: 2rem;
+	}
+
 	.flex-wrapper {
 		display: flex;
 		flex-wrap: wrap;
@@ -116,6 +170,9 @@
 		display: block;
 		width: 100%;
 		margin: 0.5rem 0;
+	}
+	.input-wrapper input {
+		width: 100%;
 	}
 
 	select {

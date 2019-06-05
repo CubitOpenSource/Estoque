@@ -1,5 +1,5 @@
 <?php
-$p = (! empty($productId)) ? $this->dbAdmin->findTable("products")->get($productId) : "";
+$p = (! empty($id)) ? $this->dbAdmin->findTable("products")->get($id) : "";
 $array = array();
 
 $array["id"] = isset($_POST["id"]) ? $_POST["id"] : ((! empty($p["id"]) ? $p["id"] : ""));
