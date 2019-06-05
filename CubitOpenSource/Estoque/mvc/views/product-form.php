@@ -1,8 +1,4 @@
-<script src="<?= URL ?>assets/js/util.js">
-	window.onload() = function() {
-		// 
-	}
-</script>
+<script src="<?= URL ?>assets/js/util.js"></script>
 <section class="main-container">
 	<h1>Novo Produto</h1>
 
@@ -33,7 +29,7 @@
 
 					<div class="grid g-c2a">
 						<div class="image-preview" style="display: flex; align-items: center; justify-content: center; width: 120px; height: 120px; border: 1px solid; overflow: hidden;">
-							<img id="image-preview" src="" style="max-width: 100%; max-height: 100%;">
+							<img id="image-preview" src="<?= URL ?>assets/img/products/<?= $product["image"] ?>" style="max-width: 100%; max-height: 100%;">
 						</div>
 						<input id="file-input" type="file" name="image" onchange="updatePreviewImage.call(this)">
 					</div>
@@ -81,14 +77,14 @@
 			<legend>Financeiro</legend>
 
 			<label>Margem de Lucro</label>
-			<input type="text" name="gain-percent" value="<?= $product["gain_percent"] ?>">
+			<input type="text" name="gain-percent" value="<?= number_format((float) $product["gain_percent"], 2, ".", "") ?>">
 
 			<label>Preço de Custo</label>
-			<input type="text" name="price-cost" value="<?= $product["price_cost"] ?>">
+			<input type="text" name="price-cost" value="<?= number_format((float) $product["price_cost"], 2, ".", "") ?>">
 			<span class="error"><?= $this->util->getErrorMessage("price-cost") ?></span>
 
 			<label>Preço de Venda</label>
-			<input type="text" name="price-sell" value="<?= $product["price_sell"] ?>">
+			<input type="text" name="price-sell" value="<?= number_format((float) $product["price_sell"], 2, ".", "") ?>">
 			<span class="error"><?= $this->util->getErrorMessage("price-sell") ?></span>
 		</fieldset>
 
