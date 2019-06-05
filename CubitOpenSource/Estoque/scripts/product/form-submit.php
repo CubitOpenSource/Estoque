@@ -2,7 +2,11 @@
 if ($this->util->checkMethod("POST")) {
 	$array = validation($array, $this->util, $this->dbAdmin);
 	if ($array !== false) {
-		$this->dbAdmin->findTable("products")->insert($array);
+		if ($_POST["operation"] == 0) {
+			$this->dbAdmin->findTable("products")->insert($array);
+		} elseif ($_POST["operation"] == 1) {
+			$this->dbAdmin->findTable("products")->update($array);
+		}
 		$this->util->redirect("product/list");
 	}
 }

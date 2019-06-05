@@ -3,12 +3,13 @@
 	<h1>Novo Produto</h1>
 
 	<form name="product" method="POST" enctype="multipart/form-data">
+		<input type="hidden" name="operation" value="<?= (empty($product["id"])) ? 0 : 1 ?>">
 		<fieldset>
 			<legend>Geral</legend>
 			<div class="grid g-c2a">
 				<div class="input-wrapper">
 					<label>Código Automático</label>
-					<input style="width: 100%" disabled="on" type="number" name="id" min="1" autofocus="on" value="<?= $product["id"] ?>" style="width: 5em">
+					<input style="width: 100%" disabled="on" type="number" name="id" min="1" value="<?= $product["id"] ?>" style="width: 5em">
 				</div>
 
 				<div class="input-wrapper">
@@ -20,16 +21,18 @@
 			<div class="grid">
 				<div class="input-wrapper">
 					<label>Descrição do Produto</label>
-					<input style="width: 100%" type="text" name="description" value="<?= $product["description"] ?>">
+					<input style="width: 100%" type="text" name="description" value="<?= $product["description"] ?>" autofocus="on" onfocus="this.selectionStart = this.selectionEnd = this.value.length;">
 					<span class="error"><?= $this->util->getErrorMessage("description") ?></span>
 				</div>
 				
 				<div class="input-wrapper">
 					<label>Imagem do Produto</label>
 
+					<!-- <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div> -->
+
 					<div class="grid g-c2a">
 						<div class="image-preview" style="display: flex; align-items: center; justify-content: center; width: 120px; height: 120px; border: 1px solid; overflow: hidden;">
-							<img id="image-preview" src="<?= URL ?>assets/img/products/<?= $product["image"] ?>" style="max-width: 100%; max-height: 100%;">
+							<img id="image-preview" src="<?= URL ."assets/img/" ?><?= (! empty($product["image"])) ? "products/" .$product["image"] : "no-picture.svg" ?>" style="max-width: 100%; max-height: 100%;">
 						</div>
 						<input id="file-input" type="file" name="image" onchange="updatePreviewImage.call(this)">
 					</div>
