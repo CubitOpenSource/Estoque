@@ -76,44 +76,56 @@
 
 		<fieldset>
 			<legend>Financeiro</legend>
+			<div class="grid g-c3">
+				<div class="input-wrapper">
+					<label>Margem de Lucro</label>
+					<input autocomplete="off" type="text" name="gain-percent" value="<?= number_format((float) $product["gain_percent"], 2, ",", "") ?>" onfocus="selectAll.call(this)">
+				</div>
 
-			<label>Margem de Lucro</label>
-			<input autocomplete="off" type="text" name="gain-percent" value="<?= number_format((float) $product["gain_percent"], 2, ",", "") ?>" onfocus="selectAll.call(this)">
+				<div class="input-wrapper">
+					<label>Preço de Custo</label>
+					<input autocomplete="off" type="text" name="price-cost" value="<?= number_format((float) $product["price_cost"], 2, ",", "") ?>" onfocus="selectAll.call(this)">
+					<span class="error"><?= $this->util->getErrorMessage("price-cost") ?></span>
+				</div>
 
-			<label>Preço de Custo</label>
-			<input autocomplete="off" type="text" name="price-cost" value="<?= number_format((float) $product["price_cost"], 2, ",", "") ?>" onfocus="selectAll.call(this)">
-			<span class="error"><?= $this->util->getErrorMessage("price-cost") ?></span>
-
-			<label>Preço de Venda</label>
-			<input autocomplete="off" type="text" name="price-sell" value="<?= number_format((float) $product["price_sell"], 2, ",", "") ?>" onfocus="selectAll.call(this)">
-			<span class="error"><?= $this->util->getErrorMessage("price-sell") ?></span>
+				<div class="input-wrapper">
+					<label>Preço de Venda</label>
+					<input autocomplete="off" type="text" name="price-sell" value="<?= number_format((float) $product["price_sell"], 2, ",", "") ?>" onfocus="selectAll.call(this)">
+					<span class="error"><?= $this->util->getErrorMessage("price-sell") ?></span>
+				</div>
+			</div>
 		</fieldset>
 
 
 		<fieldset>
 			<legend>Estoque</legend>
+			<div class="grid g-c3">
+				<div class="input-wrapper">
+					<label>Qtd em Estoque</label>
+					<input type="number" name="stock" min="0" value="<?= (! empty($product["stock"])) ? $product["stock"] : "0" ?>">
+				</div>
 
-			<label>Qtd em Estoque</label>
-			<input type="number" name="stock" min="0" value="<?= (! empty($product["stock"])) ? $product["stock"] : "0" ?>">
+				<div class="input-wrapper">
+					<label>Estoque Mínimo</label>
+					<input type="number" name="stock-min" min="0" value="<?= (! empty($product["stock_min"])) ? $product["stock_min"] : "10" ?>">
+				</div>
 
-			<label>Estoque Mínimo</label>
-			<input type="number" name="stock-min" min="0" value="<?= (! empty($product["stock_min"])) ? $product["stock_min"] : "10" ?>">
+				<div class="input-wrapper">
+					<label>Produto está Ativo:</label>
 
-			<!-- <label>Localização</label>
-			<input autocomplete="off" type="text" name="location" value="<?= $product["location"] ?>"> -->
+					<input id="active-yes" type="radio" name="active" value="1" <?= ($product["active"] == 1) ? "checked" : "" ?>><label for="active-yes">Sim</label>
+
+					<input id="active-no" type="radio" name="active" value="2" <?= ($product["active"] == 2) ? "checked" : "" ?>><label for="active-no">Não</label>
+					
+					<!-- <select name="active">
+						<option value="1" <?php echo ($product["active"] == 1) ? "selected" : ""; ?>>Sim</option>
+						<option value="2" <?php echo ($product["active"] == 2) ? "selected" : ""; ?>>Não</option>
+					</select> -->
+				</div>
+
+				<!-- <label>Localização</label>
+				<input autocomplete="off" type="text" name="location" value="<?= $product["location"] ?>"> -->
 		</fieldset>
-
-
-		<fieldset>
-			<legend>Outras Opções</legend>
-
-			<label>Produto está Ativo:</label>
-			<select name="active">
-				<option value="1" <?php echo ($product["active"] == 1) ? "selected" : ""; ?>>Sim</option>
-				<option value="2" <?php echo ($product["active"] == 2) ? "selected" : ""; ?>>Não</option>
-			</select>
-		</fieldset>
-
 
 		<input type="submit" name="save" value="Salvar">
 		<input type="submit" name="cancel" value="Cancelar">
@@ -146,31 +158,33 @@
 		font-size: 1.5rem;
 	}
 
-	select, input {
+	select, input:not(input[type=radio]) {
 		min-height: 2rem;
 	}
 
-	.flex-wrapper {
-		display: flex;
-		flex-wrap: wrap;
-	}
-	.flex-wrapper .input-wrapper {
-		margin: 1em 1em 1em 0;
-	}
-	.flex-wrapper .input-wrapper:last-child {
-		margin-right: 0;
+	.input-wrapper {
+		margin: 0.5rem 0;
+		padding: 0;
+		border: 1px solid;
+		border-radius: 6px;
+		background: white;
+		text-align: center;
+		overflow: hidden;
 	}
 
-	.input-wrapper {
-		display: inline-table;
-	}
 	.input-wrapper label {
 		display: block;
 		width: 100%;
 		margin: 0.5rem 0;
 	}
+
 	.input-wrapper input {
 		width: 100%;
+		padding: 0.5rem 0;
+		background: whitesmoke;
+		border: unset;
+		outline: unset;
+		text-align: center;
 	}
 
 	select {

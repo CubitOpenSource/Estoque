@@ -1,6 +1,6 @@
 <?php
 
-class ProductController extends Controller
+class ProductsController extends Controller
 {
 	public function __construct()
 	{
@@ -9,8 +9,7 @@ class ProductController extends Controller
 
 	public function index()
 	{
-		$data = array();
-		$this->loadView($this->defaultView, $data);
+		$this->list();
 	}
 
 	public function list()

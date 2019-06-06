@@ -1,7 +1,7 @@
 <section class="products main-container">
 	<h1>Produtos</h1>
 	
-	<a class="btn btn-default" href="<?= URL ?>product/new">Cadastrar</a>
+	<a class="btn btn-default" href="<?= URL ?>products/new">Cadastrar</a>
 
 	<table>
 		<thead>
@@ -15,7 +15,7 @@
 		<tbody>
 			<?php foreach ($products as $product) : ?>
 			<tr onclick="toggleSelectRow.call(this)">
-				<td style="text-align: center;">
+				<td>
 					<input class="checkbox" type="checkbox" name="selected[]">
 				</td>
 
@@ -25,15 +25,15 @@
 
 				<td>
 					<div>
-						<a class="post-title" href="<?= URL ?>product/edit/<?= $product["id"] ?>" title="<?= $product["description"] ?>"><?= (strlen($product["description"]) <= 30) ? $product["description"] : substr($product["description"], 0, 30) ."..." ?></a>
+						<a class="post-title" href="<?= URL ?>products/edit/<?= $product["id"] ?>" title="<?= $product["description"] ?>"><?= (strlen($product["description"]) <= 30) ? $product["description"] : substr($product["description"], 0, 30) ."..." ?></a>
 					</div>
 					
 					<div class="options">
-						<a class="item" href="<?= URL ?>product/edit/<?= $product["id"] ?>">Editar</a>
+						<a class="item" href="<?= URL ?>products/edit/<?= $product["id"] ?>">Editar</a>
 						<div class="item">|</div>
-						<a class="item" target="_blank" href="<?= URL ?>product/view/<?= $product["id"] ?>">Visualizar</a>
+						<a class="item" target="_blank" href="<?= URL ?>products/view/<?= $product["id"] ?>">Visualizar</a>
 						<div class="item">|</div>
-						<a class="item" href="<?= URL ?>product/delete/<?= $product["id"] ?>">Apagar</a>
+						<a class="item" href="<?= URL ?>products/delete/<?= $product["id"] ?>">Apagar</a>
 					</div>
 				</td>
 

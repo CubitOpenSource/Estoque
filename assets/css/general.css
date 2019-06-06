@@ -140,7 +140,7 @@
 }
 
 .error {
-	display: block;
+	/*display: block;*/
 	margin: 0.75em 0 0.5em 0;
 	font-size: 0.9em;
 	color: red;

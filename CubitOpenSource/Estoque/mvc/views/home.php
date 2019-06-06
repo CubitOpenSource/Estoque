@@ -2,8 +2,8 @@
 
 <h3>Produtos</h3>
 <ul>
-	<li><a href="<?= URL ?>product/new">Cadastrar</a></li>
-	<li><a href="<?= URL ?>product/list">Listar</a></li>
+	<li><a href="<?= URL ?>products/new">Cadastrar</a></li>
+	<li><a href="<?= URL ?>products">Listar</a></li>
 </ul>
 
 <footer>

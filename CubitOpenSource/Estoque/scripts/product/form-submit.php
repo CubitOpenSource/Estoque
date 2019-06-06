@@ -11,10 +11,10 @@ if ($this->util->checkMethod("POST")) {
 			} elseif ($_POST["operation"] == 1) {
 				$this->dbAdmin->findTable("products")->update($array);
 			}
-			$this->util->redirect("product/list");
+			$this->util->redirect("products");
 		}
 	} elseif (! empty($_POST["cancel"])) {
-		$this->util->redirect("product/list");
+		$this->util->redirect("products");
 	}
 }
 
