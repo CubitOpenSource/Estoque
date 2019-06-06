@@ -21,11 +21,11 @@
 
 				<td><?= $product["id"] ?></td>
 
-				<td><img src="<?= URL ."assets/img/" ?><?= (! empty($product["image"])) ? "products/" .$product["image"] : "no-picture.svg" ?>" style="max-width: 60px;"></td>
+				<!-- <td><img src="<?= URL ."assets/img/" ?><?= (! empty($product["image"])) ? "products/" .$product["image"] : "no-picture.svg" ?>" style="max-width: 60px;"></td> -->
 
-				<td>
+				<td style="text-align: left;">
 					<div>
-						<a class="post-title" href="<?= URL ?>products/edit/<?= $product["id"] ?>" title="<?= $product["description"] ?>"><?= (strlen($product["description"]) <= 30) ? $product["description"] : substr($product["description"], 0, 30) ."..." ?></a>
+						<a class="post-title" href="<?= URL ?>products/edit/<?= $product["id"] ?>" title="<?= $product["description"] ?>"><?= (strlen($product["description"]) <= 40) ? $product["description"] : substr($product["description"], 0, 40) ."..." ?></a>
 					</div>
 					
 					<div class="options">
@@ -36,6 +36,8 @@
 						<a class="item" href="<?= URL ?>products/delete/<?= $product["id"] ?>">Apagar</a>
 					</div>
 				</td>
+
+				<td><?= $product["category_id"] ?></td>
 
 				<td><?= $product["stock"] ?></td>
 

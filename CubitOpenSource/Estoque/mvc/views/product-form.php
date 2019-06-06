@@ -4,27 +4,11 @@
 
 	<form name="product" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="operation" value="<?= (empty($id)) ? 0 : 1 ?>">
+
 		<fieldset>
 			<legend>Geral</legend>
-			<div class="grid g-c2a">
-				<div class="input-wrapper">
-					<label>Código Automático</label>
-					<input style="width: 100%" disabled="on" type="number" name="id" min="1" value="<?= $product["id"] ?>" style="width: 5em">
-				</div>
 
-				<div class="input-wrapper">
-					<label>Código de Barras</label>
-					<input autocomplete="off" type="text" name="barcode" value="<?= $product["barcode"] ?>">
-				</div>
-			</div>
-
-			<div class="grid">
-				<div class="input-wrapper">
-					<label>Descrição do Produto</label>
-					<input style="width: 100%" type="text" name="description" value="<?= $product["description"] ?>" autocomplete="off" autofocus="on" onfocus="this.selectionStart = this.selectionEnd = this.value.length;">
-					<span class="error"><?= $this->util->getErrorMessage("description") ?></span>
-				</div>
-				
+			<div style="display: grid; grid-template-columns: 0.2fr 1fr; justify-content: center;">
 				<div class="input-wrapper">
 					<label>Imagem do Produto</label>
 
@@ -32,10 +16,33 @@
 						<div class="image-preview" style="display: flex; align-items: center; justify-content: center; width: 120px; height: 120px; border: 1px solid; overflow: hidden;">
 							<img id="image-preview" src="<?= URL ."assets/img/" ?><?= (! empty($product["image"])) ? "products/" .$product["image"] : "no-picture.svg" ?>" style="max-width: 100%; max-height: 100%;">
 						</div>
-						<input id="file-input" type="file" name="image" onchange="updatePreviewImage.call(this)">
+						<input style="display: none;" id="file-input" type="file" name="image" onchange="updatePreviewImage.call(this)">
+					</div>
+				</div>
+
+				<div>
+					<div class="grid g-c2a">
+						<div class="input-wrapper">
+							<label>Código Automático</label>
+							<input class="disabled" disabled="on" type="number" name="id" min="1" value="<?= $product["id"] ?>">
+						</div>
+
+						<div class="input-wrapper">
+							<label>Código de Barras</label>
+							<input autocomplete="off" type="text" name="barcode" value="<?= $product["barcode"] ?>">
+						</div>
+					</div>
+
+					<div class="grid">
+						<div class="input-wrapper">
+							<label>Descrição do Produto</label>
+							<input type="text" name="description" value="<?= $product["description"] ?>" autocomplete="off" autofocus="on" onfocus="this.selectionStart = this.selectionEnd = this.value.length;">
+							<span class="error"><?= $this->util->getErrorMessage("description") ?></span>
+						</div>
 					</div>
 				</div>
 			</div>
+
 
 			<div class="grid g-c3">
 				<div class="input-wrapper">
@@ -43,7 +50,7 @@
 					
 					<div class="grid g-c2b">
 						<select name="unity">
-							<option value="0"></option>
+							<option value="0">Selecione a Unidade</option>
 						</select>
 						<a id="add-product-unity" class="btn btn-option" href="#" style="display:block"><i class="fas fa-plus"></i></a>
 					</div>
@@ -54,7 +61,7 @@
 
 					<div class="grid g-c2b">
 						<select name="brand">
-							<option value="0"></option>
+							<option value="0">Selecione a Marca</option>
 						</select>
 						<a id="add-product-unity" class="btn btn-option" href="#" style="display:block"><i class="fas fa-plus"></i></a>
 					</div>
@@ -65,7 +72,7 @@
 
 					<div class="grid g-c2b">
 						<select name="category">
-							<option value="0"></option>
+							<option value="0">Selecione a Categoria</option>
 						</select>
 						<a id="add-product-unity" class="btn btn-option" href="#" style="display:block"><i class="fas fa-plus"></i></a>
 					</div>
@@ -78,18 +85,18 @@
 			<legend>Financeiro</legend>
 			<div class="grid g-c3">
 				<div class="input-wrapper">
-					<label>Margem de Lucro</label>
+					<label>Margem de Lucro (%)</label>
 					<input autocomplete="off" type="text" name="gain-percent" value="<?= number_format((float) $product["gain_percent"], 2, ",", "") ?>" onfocus="selectAll.call(this)">
 				</div>
 
 				<div class="input-wrapper">
-					<label>Preço de Custo</label>
+					<label>Preço de Custo (R$)</label>
 					<input autocomplete="off" type="text" name="price-cost" value="<?= number_format((float) $product["price_cost"], 2, ",", "") ?>" onfocus="selectAll.call(this)">
 					<span class="error"><?= $this->util->getErrorMessage("price-cost") ?></span>
 				</div>
 
 				<div class="input-wrapper">
-					<label>Preço de Venda</label>
+					<label>Preço de Venda (R$)</label>
 					<input autocomplete="off" type="text" name="price-sell" value="<?= number_format((float) $product["price_sell"], 2, ",", "") ?>" onfocus="selectAll.call(this)">
 					<span class="error"><?= $this->util->getErrorMessage("price-sell") ?></span>
 				</div>
@@ -162,7 +169,38 @@
 		min-height: 2rem;
 	}
 
-	.input-wrapper {
+	body {
+		background-color: #f9f9f9;
+	}
+
+	TODO:
+	https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/
+
+	.input-wrapper label {
+		font-size: 1rem;
+		display: block;
+		margin: 0.5rem 0;
+	}
+
+	.input-wrapper input,
+	.input-wrapper select
+	{
+		font-size: 1.5rem;
+		width: 100%;
+		margin: 0.5rem 0;
+		padding: 0.5rem 1rem;
+		background-color: white;
+		border: unset;
+		border-bottom: 2px solid #ccc;
+		outline: unset;
+		color: #444;
+	}
+
+	.input:disabled.disabled {
+		background-color: red;
+	}
+
+	/*.input-wrapper {
 		margin: 0.5rem 0;
 		padding: 0;
 		border: 1px solid;
@@ -189,5 +227,5 @@
 
 	select {
 		width: 100%;
-	}
+	}*/
 </style>

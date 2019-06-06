@@ -16,8 +16,10 @@ class ProductsController extends Controller
 	{
 		$columns = array(
 			"Código",
-			"Imagem",
-			"Descrição",
+			// "Imagem",
+			// "Descrição",
+			"Produto",
+			"Categoria",
 			"Estoque Atual",
 			"Preço de Venda",
 			"Data de Cadastro",
