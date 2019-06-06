@@ -17,6 +17,7 @@ class ProductController extends Controller
 	{
 		$columns = array(
 			"Código",
+			"Imagem",
 			"Descrição",
 			"Estoque Atual",
 			"Preço de Venda",
@@ -50,12 +51,13 @@ class ProductController extends Controller
 		include "./CubitOpenSource/Estoque/scripts/product/delete.php";
 	}
 
-	private function saveEdit($id)
+	private function saveEdit($id="")
 	{
 		include "./CubitOpenSource/Estoque/scripts/product/init.php";
 		include "./CubitOpenSource/Estoque/scripts/product/form-submit.php";
 
 		$data = array(
+			"id" => $id,
 			"product" => $array
 		);
 

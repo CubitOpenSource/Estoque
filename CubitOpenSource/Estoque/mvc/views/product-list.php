@@ -21,23 +21,25 @@
 
 				<td><?= $product["id"] ?></td>
 
+				<td><img src="<?= URL ."assets/img/" ?><?= (! empty($product["image"])) ? "products/" .$product["image"] : "no-picture.svg" ?>" style="max-width: 60px;"></td>
+
 				<td>
 					<div>
-						<a class="post-title" href="<?= URL ?>product/edit/<?= $product["id"] ?>"><?= (strlen($product["description"]) <= 20) ? $product["description"] : substr($product["description"], 0, 20) ."..." ?></a>
+						<a class="post-title" href="<?= URL ?>product/edit/<?= $product["id"] ?>" title="<?= $product["description"] ?>"><?= (strlen($product["description"]) <= 30) ? $product["description"] : substr($product["description"], 0, 30) ."..." ?></a>
 					</div>
 					
 					<div class="options">
-						<a class="item" href="<?= URL ?>product/edit/<?= $product["id"] ?>">Edit</a>
+						<a class="item" href="<?= URL ?>product/edit/<?= $product["id"] ?>">Editar</a>
 						<div class="item">|</div>
-						<a class="item" target="_blank" href="<?= URL ?>product/view/<?= $product["id"] ?>">View</a>
+						<a class="item" target="_blank" href="<?= URL ?>product/view/<?= $product["id"] ?>">Visualizar</a>
 						<div class="item">|</div>
-						<a class="item" href="<?= URL ?>product/delete/<?= $product["id"] ?>">Delete</a>
+						<a class="item" href="<?= URL ?>product/delete/<?= $product["id"] ?>">Apagar</a>
 					</div>
 				</td>
 
 				<td><?= $product["stock"] ?></td>
 
-				<td>R$ <?= number_format((float) $product["price_sell"], 2, ".", "") ?></td>
+				<td>R$ <?= number_format((float) $product["price_sell"], 2, ",", "") ?></td>
 
 				<td><?= date("d/m/Y", strtotime($product["created_at"])) ?></td>
 

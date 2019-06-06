@@ -9,3 +9,10 @@ function updatePreviewImage() {
 		obj.readAsDataURL(this.files[0]);
 	}
 }
+
+function selectAll() {
+	if (this) {
+		this.selectionStart = 0;
+		this.selectionEnd = this.value.length;
+	}
+}

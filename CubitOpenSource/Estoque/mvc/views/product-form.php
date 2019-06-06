@@ -3,7 +3,7 @@
 	<h1>Novo Produto</h1>
 
 	<form name="product" method="POST" enctype="multipart/form-data">
-		<input type="hidden" name="operation" value="<?= (empty($product["id"])) ? 0 : 1 ?>">
+		<input type="hidden" name="operation" value="<?= (empty($id)) ? 0 : 1 ?>">
 		<fieldset>
 			<legend>Geral</legend>
 			<div class="grid g-c2a">
@@ -14,21 +14,19 @@
 
 				<div class="input-wrapper">
 					<label>Código de Barras</label>
-					<input type="text" name="barcode" value="<?= $product["barcode"] ?>">
+					<input autocomplete="off" type="text" name="barcode" value="<?= $product["barcode"] ?>">
 				</div>
 			</div>
 
 			<div class="grid">
 				<div class="input-wrapper">
 					<label>Descrição do Produto</label>
-					<input style="width: 100%" type="text" name="description" value="<?= $product["description"] ?>" autofocus="on" onfocus="this.selectionStart = this.selectionEnd = this.value.length;">
+					<input style="width: 100%" type="text" name="description" value="<?= $product["description"] ?>" autocomplete="off" autofocus="on" onfocus="this.selectionStart = this.selectionEnd = this.value.length;">
 					<span class="error"><?= $this->util->getErrorMessage("description") ?></span>
 				</div>
 				
 				<div class="input-wrapper">
 					<label>Imagem do Produto</label>
-
-					<!-- <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div> -->
 
 					<div class="grid g-c2a">
 						<div class="image-preview" style="display: flex; align-items: center; justify-content: center; width: 120px; height: 120px; border: 1px solid; overflow: hidden;">
@@ -80,14 +78,14 @@
 			<legend>Financeiro</legend>
 
 			<label>Margem de Lucro</label>
-			<input type="text" name="gain-percent" value="<?= number_format((float) $product["gain_percent"], 2, ".", "") ?>">
+			<input autocomplete="off" type="text" name="gain-percent" value="<?= number_format((float) $product["gain_percent"], 2, ",", "") ?>" onfocus="selectAll.call(this)">
 
 			<label>Preço de Custo</label>
-			<input type="text" name="price-cost" value="<?= number_format((float) $product["price_cost"], 2, ".", "") ?>">
+			<input autocomplete="off" type="text" name="price-cost" value="<?= number_format((float) $product["price_cost"], 2, ",", "") ?>" onfocus="selectAll.call(this)">
 			<span class="error"><?= $this->util->getErrorMessage("price-cost") ?></span>
 
 			<label>Preço de Venda</label>
-			<input type="text" name="price-sell" value="<?= number_format((float) $product["price_sell"], 2, ".", "") ?>">
+			<input autocomplete="off" type="text" name="price-sell" value="<?= number_format((float) $product["price_sell"], 2, ",", "") ?>" onfocus="selectAll.call(this)">
 			<span class="error"><?= $this->util->getErrorMessage("price-sell") ?></span>
 		</fieldset>
 
@@ -96,13 +94,13 @@
 			<legend>Estoque</legend>
 
 			<label>Qtd em Estoque</label>
-			<input type="number" name="stock" min="0" value="<?= $product["stock"] ?>">
+			<input type="number" name="stock" min="0" value="<?= (! empty($product["stock"])) ? $product["stock"] : "0" ?>">
 
 			<label>Estoque Mínimo</label>
-			<input type="number" name="stock-min" min="0" value="<?= $product["stock_min"] ?>">
+			<input type="number" name="stock-min" min="0" value="<?= (! empty($product["stock_min"])) ? $product["stock_min"] : "10" ?>">
 
-			<label>Localização</label>
-			<input type="text" name="location" value="<?= $product["location"] ?>">
+			<!-- <label>Localização</label>
+			<input autocomplete="off" type="text" name="location" value="<?= $product["location"] ?>"> -->
 		</fieldset>
 
 
@@ -117,7 +115,8 @@
 		</fieldset>
 
 
-		<input type="submit" name="save" value="Save">
+		<input type="submit" name="save" value="Salvar">
+		<input type="submit" name="cancel" value="Cancelar">
 	</form>
 </section>
 
