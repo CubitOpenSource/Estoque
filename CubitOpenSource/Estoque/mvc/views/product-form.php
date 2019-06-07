@@ -2,10 +2,10 @@
 <section class="main-container">
 	<h1>Novo Produto</h1>
 
-	<form name="product" method="POST" enctype="multipart/form-data">
+	<form class="grid" name="product" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="operation" value="<?= (empty($id)) ? 0 : 1 ?>">
 
-		<fieldset>
+		<fieldset class="general-field">
 			<legend>Geral</legend>
 
 			<div style="display: grid; grid-template-columns: 0.2fr 1fr; justify-content: center;">
@@ -20,29 +20,26 @@
 					<label for="file-input" class="btn btn-default" style="width: 120px;">Procurar</label>
 				</div>
 
-				<div>
-					<div class="grid g-c2a">
-						<div class="input-wrapper">
-							<label>Código Automático</label>
-							<input class="disabled" disabled type="text" name="id" min="1" value="<?= $product["id"] ?>" style="background-color: #eee;">
-						</div>
-
-						<div class="input-wrapper">
-							<label>Código de Barras</label>
-							<input autocomplete="off" type="text" name="barcode" value="<?= $product["barcode"] ?>">
-						</div>
+				<div class="grid g-c2a">
+					<div class="input-wrapper">
+						<label>Código Automático</label>
+						<input class="disabled" disabled type="text" name="id" min="1" value="<?= $product["id"] ?>" style="background-color: #eee;">
 					</div>
 
-					<div class="grid">
-						<div class="input-wrapper">
-							<label>Descrição do Produto</label>
-							<input type="text" name="description" value="<?= $product["description"] ?>" autocomplete="off" autofocus="on" onfocus="this.selectionStart = this.selectionEnd = this.value.length;">
-							<span class="error"><?= $this->util->getErrorMessage("description") ?></span>
-						</div>
+					<div class="input-wrapper">
+						<label>Código de Barras</label>
+						<input autocomplete="off" type="text" name="barcode" value="<?= $product["barcode"] ?>">
+					</div>
+				</div>
+
+				<div class="grid">
+					<div class="input-wrapper">
+						<label>Descrição do Produto</label>
+						<input type="text" name="description" value="<?= $product["description"] ?>" autocomplete="off" autofocus="on" onfocus="this.selectionStart = this.selectionEnd = this.value.length;">
+						<span class="error"><?= $this->util->getErrorMessage("description") ?></span>
 					</div>
 				</div>
 			</div>
-
 
 			<div class="grid g-c3">
 				<div class="input-wrapper">
@@ -52,7 +49,7 @@
 						<select name="unity">
 							<option value="0">Selecione a Unidade</option>
 						</select>
-						<a id="add-product-unity" class="btn btn-option" href="#" style="display:block"><i class="fas fa-plus"></i></a>
+						<a id="add-product-unity" class="btn btn-option" href="#" title="Adicionar Unidade"><span class="add-icon"></span></a>
 					</div>
 				</div>
 
@@ -63,7 +60,7 @@
 						<select name="brand">
 							<option value="0">Selecione a Marca</option>
 						</select>
-						<a id="add-product-unity" class="btn btn-option" href="#" style="display:block"><i class="fas fa-plus"></i></a>
+						<a id="add-product-unity" class="btn btn-option" href="#" style="display:block" title="Adicionar Marca"><span class="add-icon"></span></a>
 					</div>
 				</div>
 
@@ -74,14 +71,13 @@
 						<select name="category">
 							<option value="0">Selecione a Categoria</option>
 						</select>
-						<a id="add-product-unity" class="btn btn-option" href="#" style="display:block"><i class="fas fa-plus"></i></a>
+						<a id="add-product-unity" class="btn btn-option" href="#" title="Adicionar Categoria"><span class="add-icon"></span></a>
 					</div>
 				</div>
 			</div>			
 		</fieldset>
-		
 
-		<fieldset>
+		<fieldset class="price-field">
 			<legend>Financeiro</legend>
 			<div class="grid g-c3">
 				<div class="input-wrapper">
@@ -103,8 +99,7 @@
 			</div>
 		</fieldset>
 
-
-		<fieldset>
+		<fieldset class="stock-field">
 			<legend>Estoque</legend>
 			<div class="grid g-c3">
 				<div class="input-wrapper">
@@ -137,8 +132,10 @@
 				<input autocomplete="off" type="text" name="location" value="<?= $product["location"] ?>"> -->
 		</fieldset>
 
-		<input type="submit" name="save" value="Salvar">
-		<input type="submit" name="cancel" value="Cancelar">
+		<div>
+			<input type="submit" name="save" value="Salvar">
+			<input type="submit" name="cancel" value="Cancelar">	
+		</div>
 	</form>
 </section>
 
@@ -146,7 +143,22 @@
 	.grid {
 		display: grid;
 		grid-gap: 1rem;
-		align-items: stretch;
+		grid-template-areas:
+		"general general"
+		"stock price"
+		"buttons buttons";
+	}
+
+	.general-field {
+		grid-area: general;
+	}
+
+	.stock-field {
+		grid-area: stock;
+	}
+
+	.price-field {
+		grid-area: price;
 	}
 
 	.g-c2 {
@@ -191,5 +203,12 @@
 	.input-wrapper select:focus {
 		background-color: rgba(255, 255, 0, 0.4);
 	}
+	
+	.add-icon {
+		display: block;
+		width: 16px;
+		height: 16px;
+		margin-top: 0.5rem;
+		background-image: url("<?= URL ?>assets/img/add.svg");
 	}
 </style>
