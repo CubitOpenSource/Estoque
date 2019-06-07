@@ -24,11 +24,17 @@
 
 .btn {
 	display: inline-block;
+	font-size: 0.8rem;
+	font-weight: 600;
 	margin: 0.5em 0;
-	padding: 0.4rem 0.4rem;
-	font-size: 0.9rem;
-	color: black;
+	padding: 0.5rem 1rem;
+	text-align: center;
+	text-transform: uppercase;
+	color: darkslategray;
 	cursor: pointer;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	   -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+			box-shadow:inset 0px 1px 0px 0px #ffffff;
 }
 
 .btn:hover {
@@ -36,9 +42,12 @@
 }
 
 .btn-default {
-	border: 1px solid gray;
+	border: 1px solid #bbb;
 	border-radius: 2px;
 	background-color: lightgray;
+}
+.btn-default:hover {
+	background-color: #ccc;
 }
 
 .form-btn {

@@ -12,19 +12,19 @@
 				<div class="input-wrapper">
 					<label>Imagem do Produto</label>
 
-					<div class="grid g-c2a">
-						<div class="image-preview" style="display: flex; align-items: center; justify-content: center; width: 120px; height: 120px; border: 1px solid; overflow: hidden;">
-							<img id="image-preview" src="<?= URL ."assets/img/" ?><?= (! empty($product["image"])) ? "products/" .$product["image"] : "no-picture.svg" ?>" style="max-width: 100%; max-height: 100%;">
-						</div>
-						<input style="display: none;" id="file-input" type="file" name="image" onchange="updatePreviewImage.call(this)">
+					<div class="image-preview" style="display: flex; align-items: center; justify-content: center; width: 120px; height: 120px; border: 1px solid #ccc; overflow: hidden;">
+						<img id="image-preview" src="<?= URL ."assets/img/" ?><?= (! empty($product["image"])) ? "products/" .$product["image"] : "no-picture.svg" ?>" style="max-width: 100%; max-height: 100%;">
 					</div>
+					
+					<input id="file-input" class="input-file" type="file" name="image" onchange="updatePreviewImage.call(this)">
+					<label for="file-input" class="btn btn-default" style="width: 120px;">Procurar</label>
 				</div>
 
 				<div>
 					<div class="grid g-c2a">
 						<div class="input-wrapper">
 							<label>Código Automático</label>
-							<input class="disabled" disabled="on" type="number" name="id" min="1" value="<?= $product["id"] ?>">
+							<input class="disabled" disabled type="text" name="id" min="1" value="<?= $product["id"] ?>" style="background-color: #eee;">
 						</div>
 
 						<div class="input-wrapper">
@@ -120,9 +120,12 @@
 				<div class="input-wrapper">
 					<label>Produto está Ativo:</label>
 
-					<input id="active-yes" type="radio" name="active" value="1" <?= ($product["active"] == 1) ? "checked" : "" ?>><label for="active-yes">Sim</label>
+					<input id="active-yes" type="radio" name="active" value="1" checked <?= ($product["active"] == 1) ? "checked" : "" ?>>
+					<label for="active-yes" style="display: inline-block;">Sim</label>
+					<br>
 
-					<input id="active-no" type="radio" name="active" value="2" <?= ($product["active"] == 2) ? "checked" : "" ?>><label for="active-no">Não</label>
+					<input id="active-no" type="radio" name="active" value="2" <?= ($product["active"] == 2) ? "checked" : "" ?>>
+					<label for="active-no" style="display: inline-block;">Não</label>
 					
 					<!-- <select name="active">
 						<option value="1" <?php echo ($product["active"] == 1) ? "selected" : ""; ?>>Sim</option>
@@ -157,75 +160,36 @@
 		grid-template-columns: repeat(3, 1fr);
 	}
 
-	label {
-		font-size: 1.25rem;
-	}
-
-	input {
-		font-size: 1.5rem;
-	}
-
-	select, input:not(input[type=radio]) {
-		min-height: 2rem;
-	}
-
 	body {
 		background-color: #f9f9f9;
 	}
 
-	TODO:
-	https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/
+	#file-input {
+		display: none;
+	}
 
 	.input-wrapper label {
-		font-size: 1rem;
 		display: block;
 		margin: 0.5rem 0;
 	}
 
-	.input-wrapper input,
+	.input-wrapper input:not([type=radio]),
 	.input-wrapper select
 	{
-		font-size: 1.5rem;
+		font-size: 1.25rem;
 		width: 100%;
-		margin: 0.5rem 0;
+		margin: 0.5rem 0 1rem 0;
 		padding: 0.5rem 1rem;
 		background-color: white;
-		border: unset;
-		border-bottom: 2px solid #ccc;
+		border: 1px solid #eee;
+		border-bottom: 2px solid #aaa;
 		outline: unset;
 		color: #444;
 	}
 
-	.input:disabled.disabled {
-		background-color: red;
+	.input-wrapper input:focus,
+	.input-wrapper select:focus {
+		background-color: rgba(255, 255, 0, 0.4);
 	}
-
-	/*.input-wrapper {
-		margin: 0.5rem 0;
-		padding: 0;
-		border: 1px solid;
-		border-radius: 6px;
-		background: white;
-		text-align: center;
-		overflow: hidden;
 	}
-
-	.input-wrapper label {
-		display: block;
-		width: 100%;
-		margin: 0.5rem 0;
-	}
-
-	.input-wrapper input {
-		width: 100%;
-		padding: 0.5rem 0;
-		background: whitesmoke;
-		border: unset;
-		outline: unset;
-		text-align: center;
-	}
-
-	select {
-		width: 100%;
-	}*/
 </style>
