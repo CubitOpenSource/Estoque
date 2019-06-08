@@ -15,12 +15,12 @@ class ProductsController extends Controller
 	public function list()
 	{
 		$columns = array(
-			"Código",
+			"Cód",
 			// "Imagem",
 			// "Descrição",
 			"Produto",
 			"Categoria",
-			"Estoque Atual",
+			"Estoque",
 			"Preço de Venda",
 			"Data de Cadastro",
 		);

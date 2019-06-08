@@ -22,7 +22,8 @@
 	        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
-.btn, .form-btn {
+.btn,
+.form-btn {
 	display: inline-block;
 	font-size: 0.8rem;
 	font-weight: 600;
@@ -30,6 +31,8 @@
 	padding: 0.5rem 1rem;
 	text-align: center;
 	text-transform: uppercase;
+	background-color: white;
+	border: 1px solid #c6c6c6;
 	color: darkslategray;
 	cursor: pointer;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -37,30 +40,22 @@
 			box-shadow:inset 0px 1px 0px 0px #ffffff;
 }
 
+.form-btn:hover,
 .btn:hover {
 	text-decoration: none;
 }
 
-.btn-default {
+/*.btn-default {
 	border: 1px solid #bbb;
 	border-radius: 2px;
 	background-color: lightgray;
-}
-.btn-default:hover {
+}*/
+/*.btn-default:hover {
 	background-color: #ccc;
-}
+}*/
 
+.btn-default,
 .form-btn {
-	border: 1px solid #c6c6c6;
-	/*padding: 0.5rem;
-	font-size: 0.8rem;
-	background: whitesmoke;
-	border: 1px solid lightgray;
-	color: black;*/
-	/*cursor: pointer;*/
-}
-
-.btn-default:hover, .form-btn:hover {
 	border: 1px solid #c6c6c6;
 	color: #222;
 	-webkit-transition: all 0;
@@ -77,8 +72,12 @@
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f8f8f8',EndColorStr='#f1f1f1')";
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1);
 	-moz-box-shadow: 0 1px 1px rgba(0,0,0,.1);
-	box-shadow: 0 1px 1px rgba(0,0,0,.1);
 	text-decoration: none;
+}
+
+.btn-default:hover,
+.form-btn:hover {
+	background: #f1f1f1;
 }
 
 .form-btn-primary:hover {
@@ -111,6 +110,9 @@
     background: -webkit-gradient(linear,left top,left bottom,from(darkseagreen),to(seagreen));
     border: 1px solid green;
     color: #fff;
+}
+.form-btn-green:hover {
+	background: darkseagreen;
 }
 
 /* INPUT GROUP */

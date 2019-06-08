@@ -127,11 +127,9 @@
 
 					<input id="active-yes" type="radio" name="active" value="1" checked <?= ($product["active"] == 1) ? "checked" : "" ?>>
 					<label for="active-yes" style="display: inline-block;">Sim</label>
-					
 
 					<input id="active-no" type="radio" name="active" value="2" <?= ($product["active"] == 2) ? "checked" : "" ?> style="margin-left: 1rem;">
 					<label for="active-no" style="display: inline-block;">Não</label>
-					
 					<!-- <select name="active">
 						<option value="1" <?php #echo ($product["active"] == 1) ? "selected" : ""; ?>>Sim</option>
 						<option value="2" <?php #echo ($product["active"] == 2) ? "selected" : ""; ?>>Não</option>
