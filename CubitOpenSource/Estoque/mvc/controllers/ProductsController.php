@@ -4,7 +4,7 @@ class ProductsController extends Controller
 {
 	public function __construct()
 	{
-		parent::__construct("Product", "product-list", "default");
+		parent::__construct("Product", "products/product-list", "default");
 	}
 
 	public function index()
@@ -62,6 +62,6 @@ class ProductsController extends Controller
 			"product" => $array
 		);
 
-		$this->loadView("product-form", $data);
+		$this->loadView("products/product-form", $data);
 	}
 }

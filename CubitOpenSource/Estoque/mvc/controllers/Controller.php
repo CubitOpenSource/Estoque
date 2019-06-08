@@ -19,6 +19,7 @@ abstract class Controller
 		$view = (! empty($view)) ? $view : $this->defaultView;
 		$template = (! empty($template)) ? $template : $this->defaultTemplate;
 
+		require "./CubitOpenSource/Estoque/mvc/views/static/page-top.html";
 		require "./CubitOpenSource/Estoque/mvc/views/templates/" .$template ."/" .$template .".php";
 	}
 

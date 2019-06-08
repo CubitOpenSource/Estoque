@@ -22,7 +22,7 @@
 	        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
-.btn {
+.btn, .form-btn {
 	display: inline-block;
 	font-size: 0.8rem;
 	font-weight: 600;
@@ -51,15 +51,16 @@
 }
 
 .form-btn {
-	padding: 0.5rem;
+	border: 1px solid #c6c6c6;
+	/*padding: 0.5rem;
 	font-size: 0.8rem;
 	background: whitesmoke;
 	border: 1px solid lightgray;
-	color: black;
+	color: black;*/
 	/*cursor: pointer;*/
 }
 
-.form-btn:hover {
+.btn-default:hover, .form-btn:hover {
 	border: 1px solid #c6c6c6;
 	color: #222;
 	-webkit-transition: all 0;
@@ -98,6 +99,17 @@
     background-image: -o-linear-gradient(top,#f57b54,#ff7043);
     background: -webkit-gradient(linear,left top,left bottom,from(#f57b54),to(#ff7043));
     border: 1px solid #f84912;
+    color: #fff;
+}
+
+.form-btn-green {
+	background: #lightgreen;
+    background-image: -moz-linear-gradient(top,darkseagreen,seagreen);
+    background-image: -ms-linear-gradient(top,darkseagreen,seagreen);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='darkseagreen',EndColorStr='seagreen')";
+    background-image: -o-linear-gradient(top,darkseagreen,seagreen);
+    background: -webkit-gradient(linear,left top,left bottom,from(darkseagreen),to(seagreen));
+    border: 1px solid green;
     color: #fff;
 }
 
