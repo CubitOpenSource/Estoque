@@ -1,0 +1,16 @@
+.breadcrumb-nav ul {
+	display: flex;
+	font-size: 1.25rem;
+}
+
+.breadcrumb-nav li.active {
+	color: black;
+}
+
+.breadcrumb-nav li::after {
+	content: "»";
+	margin: 0 0.25rem;
+}
+.breadcrumb-nav li:last-child::after {
+	content: "";
+}

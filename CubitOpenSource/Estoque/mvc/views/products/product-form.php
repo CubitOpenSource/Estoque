@@ -1,5 +1,14 @@
 <script src="<?= URL ?>assets/js/util.js"></script>
+<link rel="stylesheet" href="<?= URL ?>CubitOpenSource/Estoque/mvc/views/products/css/navigation.css">
 <link rel="stylesheet" href="<?= URL ?>CubitOpenSource/Estoque/mvc/views/products/css/form.css">
+
+<nav class="breadcrumb-nav">
+	<ul>
+		<li><a href="<?= URL ?>products">Lista de Produtos</a></li>
+		<li class="active">Novo Produto</li>
+	</ul>
+</nav>
+
 <section class="main-container">
 	<h1>Novo Produto</h1>
 
