@@ -54,7 +54,7 @@
 								<select name="unity">
 									<option value="0">Selecione a Unidade</option>
 								</select>
-								<a id="add-product-unity" class="btn btn-option" href="#" title="Adicionar Unidade"><span class="add-icon"></span></a>
+								<a id="add-product-unity" class="btn btn-option" href="<?= URL ?>CubitOpenSource/Estoque/scripts/product/newUnity.php" title="Adicionar Unidade"><span class="add-icon"></span></a>
 							</div>
 						</div>
 
@@ -65,7 +65,7 @@
 								<select name="brand">
 									<option value="0">Selecione a Marca</option>
 								</select>
-								<a id="add-product-unity" class="btn btn-option" href="#" style="display:block" title="Adicionar Marca"><span class="add-icon"></span></a>
+								<a id="add-product-unity" class="btn btn-option" href="<?= URL ?>CubitOpenSource/Estoque/scripts/product/" style="display:block" title="Adicionar Marca"><span class="add-icon"></span></a>
 							</div>
 						</div>
 					</div>
@@ -77,7 +77,7 @@
 							<select name="category">
 								<option value="0">Selecione a Categoria</option>
 							</select>
-							<a id="add-product-unity" class="btn btn-option" href="#" title="Adicionar Categoria"><span class="add-icon"></span></a>
+							<a id="add-product-unity" class="btn btn-option" href="<?= URL ?>CubitOpenSource/Estoque/scripts/product/" title="Adicionar Categoria"><span class="add-icon"></span></a>
 						</div>
 					</div>
 				</div>

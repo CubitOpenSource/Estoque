@@ -33,6 +33,8 @@ class ProductsController extends Controller
 			"columns" => $columns,
 			"products" => $this->dbAdmin->findTable("products")->getAll()
 		);
+
+		$this->title = end($pages)["title"];
 		$this->loadView($this->defaultView, $data);
 	}
 
@@ -66,7 +68,7 @@ class ProductsController extends Controller
 		);
 
 		if (! empty($id))
-			$pages[] = array("name" => "edit", "title" => "Editar Produto", "url" => URL ."edit/" .$id);
+			$pages[] = array("name" => "edit", "title" => $array["description"], "url" => URL ."edit/" .$id);
 		else
 			$pages[] = array("name" => "new", "title" => "Novo Produto", "url" => URL ."new");
 
@@ -76,6 +78,7 @@ class ProductsController extends Controller
 			"product" => $array
 		);
 
+		$this->title = end($pages)["title"];
 		$this->loadView("products/product-form", $data);
 	}
 }

@@ -32,7 +32,7 @@
 	text-align: center;
 	text-transform: uppercase;
 	background-color: white;
-	border: 1px solid #c6c6c6;
+	border: unset;
 	color: darkslategray;
 	cursor: pointer;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -40,19 +40,12 @@
 			box-shadow:inset 0px 1px 0px 0px #ffffff;
 }
 
+.form-btn { border: 1px solid #c6c6c6; }
+
 .form-btn:hover,
 .btn:hover {
 	text-decoration: none;
 }
-
-/*.btn-default {
-	border: 1px solid #bbb;
-	border-radius: 2px;
-	background-color: lightgray;
-}*/
-/*.btn-default:hover {
-	background-color: #ccc;
-}*/
 
 .btn-default,
 .form-btn {
