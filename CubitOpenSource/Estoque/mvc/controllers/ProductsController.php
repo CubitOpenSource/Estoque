@@ -43,9 +43,21 @@ class ProductsController extends Controller
 		# TODO...
 	}
 
-	public function new()
+	public function new($entity="")
 	{
-		$this->saveEdit();
+		if (empty($entity))
+			$this->saveEdit();
+		else {
+			if ($entity == "unity") {
+				$this->util->redirect("CubitOpenSource/Estoque/scripts/product/newUnity.php");
+			} elseif ($entity == "brand") {
+				#
+			} elseif ($entity == "category") {
+				#
+			} else {
+				$this->util->redirect("404");
+			}
+		}
 	}
 
 	public function edit($id)

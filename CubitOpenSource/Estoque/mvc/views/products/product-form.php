@@ -54,7 +54,7 @@
 								<select name="unity">
 									<option value="0">Selecione a Unidade</option>
 								</select>
-								<a id="add-product-unity" class="btn btn-option" href="<?= URL ?>CubitOpenSource/Estoque/scripts/product/newUnity.php" title="Adicionar Unidade"><span class="add-icon"></span></a>
+								<a id="add-product-unity" class="btn btn-option" href="<?= URL ?>products/new/unity" title="Adicionar Unidade"><span class="add-icon"></span></a>
 							</div>
 						</div>
 
