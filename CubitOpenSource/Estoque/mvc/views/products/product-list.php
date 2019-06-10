@@ -1,3 +1,5 @@
+<?php $this->loadViewPart("navigation", array("pages" => $pages)); ?>
+
 <section class="products main-container">
 	<h1>Produtos</h1>
 	

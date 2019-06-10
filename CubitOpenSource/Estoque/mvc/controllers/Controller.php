@@ -31,7 +31,7 @@ abstract class Controller
 
 	private function loadViewPart($view, $data=array())
 	{
-		$subpath = "./mvc/views/parts/";
+		$subpath = "./CubitOpenSource/Estoque/mvc/views/parts/";
 		$this->requireView($subpath, $view, $data);
 	}
 

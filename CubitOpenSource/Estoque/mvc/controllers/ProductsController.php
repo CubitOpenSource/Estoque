@@ -14,6 +14,10 @@ class ProductsController extends Controller
 
 	public function list()
 	{
+		$pages = array(
+			array("name" => "list", "title" => "Lista de Produtos", "url" => URL ."products")
+		);
+
 		$columns = array(
 			"Cód",
 			"Produto",
@@ -24,6 +28,8 @@ class ProductsController extends Controller
 		);
 
 		$data = array(
+			"pages" => $pages,
+			"currentPage" => "list",
 			"columns" => $columns,
 			"products" => $this->dbAdmin->findTable("products")->getAll()
 		);
@@ -55,7 +61,17 @@ class ProductsController extends Controller
 		include "./CubitOpenSource/Estoque/scripts/product/init.php";
 		include "./CubitOpenSource/Estoque/scripts/product/form-submit.php";
 
+		$pages = array(
+			array("name" => "list", "title" => "Lista de Produtos", "url" => URL ."products")
+		);
+
+		if (! empty($id))
+			$pages[] = array("name" => "edit", "title" => "Editar Produto", "url" => URL ."edit/" .$id);
+		else
+			$pages[] = array("name" => "new", "title" => "Novo Produto", "url" => URL ."new");
+
 		$data = array(
+			"pages" => $pages,
 			"id" => $id,
 			"product" => $array
 		);
