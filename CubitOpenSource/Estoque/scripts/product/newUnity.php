@@ -1,26 +1,18 @@
 <?php
+include "../../../../config.php";
+$util = new Util();
 
-if ($this->util->checkMethod("POST")) {
-	if (! empty($_POST["save-unity"])) {
-		var_dump($_POST); die;
-		
+if ($util->checkMethod("POST")) {
+	if (! empty($_POST["save-unity"])) {		
 		if (! empty($_POST["unity-name"])) {
 			$a = array();
 			$a["name"] = $_POST["unity-name"];
 			$a["abbreviation"] = $_POST["unity-abbreviation"];
 
-			$this->dbMan()->findTable("unities").insert($a);
-			// closeModal();
+			$dbAdmin->findTable("unities")->insert($a);
+			$util->redirect("products/" .$_POST["src-url"]);
 		}
 	} elseif (! empty($_POST["cancel-unity"])) {
-		closeModal();
+		$util->redirect("products/" .$_POST["src-url"]);
 	}
-}
-
-function closeModal()
-{
-	?>
-	closeModal();
-	<?php
-	die;
 }

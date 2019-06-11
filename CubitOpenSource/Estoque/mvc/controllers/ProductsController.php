@@ -45,12 +45,10 @@ class ProductsController extends Controller
 
 	public function new($entity="")
 	{
-		if (empty($entity))
-			$this->saveEdit();
-		else {
+		if (! empty($entity)) {
 			if ($entity == "unity") {
 				// $this->util->redirect("CubitOpenSource/Estoque/scripts/product/newUnity.php");
-				include "CubitOpenSource/Estoque/scripts/product/newUnity.php";
+				// include "CubitOpenSource/Estoque/scripts/product/newUnity.php";
 				$this->loadView("products/unity");
 			} elseif ($entity == "brand") {
 				#
@@ -59,6 +57,9 @@ class ProductsController extends Controller
 			} else {
 				$this->util->redirect("404");
 			}
+		} else {
+			$this->saveEdit();
+			
 		}
 	}
 

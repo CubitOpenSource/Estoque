@@ -1,6 +1,9 @@
 <section class="main-container">
 	<h1>Nova Unidade</h1>
-	<form name="unity-form" method="POST">
+	<form name="unity-form" method="POST" action="<?= URL ?>CubitOpenSource/Estoque/scripts/product/newUnity.php">
+		<!-- TODO: AJAX to call form action -->
+		<input type="hidden" name="src-url" value="<?= URL ?>">
+
 		<div class="input-wrapper">
 			<label>Unidade</label>
 			<input autofocus="on" type="text" name="unity-name">
