@@ -49,7 +49,9 @@ class ProductsController extends Controller
 			$this->saveEdit();
 		else {
 			if ($entity == "unity") {
-				$this->util->redirect("CubitOpenSource/Estoque/scripts/product/newUnity.php");
+				// $this->util->redirect("CubitOpenSource/Estoque/scripts/product/newUnity.php");
+				include "CubitOpenSource/Estoque/scripts/product/newUnity.php";
+				$this->loadView("products/unity");
 			} elseif ($entity == "brand") {
 				#
 			} elseif ($entity == "category") {

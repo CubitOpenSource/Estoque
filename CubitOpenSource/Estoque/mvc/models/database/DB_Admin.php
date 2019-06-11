@@ -20,6 +20,7 @@ class DB_Admin
 	public function __construct()
 	{
 		$this->tables[] = new ProdutoDAO();
+		$this->tables[] = new UnityDAO();
 
 		$this->createTables();
 	}

@@ -7,7 +7,7 @@ use \IvanFilho\Database\DB_Table;
 use \IvanFilho\Database\DB_Utils;
 
 /**
-* Class: ProductDAO
+* Class: UnityDAO
 * 
 * Contains operations related to the Unity DAO database table.
 *
@@ -16,7 +16,7 @@ use \IvanFilho\Database\DB_Utils;
 * @author       CubitOpenSource <cubit.open.src@gmail.com>
 *
 * Created: Jun 10, 2019.
-* Last Modified: Jun 10, 2019.
+* Last Modified: Jun 11, 2019.
 */
 
 class UnityDAO extends DB_Table
@@ -26,6 +26,7 @@ class UnityDAO extends DB_Table
 		parent::__construct("unities");
 		$this->addColumn(new Column("id", INT, 0, false, "AUTO_INCREMENT", "PRIMARY KEY"));
 		$this->addColumn(new Column("name", TEXT));
+		$this->addColumn(new Column("abbreviation", VARCHAR, 5));
 	}
 
 	public function insert($array)

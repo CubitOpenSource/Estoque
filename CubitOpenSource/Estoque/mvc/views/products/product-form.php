@@ -3,6 +3,8 @@
 
 <?php $this->loadViewPart("navigation", array("pages" => $pages)); ?>
 
+<?php $this->loadViewPart("modal", array()); ?>
+
 <section class="main-container">
 	<h1>Novo Produto</h1>
 
