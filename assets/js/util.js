@@ -16,3 +16,16 @@ function selectAll() {
 		this.selectionEnd = this.value.length;
 	}
 }
+
+function ajax(url, onSuccessFunction) {
+	var processResponseFunction = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			onSuccessFunction(this.responseText);
+		}
+	};
+
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = processResponseFunction;
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
+}
