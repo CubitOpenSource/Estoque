@@ -12,15 +12,17 @@ namespace CubitOpenSource\Database;
 * @author       CubitOpenSource <cubit.open.src@gmail.com>
 *
 * Created: Jun 1, 2019.
-* Last Modified: Jun 1, 2019.
+* Last Modified: Jun 13, 2019.
 */
 
 class DB_Admin
 {
 	public function __construct()
 	{
-		$this->tables[] = new ProdutoDAO();
+		$this->tables[] = new ProductDAO();
 		$this->tables[] = new UnityDAO();
+		$this->tables[] = new BrandDAO();
+		$this->tables[] = new CategoryDAO();
 
 		$this->createTables();
 	}

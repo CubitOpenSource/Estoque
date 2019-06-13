@@ -4,13 +4,9 @@ let callback = function(response) {
 	if (response == "success") closeModal();
 };
 
-function callAjax(e) {
-	// e.preventDefault();
-
-	if (this) {
-		var url = document.getElementById("script-url").value;
-		var form = document.getElementById("unity-form");
-		// document.getElementById("unity-submit").disabled = true;
-		ajax(url, form, callback);
-	}
+function callAjax() {
+	var url = document.getElementById("script-url").value;
+	var form = document.getElementById("unity-form");
+	// document.getElementById("unity-submit").disabled = true;
+	ajax(url, form, callback);
 }

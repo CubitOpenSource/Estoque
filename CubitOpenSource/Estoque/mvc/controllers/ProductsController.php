@@ -59,7 +59,6 @@ class ProductsController extends Controller
 			}
 		} else {
 			$this->saveEdit();
-			
 		}
 	}
 
@@ -90,7 +89,10 @@ class ProductsController extends Controller
 		$data = array(
 			"pages" => $pages,
 			"id" => $id,
-			"product" => $array
+			"product" => $array,
+			"unities" => $this->dbAdmin->findTable("unities")->getAll(),
+			"brands" => $this->dbAdmin->findTable("brands")->getAll(),
+			"categories" => $this->dbAdmin->findTable("categories")->getAll()
 		);
 
 		$this->title = end($pages)["title"];

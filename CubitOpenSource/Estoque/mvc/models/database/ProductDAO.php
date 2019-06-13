@@ -20,7 +20,7 @@ use \CubitOpenSource\Estoque\Produto;
 * Last Modified: Jun 2, 2019.
 */
 
-class ProdutoDAO extends DB_Table
+class ProductDAO extends DB_Table
 {
 	public function __construct()
 	{

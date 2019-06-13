@@ -6,12 +6,12 @@
 		<input id="script-url" type="hidden" name="script-url" value="<?= URL ?>CubitOpenSource/Estoque/scripts/product/newUnity.php">
 
 		<div class="input-wrapper">
-			<label>Unidade</label>
-			<input autofocus="on" type="text" name="unity-name">
+			<label>Unidade (*)</label>
+			<input autofocus="on" required="on" type="text" name="unity-name">
 		</div>
 
 		<div class="input-wrapper">
-			<label>Abreviação (Opcional)</label>
+			<label>Abreviação</label>
 			<input type="text" name="unity-abbreviation">
 		</div>
 		

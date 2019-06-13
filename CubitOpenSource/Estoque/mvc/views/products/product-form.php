@@ -56,6 +56,9 @@
 							<div class="flex">
 								<select name="unity">
 									<option value="0">Selecione a Unidade</option>
+									<?php foreach ($unities as $d) : ?>
+										<option value="<?= $d["name"] ?>"><?= $d["name"] .((! empty($d["abbreviation"])) ? " (" .$d["abbreviation"] .")" : "") ?></option>
+									<?php endforeach; ?>
 								</select>
 								<a id="add-product-unity" class="btn btn-option" href="<?= URL ?>products/new/unity" title="Adicionar Unidade"><span class="add-icon"></span></a>
 							</div>
@@ -67,6 +70,8 @@
 							<div class="flex">
 								<select name="brand">
 									<option value="0">Selecione a Marca</option>
+									<?php foreach ($brands as $d) : ?>
+									<?php endforeach; ?>
 								</select>
 								<a id="add-product-unity" class="btn btn-option" href="<?= URL ?>CubitOpenSource/Estoque/scripts/product/" style="display:block" title="Adicionar Marca"><span class="add-icon"></span></a>
 							</div>
@@ -79,6 +84,8 @@
 						<div class="flex">
 							<select name="category">
 								<option value="0">Selecione a Categoria</option>
+								<?php foreach ($categories as $d) : ?>
+								<?php endforeach; ?>
 							</select>
 							<a id="add-product-unity" class="btn btn-option" href="<?= URL ?>CubitOpenSource/Estoque/scripts/product/" title="Adicionar Categoria"><span class="add-icon"></span></a>
 						</div>
