@@ -17,15 +17,21 @@ function selectAll() {
 	}
 }
 
-function ajax(url, onSuccessFunction) {
+function ajax(url, formName, callback) {
 	var processResponseFunction = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			onSuccessFunction(this.responseText);
+			callback(this.responseText);
 		}
 	};
 
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = processResponseFunction;
-	xmlhttp.open("GET", url, true);
-	xmlhttp.send();
+	xmlhttp.open("POST", url, true);
+
+	if (formName !== null) {
+		let formData = new FormData(formName);
+		xmlhttp.send(formData);
+	} else {
+		xmlhttp.send();
+	}
 }

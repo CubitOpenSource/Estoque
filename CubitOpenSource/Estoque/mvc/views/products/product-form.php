@@ -1,4 +1,5 @@
 <script src="<?= URL ?>assets/js/util.js"></script>
+<script src="<?= URL ?>assets/js/products/unity.js"></script>
 <link rel="stylesheet" href="<?= URL ?>CubitOpenSource/Estoque/mvc/views/products/css/form.css">
 
 <?php $this->loadViewPart("navigation", array("pages" => $pages)); ?>
