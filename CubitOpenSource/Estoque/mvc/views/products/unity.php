@@ -1,7 +1,8 @@
 <section class="main-container">
 	<h1>Nova Unidade</h1>
 
-	<form id="unity-form" method="POST" onsubmit="callAjax(); return false;">
+	<!-- onsubmit="callAjax(); return false;" -->
+	<form id="unity-form" method="POST">
 		<input type="hidden" name="src-url" value="<?= URL ?>">
 		<input id="script-url" type="hidden" name="script-url" value="<?= URL ?>CubitOpenSource/Estoque/scripts/product/newUnity.php">
 
@@ -16,6 +17,7 @@
 		</div>
 		
 		<input id="unity-submit" class="form-btn form-btn-green" type="submit" name="save-unity" value="Salvar">
+		
 		<input class="form-btn" type="submit" name="cancel-unity" value="Cancelar" onclick="closeModal()">
 	</form>
 </section>

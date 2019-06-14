@@ -27,11 +27,14 @@ class UnityDAO extends DB_Table
 		$this->addColumn(new Column("id", INT, 0, false, "AUTO_INCREMENT", "PRIMARY KEY"));
 		$this->addColumn(new Column("name", TEXT));
 		$this->addColumn(new Column("abbreviation", VARCHAR, 5));
+
+		$this->listeners = array();
 	}
 
 	public function insert($array)
 	{
 		parent::insert($array);
+		$this->notify();
 	}
 
 	public function update($array, $where = array())
@@ -55,5 +58,25 @@ class UnityDAO extends DB_Table
 	public function getAll()
 	{
 		return parent::selectAll(array(), array(), true);
+	}
+
+	public function addListener(Listener $l) {
+		$this->listeners[] = $l;
+	}
+
+	public function removeListener(Listener $listener) {
+		foreach ($this->listeners as $key => $l) {
+			if ($l == $listener) {
+				unset($this->listeners[$key]);
+				break;
+			}
+		}
+	}
+
+	public function notify()
+	{
+		foreach ($this->listeners as $l) {
+			$l->update();
+		}
 	}
 }

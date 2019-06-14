@@ -1,9 +1,49 @@
 <script src="<?= URL ?>assets/js/util.js"></script>
-<script src="<?= URL ?>assets/js/products/unity.js"></script>
+<!-- <script src="<?= URL ?>assets/js/products/unity.js"></script> -->
 <link rel="stylesheet" href="<?= URL ?>CubitOpenSource/Estoque/mvc/views/products/css/form.css">
 
 <?php $this->loadViewPart("navigation", array("pages" => $pages)); ?>
-<?php $this->loadViewPart("modal", array()); ?>
+<?php #$this->loadViewPart("modal", array()); ?>
+
+<script>
+	var callback = function updateUnities(data=null) {
+		console.log(data);
+
+		if (data != null) {
+			data = JSON.parse(data);
+
+			var select = document.getElementById("product-unity-select");
+			select.innerHTML = "";
+			
+			for (var i = 0; i < data.length; i++) {
+				var fullUnity = data[i]["name"];
+				fullUnity += (data[i]["abbreviation"] != "") ? " (" + data[i]["abbreviation"] + ")" : "";
+				console.log("Full unity: " + fullUnity);
+
+				select.innerHTML += '<option value="' + data[i]['name'] + '">' + fullUnity + '</option>';
+			}
+		}
+	};
+
+	function update() {
+		var url = "<?= URL ."CubitOpenSource/Estoque/scripts/ajax/select-db.php" ?>";
+		ajax(url, callback);
+	}
+
+	window.onload = function() {
+		var options = document.getElementsByClassName("btn-option");
+		for (var i = 0; i < options.length; i++) {
+			options[i].addEventListener("click", function(e) {
+				var url = this.href;
+				var title = "";
+				e.preventDefault();
+				openWindow(url, title);
+			}, 1);
+		}
+
+		setInterval(update, 5000);
+	}
+</script>
 
 <section class="main-container">
 	<h1>Novo Produto</h1>
@@ -53,7 +93,7 @@
 							<label>Unidade</label>
 							
 							<div class="flex">
-								<select name="unity">
+								<select id="product-unity-select" name="unity">
 									<option value="0">Selecione a Unidade</option>
 									<?php foreach ($unities as $d) : ?>
 										<option value="<?= $d["name"] ?>"><?= $d["name"] .((! empty($d["abbreviation"])) ? " (" .$d["abbreviation"] .")" : "") ?></option>
