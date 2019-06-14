@@ -48,10 +48,9 @@ class ProductsController extends Controller
 		if (! empty($entity)) {
 			$this->title = "Nova ";
 			if ($entity == "unity") {
-				// $this->util->redirect("CubitOpenSource/Estoque/scripts/product/newUnity.php");
 				include "CubitOpenSource/Estoque/scripts/product/newUnity.php";
 				$this->title .= "Unidade";
-				$this->loadView("products/unity");
+				$this->loadView("products/unity-form");
 			} elseif ($entity == "brand") {
 				$this->title .= "Marca";
 			} elseif ($entity == "category") {

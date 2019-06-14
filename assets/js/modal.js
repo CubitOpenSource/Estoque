@@ -9,22 +9,7 @@ function openModal(event, url) {
 		modalBox.getElementsByTagName("form")[0].getElementsByTagName("input")[0].focus();
 	};
 
-	ajax(url, null ,callback);
-	// return;
-
-	/*var processResponseFunction = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			modal.innerHTML = this.responseText;
-			modalBox.style.display = "block";
-
-			modalBox.getElementsByTagName("form")[0].getElementsByTagName("input")[0].focus();
-		}
-	};
-
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = processResponseFunction;
-	xmlhttp.open("GET", url, true);
-	xmlhttp.send();*/
+	ajax(url, callback);
 }
 
 function closeModal(event) {

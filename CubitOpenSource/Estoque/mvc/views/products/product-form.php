@@ -1,9 +1,7 @@
 <script src="<?= URL ?>assets/js/util.js"></script>
-<!-- <script src="<?= URL ?>assets/js/products/unity.js"></script> -->
 <link rel="stylesheet" href="<?= URL ?>CubitOpenSource/Estoque/mvc/views/products/css/form.css">
 
 <?php $this->loadViewPart("navigation", array("pages" => $pages)); ?>
-<?php #$this->loadViewPart("modal", array()); ?>
 
 <script>
 	var callback = function updateUnities(data=null) {
@@ -13,7 +11,7 @@
 			data = JSON.parse(data);
 
 			var select = document.getElementById("product-unity-select");
-			select.innerHTML = "";
+			select.innerHTML = "<option>Selecione a Unidade</option>";
 			
 			for (var i = 0; i < data.length; i++) {
 				var fullUnity = data[i]["name"];
@@ -41,7 +39,7 @@
 			}, 1);
 		}
 
-		setInterval(update, 5000);
+		setInterval(update, 1000);
 	}
 </script>
 
