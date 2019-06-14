@@ -7,7 +7,12 @@ define("ENVIRONMENT", "dev");
 
 switch (ENVIRONMENT) {
 	case "dev":
-		define("URL", "http://localhost/dev/cubit/estoque/");
+		// define("URL", "http://localhost/dev/cubit/estoque/"); echo URL; die;
+		$array = explode("/", $_SERVER["PHP_SELF"]);
+		array_shift($array);
+		array_pop($array);
+		define("URL", $_SERVER["REQUEST_SCHEME"] ."://" .$_SERVER["SERVER_NAME"] ."/" .implode("/", $array) ."/");
+		// echo URL; die;
 		define("DB_NAME", "stock_db");
 		define("DB_HOST", "127.0.0.1");
 		define("DB_USER", "root");

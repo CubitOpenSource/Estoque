@@ -3,7 +3,6 @@
 <link rel="stylesheet" href="<?= URL ?>CubitOpenSource/Estoque/mvc/views/products/css/form.css">
 
 <?php $this->loadViewPart("navigation", array("pages" => $pages)); ?>
-
 <?php $this->loadViewPart("modal", array()); ?>
 
 <section class="main-container">
@@ -71,13 +70,14 @@
 								<select name="brand">
 									<option value="0">Selecione a Marca</option>
 									<?php foreach ($brands as $d) : ?>
+										<option value="<?= $d["name"] ?>"><?= $d["name"] ?></option>
 									<?php endforeach; ?>
 								</select>
 								<a id="add-product-unity" class="btn btn-option" href="<?= URL ?>CubitOpenSource/Estoque/scripts/product/" style="display:block" title="Adicionar Marca"><span class="add-icon"></span></a>
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="input-wrapper">
 						<label>Categoria</label>
 
@@ -85,6 +85,7 @@
 							<select name="category">
 								<option value="0">Selecione a Categoria</option>
 								<?php foreach ($categories as $d) : ?>
+									<option value="<?= $d["name"] ?>"><?= $d["name"] ?></option>
 								<?php endforeach; ?>
 							</select>
 							<a id="add-product-unity" class="btn btn-option" href="<?= URL ?>CubitOpenSource/Estoque/scripts/product/" title="Adicionar Categoria"><span class="add-icon"></span></a>
