@@ -40,7 +40,7 @@ function validation($array, $util, $dbAdmin)
 
 	// TODO: check product with the same description
 
-	// Replace commas (,) by dots (.) in prices
+	# Replace commas (,) by dots (.) in prices
 	$array["price_cost"] = str_replace(",", ".", $array["price_cost"]);
 	$array["price_sell"] = str_replace(",", ".", $array["price_sell"]);
 
@@ -57,7 +57,7 @@ function validation($array, $util, $dbAdmin)
 					deleteImage($array["image"]);
 				move_uploaded_file($img["tmp_name"], $imagePath);
 
-				# resize and save image
+				# Resize and save image
 				saveResizedImage($type, $imagePath);
 				$array["image"] = $tmpName;
 			}

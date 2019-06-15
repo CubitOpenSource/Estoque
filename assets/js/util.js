@@ -21,7 +21,7 @@ function openWindow(url, title) {
 	window.open(url, title, "toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=600");
 }
 
-function ajax(url, callback, form) {
+function ajax(url, callback, form="") {
 	var processResponseFunction = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			callback(this.responseText);
@@ -30,12 +30,13 @@ function ajax(url, callback, form) {
 
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = processResponseFunction;
-	xmlhttp.open("POST", url, true);
 
-	if (form !== null) {
+	if (form != "") {
 		let formData = new FormData(form);
+		xmlhttp.open("POST", url, true);
 		xmlhttp.send(formData);
 	} else {
+		xmlhttp.open("GET", url, true);
 		xmlhttp.send();
 	}
 }

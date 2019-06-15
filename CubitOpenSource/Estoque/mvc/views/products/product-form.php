@@ -4,29 +4,60 @@
 <?php $this->loadViewPart("navigation", array("pages" => $pages)); ?>
 
 <script>
-	var callback = function updateUnities(data) {
-		console.log(data);
+	var callback = function updateDataFromDatabase(data) {
+		// console.log(data);
 
 		if (data != "") {
 			data = JSON.parse(data);
-			var select = document.getElementById("product-unity-select");
+			console.log(data);
 
-			for (var i = 0, j = 1; i < data.length; i++, j++) {
-				var fullUnity = data[i]["name"];
-				fullUnity += (data[i]["abbreviation"] != "") ? " (" + data[i]["abbreviation"] + ")" : "";
-				console.log("Full unity: " + fullUnity);
+			var name = data[0]["name"];
+			var selects = document.getElementsByTagName("select");
+			var selectIndex = -1;
+
+			for (var i = 0; i < selects.length; i++) {
+				if (selects[i].name == name) {
+					selectIndex = i;
+					break;
+				}
+			}
+			if (selectIndex == -1) { return; }
+
+			var select = selects[selectIndex];
+			var selectedIndex = select.options.selectedIndex;
+
+			for (var i = 1; i < data.length; i++) {
+				var dataId = data[i]["id"];
+				var dataName = data[i]["name"];
+				if (name == "unities") {
+					dataName += (data[i]["abbreviation"] != "") ? " (" + data[i]["abbreviation"] + ")" : "";
+				}
 
 				var o = document.createElement("option");
-				o.value = data[i]['name'];
-				o.innerHTML = fullUnity;
+				o.value = dataId;
+				o.innerHTML = dataName;
+				if (i == selectedIndex) { o.selected = "true"; }
 
-				select.options[j] = o;
+				select.options[i] = o;
 			}
 		}
 	};
 
-	function update() {
+	function updateUnities() {
 		var url = "<?= URL ."CubitOpenSource/Estoque/scripts/ajax/select-db.php" ?>";
+		url += "?table=unities";
+		ajax(url, callback);
+	}
+
+	function updateBrands() {
+		var url = "<?= URL ."CubitOpenSource/Estoque/scripts/ajax/select-db.php" ?>";
+		url += "?table=brands";
+		ajax(url, callback);
+	}
+
+	function updateCategories() {
+		var url = "<?= URL ."CubitOpenSource/Estoque/scripts/ajax/select-db.php" ?>";
+		url += "?table=categories";
 		ajax(url, callback);
 	}
 
@@ -41,7 +72,9 @@
 			}, 1);
 		}
 
-		setInterval(update, 1000);
+		/*setInterval(updateUnities, 1000);
+		setInterval(updateBrands, 1000);
+		setInterval(updateCategories, 1000);*/
 	}
 </script>
 
@@ -93,13 +126,13 @@
 							<label>Unidade</label>
 							
 							<div class="flex">
-								<select id="product-unity-select" name="unity">
+								<select name="unities">
 									<option value="0">Selecione a Unidade</option>
 									<?php foreach ($unities as $d) : ?>
-										<option value="<?= $d["name"] ?>"><?= $d["name"] .((! empty($d["abbreviation"])) ? " (" .$d["abbreviation"] .")" : "") ?></option>
+										<option value="<?= $d["id"] ?>" <?= ($product["unity_id"] == $d["id"]) ? "selected='true'" : "" ?>><?= $d["name"] .((! empty($d["abbreviation"])) ? " (" .$d["abbreviation"] .")" : "") ?></option>
 									<?php endforeach; ?>
 								</select>
-								<a id="add-product-unity" class="btn btn-option" href="<?= URL ?>products/new/unity" title="Adicionar Unidade"><span class="add-icon"></span></a>
+								<a class="btn btn-option" href="<?= URL ?>products/new/unity" title="Adicionar Unidade"><span class="add-icon"></span></a>
 							</div>
 						</div>
 
@@ -107,13 +140,13 @@
 							<label>Marca</label>
 
 							<div class="flex">
-								<select name="brand">
+								<select name="brands">
 									<option value="0">Selecione a Marca</option>
 									<?php foreach ($brands as $d) : ?>
-										<option value="<?= $d["name"] ?>"><?= $d["name"] ?></option>
+										<option value="<?= $d["id"] ?>" <?= ($product["brand_id"] == $d["id"]) ? "selected='true'" : "" ?>><?= $d["name"] ?></option>
 									<?php endforeach; ?>
 								</select>
-								<a id="add-product-unity" class="btn btn-option" href="<?= URL ?>CubitOpenSource/Estoque/scripts/product/" style="display:block" title="Adicionar Marca"><span class="add-icon"></span></a>
+								<a class="btn btn-option" href="<?= URL ?>products/new/brand" title="Adicionar Unidade"><span class="add-icon"></span></a>
 							</div>
 						</div>
 					</div>
@@ -122,13 +155,13 @@
 						<label>Categoria</label>
 
 						<div class="flex">
-							<select name="category">
+							<select name="categories">
 								<option value="0">Selecione a Categoria</option>
 								<?php foreach ($categories as $d) : ?>
-									<option value="<?= $d["name"] ?>"><?= $d["name"] ?></option>
+									<option value="<?= $d["id"] ?>" <?= ($product["category_id"] == $d["id"]) ? "selected='true'" : "" ?>><?= $d["name"] ?></option>
 								<?php endforeach; ?>
 							</select>
-							<a id="add-product-unity" class="btn btn-option" href="<?= URL ?>CubitOpenSource/Estoque/scripts/product/" title="Adicionar Categoria"><span class="add-icon"></span></a>
+							<a class="btn btn-option" href="<?= URL ?>products/new/category" title="Adicionar Unidade"><span class="add-icon"></span></a>
 						</div>
 					</div>
 				</div>
