@@ -21,14 +21,14 @@ function validation($util, $dbAdmin)
 
 	if (empty ($a["name"])) {
 		$res = false;
-		$util->setErrorMessage("name", "Digite o nome da Marca");
+		$util->setErrorMessage("name", "Digite o nome da Marca.");
 	} else {
 		$data = $dbAdmin->findTable("brands")->getAll();
 		
 		foreach ($data as $key => $d) {
 			if ($d["name"] == $a["name"]) {
 				$res = false;
-				$util->setErrorMessage("name", "Já existe uma Marca com este nome");
+				$util->setErrorMessage("name", "Já existe uma Marca com este nome.");
 				break;
 			}
 		}

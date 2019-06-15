@@ -83,10 +83,14 @@ class ProductsController extends Controller
 			array("name" => "list", "title" => "Lista de Produtos", "url" => URL ."products")
 		);
 
-		if (! empty($id))
-			$pages[] = array("name" => "edit", "title" => $array["description"], "url" => URL ."edit/" .$id);
-		else
-			$pages[] = array("name" => "new", "title" => "Novo Produto", "url" => URL ."new");
+		if (! empty($id)) {
+			$t = (empty($_POST["description"])) ? $p["description"] : $_POST["description"];
+			$pages[] = array("name" => "edit", "title" => $t, "url" => URL ."edit/" .$id);
+		}
+		else {
+			$t = "Novo Produto";
+			$pages[] = array("name" => "new", "title" => $t, "url" => URL ."new");
+		}
 
 		$data = array(
 			"pages" => $pages,

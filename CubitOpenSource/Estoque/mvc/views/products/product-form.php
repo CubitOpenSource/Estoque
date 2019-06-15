@@ -79,7 +79,7 @@
 </script>
 
 <section class="main-container">
-	<h1>Novo Produto</h1>
+	<h1><?= $this->title; ?></h1>
 
 	<form class="main-grid" name="product" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="operation" value="<?= (empty($id)) ? 0 : 1 ?>">

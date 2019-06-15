@@ -21,14 +21,14 @@ function validation($util, $dbAdmin)
 
 	if (empty ($a["name"])) {
 		$res = false;
-		$util->setErrorMessage("name", "Digite o nome da Categoria");
+		$util->setErrorMessage("name", "Digite o nome da Categoria.");
 	} else {
 		$data = $dbAdmin->findTable("categories")->getAll();
 		
 		foreach ($data as $key => $d) {
 			if ($d["name"] == $a["name"]) {
 				$res = false;
-				$util->setErrorMessage("name", "Já existe uma Categoria com este nome");
+				$util->setErrorMessage("name", "Já existe uma Categoria com este nome.");
 				break;
 			}
 		}

@@ -1,11 +1,10 @@
 <?php
 if ($this->util->checkMethod("POST")) {
 	if (! empty($_POST["save"])) {
-		$array = validation($array, $this->util, $this->dbAdmin);
-		// var_dump($array);
-		// echo "<br>Operation: " .$_POST["operation"];
+		$res = validation($array, $this->util, $this->dbAdmin);
 
-		if ($array !== false) {
+		if ($res !== false) {
+			$array = $res;
 			if ($_POST["operation"] == 0) {
 				$this->dbAdmin->findTable("products")->insert($array);
 			} elseif ($_POST["operation"] == 1) {
@@ -18,31 +17,41 @@ if ($this->util->checkMethod("POST")) {
 	}
 }
 
-function validation($array, $util, $dbAdmin)
+function validation($product, $util, $dbAdmin)
 {
 	$res = true;
 	$supportedTypes = array("image/jpeg", "image/png");
 
-	if (empty($array["description"])) {
+	if (empty($product["description"])) {
 		$res = false;
 		$util->setErrorMessage("description", "Digite a descrição do produto.");
+	} else {
+		if ($_POST["operation"] == 0) {
+			# Check product with same description
+			$data = $dbAdmin->findTable("products")->getAll();
+			foreach ($data as $key => $d) {
+				if ($d["description"] == $product["description"]) {
+					$res = false;
+					$util->setErrorMessage("description", "Já existe um Produto com a mesma descrição.");
+					break;
+				}
+			}
+		}
 	}
 
-	if (empty($array["price_cost"])) {
+	if (empty($product["price_cost"])) {
 		$res = false;
 		$util->setErrorMessage("price-cost", "Digite o preço de custo do produto.");
 	}
 
-	if (empty($array["price_sell"])) {
+	if (empty($product["price_sell"])) {
 		$res = false;
 		$util->setErrorMessage("price-sell", "Digite o preço de venda do produto.");
 	}
 
-	// TODO: check product with the same description
-
 	# Replace commas (,) by dots (.) in prices
-	$array["price_cost"] = str_replace(",", ".", $array["price_cost"]);
-	$array["price_sell"] = str_replace(",", ".", $array["price_sell"]);
+	$product["price_cost"] = str_replace(",", ".", $product["price_cost"]);
+	$product["price_sell"] = str_replace(",", ".", $product["price_sell"]);
 
 	if ($res) {
 		$img = $_FILES["image"];
@@ -53,18 +62,18 @@ function validation($array, $util, $dbAdmin)
 				$tmpName = md5(time() .rand(0, 9999)) .".jpg";
 				$imagePath = "assets/img/products/" .$tmpName;
 
-				if (! empty($array["image"]))
-					deleteImage($array["image"]);
+				if (! empty($product["image"]))
+					deleteImage($product["image"]);
 				move_uploaded_file($img["tmp_name"], $imagePath);
 
 				# Resize and save image
 				saveResizedImage($type, $imagePath);
-				$array["image"] = $tmpName;
+				$product["image"] = $tmpName;
 			}
 		}	
 	}
 
-	return ($res) ? $array : $res;
+	return ($res) ? $product : $res;
 }
 
 function saveResizedImage($type, $imagePath)

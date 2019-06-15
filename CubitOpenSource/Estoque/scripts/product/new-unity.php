@@ -22,14 +22,14 @@ function validation($util, $dbAdmin)
 
 	if (empty ($a["name"])) {
 		$res = false;
-		$util->setErrorMessage("name", "Digite o nome da Unidade");
+		$util->setErrorMessage("name", "Digite o nome da Unidade.");
 	} else {
 		$data = $dbAdmin->findTable("data")->getAll();
 		
 		foreach ($data as $key => $d) {
 			if ($d["name"] == $a["name"]) {
 				$res = false;
-				$util->setErrorMessage("name", "Já existe uma Unidade com este nome");
+				$util->setErrorMessage("name", "Já existe uma Unidade com este nome.");
 				break;
 			}
 		}
