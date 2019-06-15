@@ -2,4 +2,4 @@
 include "../../../../config.php";
 // TODO: select any data passed via POST or GET
 $array = $dbAdmin->findTable("unities")->getAll();
-echo json_encode($array);
+echo (! empty($array)) ? json_encode($array) : "";

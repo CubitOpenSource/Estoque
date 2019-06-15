@@ -4,21 +4,23 @@
 <?php $this->loadViewPart("navigation", array("pages" => $pages)); ?>
 
 <script>
-	var callback = function updateUnities(data=null) {
+	var callback = function updateUnities(data) {
 		console.log(data);
 
-		if (data != null) {
+		if (data != "") {
 			data = JSON.parse(data);
-
 			var select = document.getElementById("product-unity-select");
-			select.innerHTML = "<option>Selecione a Unidade</option>";
-			
-			for (var i = 0; i < data.length; i++) {
+
+			for (var i = 0, j = 1; i < data.length; i++, j++) {
 				var fullUnity = data[i]["name"];
 				fullUnity += (data[i]["abbreviation"] != "") ? " (" + data[i]["abbreviation"] + ")" : "";
 				console.log("Full unity: " + fullUnity);
 
-				select.innerHTML += '<option value="' + data[i]['name'] + '">' + fullUnity + '</option>';
+				var o = document.createElement("option");
+				o.value = data[i]['name'];
+				o.innerHTML = fullUnity;
+
+				select.options[j] = o;
 			}
 		}
 	};
