@@ -72,9 +72,9 @@
 			}, 1);
 		}
 
-		/*setInterval(updateUnities, 1000);
+		setInterval(updateUnities, 1000);
 		setInterval(updateBrands, 1000);
-		setInterval(updateCategories, 1000);*/
+		setInterval(updateCategories, 1000);
 	}
 </script>
 
