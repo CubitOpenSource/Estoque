@@ -10,10 +10,28 @@
 			this.getElementsByClassName("checkbox")[0].removeAttribute("checked");
 		}
 	}
+
+	window.onload = function() {
+		var as = document.getElementsByTagName("a");
+		for (var i = 0; i < as.length; i++) {
+			as[i].addEventListener("click", function() {
+				if (this.parentElement) {
+					if (this.parentElement.parentElement) {
+						if (this.parentElement.parentElement.parentElement) {
+							var tr = this.parentElement.parentElement.parentElement;
+							tr.setAttribute("class", " ");
+							tr.getElementsByClassName("checkbox")[0].removeAttribute("checked");
+						}
+					}
+				}
+				
+			}, 1);
+		}
+	}
 </script>
 
 <section class="products main-container">
-	<h1>Produtos</h1>
+	<h1>Produtos do Governo</h1>
 	
 	<a class="btn btn-default" href="<?= URL ?>products/new">Cadastrar</a>
 
