@@ -39,12 +39,12 @@ function validation($product, $util, $dbAdmin)
 		}
 	}
 
-	if (empty($product["price_cost"])) {
+	if (empty($product["price_cost"]) || $product["price_cost"] <= 0) {
 		$res = false;
 		$util->setErrorMessage("price-cost", "Digite o preço de custo do produto.");
 	}
 
-	if (empty($product["price_sell"])) {
+	if (empty($product["price_sell"]) || $product["price_sell"] <= 0) {
 		$res = false;
 		$util->setErrorMessage("price-sell", "Digite o preço de venda do produto.");
 	}

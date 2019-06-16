@@ -1,5 +1,17 @@
 <?php $this->loadViewPart("navigation", array("pages" => $pages)); ?>
 
+<script>
+	function toggleSelectRow() {
+		if (this.className == "") {
+			this.setAttribute("class", "selected");
+			this.getElementsByClassName("checkbox")[0].setAttribute("checked", "true");
+		} else {
+			this.removeAttribute("class");
+			this.getElementsByClassName("checkbox")[0].removeAttribute("checked");
+		}
+	}
+</script>
+
 <section class="products main-container">
 	<h1>Produtos</h1>
 	
