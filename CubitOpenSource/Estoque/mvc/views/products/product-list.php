@@ -30,12 +30,70 @@
 	}
 </script>
 
-<section class="products main-container">
-	<h1>Produtos do Governo</h1>
-	
-	<a class="btn btn-default" href="<?= URL ?>products/new">Cadastrar</a>
+<style>
+	.option {
+		background: linear-gradient(to bottom,#f5f5f5,#f1f1f1);
+		border-radius: 2px;
+		border: 1px solid rgba(0,0,0,0.1);
+		color: #444;
+		display: block;
+		font-size: 11px;
+		font-weight: bold;
+		height: 27px;
+		line-height: 27px;
+		padding: 0 10px;
+		position: relative;
+		text-align: center;
+		text-decoration: none;
+		transition: all .2s;
+		vertical-align: middle;
+	}
+	.option:hover {
+		background: linear-gradient(to bottom,#f6f6f6,#f1f1f1);
+		border: 1px solid #bbb;
+		box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+		text-decoration: none;
+		z-index: 1;
+	}
+	.option:focus {
+		border: 1px solid #4d90fe;
+		outline: none;
+		z-index: 1;
+	}
 
-	<table>
+	.opt {
+		display: inline-block;
+	}
+</style>
+
+<section class="products main-container">
+	<h1>Produtos</h1>
+	
+	<a class="btn btn-default" href="<?= URL ?>products/new">Cadastrar Produto</a>
+
+	<table class="options-table">
+		<tr>
+			<td>
+				<span class="opt" title="Marcar todos os produtos">
+					<span class="option"><input type="checkbox" name="select-all"></span>
+				</span>
+			</td>
+
+			<td>
+				<label>Filtrar:</label>
+				<select name="filter">
+					<option value="0">Todos os Rótulos</option>
+				</select>
+				<input type="search" name="search">
+			</td>
+
+			<td>
+				TODO: top pagination
+			</td>
+		</tr>	
+	</table>
+
+	<table class="list-table">
 		<thead>
 			<tr>
 				<th></th>
@@ -81,27 +139,35 @@
 			<?php endforeach; ?>
 		</tbody>
 	</table>
+
+	<table class="options-table">
+		<tr>
+			<td>
+				TODO: bottom pagination
+			</td>
+		</tr>
+	</table>
 </section>
 
 <style>
-	.products table {
+	.list-table {
 		width: 100%;
 		border-collapse: collapse;
 	}
 	
-	.products table tr:hover .options { visibility: visible; }
+	.list-table tr:hover .options { visibility: visible; }
 
-	.products table td {
+	.list-table td {
 		padding: 0.5em;
 		text-align: center;
 		border-bottom: 1px solid #ebebeb;
 	}
 
-	.products table tr:first-child td {
+	.list-table tr:first-child td {
 		border-top: 1px solid #ebebeb;
 	}
 
-	.products table .selected {
+	.list-table .selected {
 		background-color: #fff9e7;
 	}
 
