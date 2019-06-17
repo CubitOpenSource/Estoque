@@ -1,5 +1,5 @@
 .main-container {
-	width: 90%;
+	width: 100%;
 	margin: 0 auto;
 }
 
@@ -164,4 +164,11 @@
 
 .error-icon {
 	color: red;
+}
+
+@media(min-width: 420px) {
+	.main-container {
+		width: 90%;
+		margin: 0 auto;
+	}
 }

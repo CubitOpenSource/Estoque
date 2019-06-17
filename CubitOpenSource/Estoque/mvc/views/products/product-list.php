@@ -1,14 +1,40 @@
 <?php $this->loadViewPart("navigation", array("pages" => $pages)); ?>
 
 <script>
-	function toggleSelectRow() {
-		if (this.className == "") {
-			this.setAttribute("class", "selected");
-			this.getElementsByClassName("checkbox")[0].setAttribute("checked", "true");
-		} else {
-			this.removeAttribute("class");
-			this.getElementsByClassName("checkbox")[0].removeAttribute("checked");
+	function toggleSelectCheckboxes(source) {
+		var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+		for (var i = 0; i < checkboxes.length; i++) {
+		    if (checkboxes[i] != source) {
+		        checkboxes[i].checked = source.checked;
+
+		        // bug below
+
+		        var parent = checkboxes[i].parentElement.parentElement;
+		        // alert(checkboxes[i].checked + " " +parent.className);
+		        if (parent) {
+		        	if (parent.className == "") {
+		        		if (checkboxes[i].checked) {
+		        			parent.setAttribute("class", "selected");
+		        		}		        		
+		        	} else {
+		        		parent.removeAttribute("class");
+		        	}
+		        }
+		    }
 		}
+	}
+
+	function toggleSelectRow(row) {
+		if (this) {
+			if (this.className == "") {
+				this.setAttribute("class", "selected");
+				this.getElementsByClassName("checkbox")[0].setAttribute("checked", "true");
+			} else {
+				this.removeAttribute("class");
+				this.getElementsByClassName("checkbox")[0].removeAttribute("checked");
+			}
+		}
+		
 	}
 
 	window.onload = function() {
@@ -20,11 +46,10 @@
 						if (this.parentElement.parentElement.parentElement) {
 							var tr = this.parentElement.parentElement.parentElement;
 							tr.setAttribute("class", " ");
-							tr.getElementsByClassName("checkbox")[0].removeAttribute("checked");
+							// tr.getElementsByClassName("checkbox")[0].removeAttribute("checked");
 						}
 					}
 				}
-				
 			}, 1);
 		}
 	}
@@ -74,23 +99,35 @@
 	<table class="options-table">
 		<tr>
 			<td>
-				<span class="opt" title="Marcar todos os produtos">
-					<span class="option"><input type="checkbox" name="select-all"></span>
+				<span class="opt">
+					<span class="option" style="display: flex; align-items: center;">
+						<input id="select-all" type="checkbox" name="select-all" onclick="toggleSelectCheckboxes(this);">
+						<label for="select-all" style="margin-left: 0.5rem;">Marcar tudo</label>
+					</span>
 				</span>
 			</td>
 
 			<td>
-				<label>Filtrar:</label>
+				<label>Mostrar:</label>
 				<select name="filter">
 					<option value="0">Todos os Rótulos</option>
 				</select>
-				<input type="search" name="search">
 			</td>
 
 			<td>
-				TODO: top pagination
+				<input type="search" name="search" placeholder="Buscar">
 			</td>
-		</tr>	
+
+			<td>
+				<div class="pagination">
+					<a id="previous-page" class="btn btn-default">&#10094;</a>
+					<select title="Página Atual: 1">
+						<option value="1">1</option>
+					</select>
+					<a id="next-page" class="btn btn-default">&#10095;</a>
+				</div>
+			</td>
+		</tr>
 	</table>
 
 	<table class="list-table">
