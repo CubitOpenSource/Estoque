@@ -15,6 +15,7 @@ class ProductsController extends Controller
 	public function list()
 	{
 		include "CubitOpenSource/Estoque/scripts/product/pagination.php";
+		$categories = $this->dbAdmin->findTable("categories")->getAll();
 
 		$pages = array(
 			array("name" => "list", "title" => "Lista de Produtos", "url" => URL ."products")
@@ -34,6 +35,8 @@ class ProductsController extends Controller
 			"currentPage" => "list",
 			"columns" => $columns,
 			"products" => $products,
+			"categories" => $categories,
+			"category" => $category,
 			"maxPages" => $maxPages,
 			"currentPage" => $currentPage,
 			"itemsPerPage" => $itemsPerPage

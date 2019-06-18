@@ -34,20 +34,42 @@
 				this.getElementsByClassName("checkbox")[0].removeAttribute("checked");
 			}
 		}
-		
+	}
+
+	function goToCategory(c) {
+		var select = document.getElementById("select-categories");
+		var p = parseInt("<?= $currentPage ?>");
+		var max = parseInt("<?= $maxPages ?>");
+		if (p <= 0 || p > max) { return false; }
+		/*var exists = false;
+
+		for (var i = 0; i < select.options.length; i++) {
+			if (select.options[i].value == c) {
+				exists = true;
+			}
+		}
+
+		if (! exists) return false;*/
+
+		url = "<?= URL ?>" + "products/list?p=" + "<?= $currentPage ?>";
+		url += (parseInt(c) > 0) ? "&category=" + c : "";
+		window.location.href = url;
 	}
 
 	function goToPage(p) {
 		var select = document.getElementById("select-pages");
-		var pageExists = false;
+		var max = parseInt("<?= $maxPages ?>");
+		if (p <= 0 || p > max) { return false; }
+
+		/*var exists = false;
 
 		for (var i = 0; i < select.options.length; i++) {
 			if (select.options[i].value == p) {
-				pageExists = true;
+				exists = true;
 			}
 		}
 
-		if (! pageExists) return false;
+		if (! exists) return false;*/
 
 		url = "<?= URL ?>" + "products/list?p=" + p;
 		window.location.href = url;
@@ -131,8 +153,12 @@
 
 			<td>
 				<label>Mostrar:</label>
-				<select name="filter">
-					<option value="0">Todos os Rótulos</option>
+				<select id="select-categories" name="filter" onchange="goToCategory(this.options[this.selectedIndex].value)">
+					<option value="0">Todas as Categorias</option>
+					<?php foreach ($categories as $c) : ?>
+						<?php $i++; ?>
+						<option value="<?= $i ?>" <?= ($category == $c["id"]) ? "selected='true'" : "" ?>><?= $c["name"] ?></option>
+					<?php endforeach; ?>
 				</select>
 			</td>
 

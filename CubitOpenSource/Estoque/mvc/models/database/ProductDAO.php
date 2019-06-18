@@ -68,10 +68,13 @@ class ProductDAO extends DB_Table
 		return parent::selectOne(array(), $where, $asList);
 	}
 
-	public function getAll($maxPerPage="", $currentPage="")
+	public function getAll($maxPerPage="", $currentPage="", $category="")
 	{
 		$select = array();
 		$where = array();
+
+		if (! empty($category)) 
+			$where[] = DB_Utils::createCondition($this, "category_id", $category);
 
 		$limit = (! empty($maxPerPage)) ? $maxPerPage : 1;
 		$startPoint = (! empty($currentPage)) ? (($currentPage -1) * $limit) : -1;
