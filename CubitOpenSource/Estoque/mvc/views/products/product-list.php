@@ -37,6 +37,22 @@
 		
 	}
 
+	function goToPage(p) {
+		var select = document.getElementById("select-pages");
+		var pageExists = false;
+
+		for (var i = 0; i < select.options.length; i++) {
+			if (select.options[i].value == p) {
+				pageExists = true;
+			}
+		}
+
+		if (! pageExists) return false;
+
+		url = "<?= URL ?>" + "products/list?p=" + p;
+		window.location.href = url;
+	}
+
 	window.onload = function() {
 		var as = document.getElementsByTagName("a");
 		for (var i = 0; i < as.length; i++) {
@@ -89,6 +105,12 @@
 	.opt {
 		display: inline-block;
 	}
+
+	.disabled {
+		pointer-events: none;
+		cursor: default;
+		color: #ccc;
+	}
 </style>
 
 <section class="products main-container">
@@ -120,11 +142,13 @@
 
 			<td>
 				<div class="pagination">
-					<a id="previous-page" class="btn btn-default">&#10094;</a>
-					<select title="Página Atual: 1">
-						<option value="1">1</option>
+					<a href="<?= URL ?>products/list?p=<?= $currentPage - 1 ?>" title="Página Anterior" class="btn btn-default <?= ($currentPage <= 1 || $maxPages <= 1) ? "disabled" : "" ?>">&#10094;</a>
+					<select id="select-pages" title="Página Atual: <?= $currentPage ?>" <?= ($maxPages <= 1) ? "disabled='on'" : "" ?> onchange="goToPage(this.options[this.selectedIndex].value)">
+						<?php for ($i = 0; $i < $maxPages; $i++) : ?>
+							<option value="<?= $i + 1 ?>" <?= ($currentPage == $i + 1) ? "selected='true'" : "" ?>><?= $i + 1 ?></option>
+						<?php endfor; ?>
 					</select>
-					<a id="next-page" class="btn btn-default">&#10095;</a>
+					<a href="<?= URL ?>products/list?p=<?= $currentPage + 1 ?>" title="Próxima Página" class="btn btn-default <?= ($currentPage == $maxPages || $maxPages <= 1) ? "disabled" : "" ?>">&#10095;</a>
 				</div>
 			</td>
 		</tr>
@@ -180,7 +204,15 @@
 	<table class="options-table">
 		<tr>
 			<td>
-				TODO: bottom pagination
+				<div class="pagination">
+					<a href="<?= URL ?>products/list?p=<?= $currentPage - 1 ?>" title="Página Anterior" class="btn btn-default <?= ($currentPage <= 1 || $maxPages <= 1) ? "disabled" : "" ?>">&#10094;</a>
+					<select id="select-pages" title="Página Atual: <?= $currentPage ?>" <?= ($maxPages <= 1) ? "disabled='on'" : "" ?> onchange="goToPage(this.options[this.selectedIndex].value)">
+						<?php for ($i = 0; $i < $maxPages; $i++) : ?>
+							<option value="<?= $i + 1 ?>" <?= ($currentPage == $i + 1) ? "selected='true'" : "" ?>><?= $i + 1 ?></option>
+						<?php endfor; ?>
+					</select>
+					<a href="<?= URL ?>products/list?p=<?= $currentPage + 1 ?>" title="Próxima Página" class="btn btn-default <?= ($currentPage == $maxPages || $maxPages <= 1) ? "disabled" : "" ?>">&#10095;</a>
+				</div>
 			</td>
 		</tr>
 	</table>

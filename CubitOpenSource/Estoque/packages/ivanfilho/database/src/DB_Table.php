@@ -29,7 +29,7 @@ define("CL", ":"); #Colon
 * @author       Ivan Filho <ivanfilho21@gmail.com>
 *
 * Created: Mar 11, 2019.
-* Last Modified: Jun 2, 2019.
+* Last Modified: Jun 18, 2019.
 */
 
 class DB_Table
@@ -95,14 +95,20 @@ class DB_Table
 
     protected function selectOne($selectColumnArray = array(), $whereColumnArray = array(), $asList = false)
     {
-        $sql = $this->createSelectSQL($selectColumnArray , $whereColumnArray, 1);
+        $sql = $this->createSelectSQL($selectColumnArray, $whereColumnArray, 1);
         return $this->select($sql, $whereColumnArray, $asList);
     }
 
     protected function selectAll($selectColumnArray = array(), $whereColumnArray = array(), $asList = false)
     {
-        $sql = $this->createSelectSQL($selectColumnArray , $whereColumnArray);
+        $sql = $this->createSelectSQL($selectColumnArray, $whereColumnArray);
         return $this->select($sql, $whereColumnArray, $asList);
+    }
+
+    protected function selectWithAdditionalColumn($select=array(), $where=array(), $limit="", $additionalSelect=array(), $order=array(), $asList=false)
+    {
+        $sql = $this->createSelectSQL($select, $where, $limit, $additionalSelect, $order);
+        return $this->select($sql, $where, $asList);
     }
 
     private function prepareValues($operation = "", $array = array(), $whereColumnArray = array(), $includePK = false)

@@ -68,8 +68,19 @@ class ProductDAO extends DB_Table
 		return parent::selectOne(array(), $where, $asList);
 	}
 
-	public function getAll()
+	public function getAll($maxPerPage="", $currentPage="")
 	{
-		return parent::selectAll(array(), array(), true);
+		$select = array();
+		$where = array();
+
+		$limit = (! empty($maxPerPage)) ? $maxPerPage : 1;
+		$startPoint = (! empty($currentPage)) ? (($currentPage -1) * $limit) : -1;
+		$limit = ($startPoint >= 0) ? ($startPoint .", " .$limit) : "";
+
+		$additional = array();
+		$order = array();
+		$asList = true;
+
+		return parent::selectWithAdditionalColumn($select, $where, $limit, $additional, $order, $asList);
 	}
 }
