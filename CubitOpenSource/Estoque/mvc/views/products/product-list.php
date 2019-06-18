@@ -56,25 +56,6 @@
 		window.location.href = url;
 	}
 
-	function goToPage(p) {
-		var select = document.getElementById("select-pages");
-		var max = parseInt("<?= $maxPages ?>");
-		if (p <= 0 || p > max) { return false; }
-
-		/*var exists = false;
-
-		for (var i = 0; i < select.options.length; i++) {
-			if (select.options[i].value == p) {
-				exists = true;
-			}
-		}
-
-		if (! exists) return false;*/
-
-		url = "<?= URL ?>" + "products/list?p=" + p;
-		window.location.href = url;
-	}
-
 	window.onload = function() {
 		var as = document.getElementsByTagName("a");
 		for (var i = 0; i < as.length; i++) {
@@ -127,12 +108,6 @@
 	.opt {
 		display: inline-block;
 	}
-
-	.disabled {
-		pointer-events: none;
-		cursor: default;
-		color: #ccc;
-	}
 </style>
 
 <section class="products main-container">
@@ -153,7 +128,7 @@
 
 			<td>
 				<label>Mostrar:</label>
-				<select id="select-categories" name="filter" onchange="goToCategory(this.options[this.selectedIndex].value)">
+				<select id="select-categories" class="btn btn-default" name="filter" onchange="goToCategory(this.options[this.selectedIndex].value)">
 					<option value="0">Todas as Categorias</option>
 					<?php foreach ($categories as $c) : ?>
 						<?php $i++; ?>
@@ -167,15 +142,7 @@
 			</td>
 
 			<td>
-				<div class="pagination">
-					<a href="<?= URL ?>products/list?p=<?= $currentPage - 1 ?>" title="Página Anterior" class="btn btn-default <?= ($currentPage <= 1 || $maxPages <= 1) ? "disabled" : "" ?>">&#10094;</a>
-					<select id="select-pages" title="Página Atual: <?= $currentPage ?>" <?= ($maxPages <= 1) ? "disabled='on'" : "" ?> onchange="goToPage(this.options[this.selectedIndex].value)">
-						<?php for ($i = 0; $i < $maxPages; $i++) : ?>
-							<option value="<?= $i + 1 ?>" <?= ($currentPage == $i + 1) ? "selected='true'" : "" ?>><?= $i + 1 ?></option>
-						<?php endfor; ?>
-					</select>
-					<a href="<?= URL ?>products/list?p=<?= $currentPage + 1 ?>" title="Próxima Página" class="btn btn-default <?= ($currentPage == $maxPages || $maxPages <= 1) ? "disabled" : "" ?>">&#10095;</a>
-				</div>
+				<?php $this->loadViewPart("pagination", $data); ?>
 			</td>
 		</tr>
 	</table>
@@ -230,15 +197,7 @@
 	<table class="options-table">
 		<tr>
 			<td>
-				<div class="pagination">
-					<a href="<?= URL ?>products/list?p=<?= $currentPage - 1 ?>" title="Página Anterior" class="btn btn-default <?= ($currentPage <= 1 || $maxPages <= 1) ? "disabled" : "" ?>">&#10094;</a>
-					<select id="select-pages" title="Página Atual: <?= $currentPage ?>" <?= ($maxPages <= 1) ? "disabled='on'" : "" ?> onchange="goToPage(this.options[this.selectedIndex].value)">
-						<?php for ($i = 0; $i < $maxPages; $i++) : ?>
-							<option value="<?= $i + 1 ?>" <?= ($currentPage == $i + 1) ? "selected='true'" : "" ?>><?= $i + 1 ?></option>
-						<?php endfor; ?>
-					</select>
-					<a href="<?= URL ?>products/list?p=<?= $currentPage + 1 ?>" title="Próxima Página" class="btn btn-default <?= ($currentPage == $maxPages || $maxPages <= 1) ? "disabled" : "" ?>">&#10095;</a>
-				</div>
+				<?php $this->loadViewPart("pagination", $data); ?>
 			</td>
 		</tr>
 	</table>

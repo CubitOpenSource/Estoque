@@ -2,7 +2,7 @@
 
 $category = (! empty($_GET["category"])) ? $_GET["category"] : "";
 
-$itemsPerPage = 1;
+$itemsPerPage = (! empty($_GET["s"])) ? intval($_GET["s"]) : 10;
 $currentPage = (! empty($_GET["p"])) ? intval($_GET["p"]) : 1;
 
 $allProducts = $this->dbAdmin->findTable("products")->getAll("", "", $category);
