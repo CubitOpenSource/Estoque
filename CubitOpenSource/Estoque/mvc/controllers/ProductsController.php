@@ -15,7 +15,7 @@ class ProductsController extends Controller
 	public function list()
 	{
 		include "CubitOpenSource/Estoque/scripts/product/list.php";
-		$categories = $this->dbAdmin->findTable("categories")->getAll();
+		$categories = $this->dbAdmin->findTable("categories")->getAll($this->dbAdmin);
 
 		$pages = array(
 			array("name" => "list", "title" => "Lista de Produtos", "url" => URL ."products")
@@ -34,6 +34,7 @@ class ProductsController extends Controller
 			"pages" => $pages,
 			"currentPage" => "list",
 			"columns" => $columns,
+			"search" => $search,
 			"products" => $products,
 			"categories" => $categories,
 			"category" => $category,

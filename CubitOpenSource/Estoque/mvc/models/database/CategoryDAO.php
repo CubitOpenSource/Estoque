@@ -51,8 +51,25 @@ class CategoryDAO extends DB_Table
 		return parent::selectOne(array(), $where, $asList);
 	}
 
-	public function getAll()
+	public function getAll($db="")
 	{
-		return parent::selectAll(array(), array(), true);
+		$additional = array();
+
+		if (! empty($db)) {
+			$productTable = $db->findTable("products");
+
+			$table1 = array("name" => "", "select" => array(), "where"  => array(), "as" => "", "limit" => "");
+
+			$table1["name"] = $productTable->getName();
+			$table1["select"][] = DB_Utils::createSelection($productTable, "category_id");
+			$table1["where"][] = DB_Utils::createCondition($productTable, "category_id", "id");
+			$table1["as"] = "products";
+			$table1["limit"] = 2;
+
+			$additional[] = $table1;
+		}
+
+		return parent::selectWithAdditionalColumn(array(), array(), "", $additional, array(), true);
+		// return parent::selectAll(array(), array(), true);
 	}
 }

@@ -115,37 +115,42 @@
 	
 	<a class="btn btn-default" href="<?= URL ?>products/new">Cadastrar Produto</a>
 
-	<table class="options-table">
-		<tr>
-			<td>
-				<span class="opt">
-					<span class="option" style="display: flex; align-items: center;">
-						<input id="select-all" type="checkbox" name="select-all" onclick="toggleSelectCheckboxes(this);">
-						<label for="select-all" style="margin-left: 0.5rem;">Marcar tudo</label>
+	<!-- TODO: fix GET -->
+	<form action="<?= URL ?>products/list">
+		<table class="options-table">
+			<tr>
+				<td style="text-align: left;">
+					<span class="opt">
+						<span class="option" style="display: flex; align-items: center;">
+							<input id="select-all" type="checkbox" name="select-all" onclick="toggleSelectCheckboxes(this);">
+							<label for="select-all" style="margin-left: 0.5rem;">Marcar tudo</label>
+						</span>
 					</span>
-				</span>
-			</td>
-
-			<td>
-				<label>Mostrar:</label>
-				<select id="select-categories" class="btn btn-default" name="filter" onchange="goToCategory(this.options[this.selectedIndex].value)">
-					<option value="0">Todas as Categorias</option>
-					<?php foreach ($categories as $c) : ?>
-						<?php $i++; ?>
-						<option value="<?= $i ?>" <?= ($category == $c["id"]) ? "selected='true'" : "" ?>><?= $c["name"] ?></option>
-					<?php endforeach; ?>
-				</select>
-			</td>
-
-			<td>
-				<input type="search" name="search" placeholder="Buscar">
-			</td>
-
-			<td>
-				<?php $this->loadViewPart("pagination", $data); ?>
-			</td>
-		</tr>
-	</table>
+				</td>
+				<td>
+					<div class="input-group">
+						<select id="select-categories" name="category" title="Mostrar por Categoria" name="filter" onchange="this.form.submit()">
+							<option value="0" <?= ($category == 0) ? "selected='true'" : "" ?>>Todas as Categorias</option>
+							<option value="-1" <?= ($category == -1) ? "selected='true'" : "" ?>>Sem Categoria</option>
+							<?php foreach ($categories as $c) : ?>
+								<?php $i++; ?>
+								<option value="<?= $i ?>" <?= ($category == $c["id"]) ? "selected='true'" : "" ?>><?= $c["name"] . " (" .$c["products"] .")" ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+				</td>
+				<td>
+					<div class="input-group">
+						<input type="search" title="Buscar Produtos" name="search" placeholder="Buscar" value="<?= $search ?>">
+					</div>
+					
+				</td>
+				<td style="text-align: right;">
+					<?php $this->loadViewPart("pagination", $data); ?>
+				</td>
+			</tr>
+		</table>
+	</form>
 
 	<table class="list-table">
 		<thead>
@@ -204,31 +209,25 @@
 </section>
 
 <style>
-	.list-table {
+	table {
 		width: 100%;
 		border-collapse: collapse;
 	}
-	
-	.list-table tr:hover .options { visibility: visible; }
 
-	.list-table td {
-		padding: 0.5em;
+	table td {
+		padding: 0.5rem;
 		text-align: center;
 		border-bottom: 1px solid #ebebeb;
 	}
-
-	.list-table tr:first-child td {
-		border-top: 1px solid #ebebeb;
-	}
-
+	
 	.list-table .selected {
 		background-color: #fff9e7;
 	}
 
-	.post-title {
-		font-weight: 600;
-		color: dodgerblue;
-	}
+	.list-table tr:hover .options { visibility: visible; }
+	.list-table tr:first-child td { border-top: 1px solid #ebebeb; }
+
+	.post-title { font-weight: 600; color: dodgerblue; }
 
 	.options {
 		visibility: hidden;
@@ -241,9 +240,5 @@
 	.options .item { margin-right: 0.25rem; }
 	.options .item:last-child { margin-right: 0; }
 
-	.draft {
-		margin: 0 0.5em;
-		font-style: italic;
-		color: red;
-	}
+	.draft { margin: 0 0.5em; font-style: italic; color: red; }
 </style>
