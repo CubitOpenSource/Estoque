@@ -36,6 +36,7 @@ class ProductsController extends Controller
 			"columns" => $columns,
 			"search" => $search,
 			"products" => $products,
+			"noCategoryProducts" => count($this->dbAdmin->findTable("products")->getAll("", "", -1)),
 			"categories" => $categories,
 			"category" => $category,
 			"maxPages" => $maxPages,

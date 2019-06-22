@@ -131,7 +131,7 @@
 					<div class="input-group">
 						<select id="select-categories" name="category" title="Mostrar por Categoria" name="filter" onchange="this.form.submit()">
 							<option value="0" <?= ($category == 0) ? "selected='true'" : "" ?>>Todas as Categorias</option>
-							<option value="-1" <?= ($category == -1) ? "selected='true'" : "" ?>>Sem Categoria</option>
+							<option value="-1" <?= ($category == -1) ? "selected='true'" : "" ?>>Sem Categoria<?= " (" .$noCategoryProducts .")" ?></option>
 							<?php foreach ($categories as $c) : ?>
 								<?php $i++; ?>
 								<option value="<?= $i ?>" <?= ($category == $c["id"]) ? "selected='true'" : "" ?>><?= $c["name"] . " (" .$c["products"] .")" ?></option>
