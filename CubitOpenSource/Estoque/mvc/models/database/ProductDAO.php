@@ -68,10 +68,13 @@ class ProductDAO extends DB_Table
 		return parent::selectOne(array(), $where, $asList);
 	}
 
-	public function getAll($maxPerPage="", $currentPage="", $category="", $search="")
+	public function getAll($db="", $maxPerPage="", $currentPage="", $category="", $search="")
 	{
 		$select = array();
 		$where = array();
+		$additional = array();
+		$order = array();
+		$asList = true;
 
 		if (! empty($category)) {
 			if ($category == -1) $category = "";
@@ -79,16 +82,26 @@ class ProductDAO extends DB_Table
 		}
 
 		if (! empty($search)) {
-			$where[] = DB_Utils::createCondition($this, "description", $search);		
+			$where[] = DB_Utils::createCondition($this, "description", $search);
+		}
+
+		if (! empty($db)) {
+			$addTable = $db->findTable("categories");
+
+			$table1 = array("name" => "", "select" => array(), "where"  => array(), "as" => "", "limit" => "");
+
+			$table1["name"] = $addTable->getName();
+			$table1["select"][] = DB_Utils::createSelection($addTable, "name");
+			$table1["where"][] = DB_Utils::createCondition($addTable, "id", "category_id");
+			$table1["as"] = "category_name";
+			$table1["limit"] = 1;
+
+			$additional[] = $table1;
 		}
 
 		$limit = (! empty($maxPerPage)) ? $maxPerPage : 1;
 		$startPoint = (! empty($currentPage)) ? (($currentPage -1) * $limit) : -1;
 		$limit = ($startPoint >= 0) ? ($startPoint .", " .$limit) : "";
-
-		$additional = array();
-		$order = array();
-		$asList = true;
 
 		return parent::selectWithAdditionalColumn($select, $where, $limit, $additional, $order, $asList);
 	}

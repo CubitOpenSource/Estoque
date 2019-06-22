@@ -36,26 +36,6 @@
 		}
 	}
 
-	function goToCategory(c) {
-		var select = document.getElementById("select-categories");
-		var p = parseInt("<?= $currentPage ?>");
-		var max = parseInt("<?= $maxPages ?>");
-		if (p <= 0 || p > max) { return false; }
-		/*var exists = false;
-
-		for (var i = 0; i < select.options.length; i++) {
-			if (select.options[i].value == c) {
-				exists = true;
-			}
-		}
-
-		if (! exists) return false;*/
-
-		url = "<?= URL ?>" + "products/list?p=" + "<?= $currentPage ?>";
-		url += (parseInt(c) > 0) ? "&category=" + c : "";
-		window.location.href = url;
-	}
-
 	window.onload = function() {
 		var as = document.getElementsByTagName("a");
 		for (var i = 0; i < as.length; i++) {
@@ -108,6 +88,17 @@
 	.opt {
 		display: inline-block;
 	}
+
+	.option-wrapper {
+		display: flex;
+		align-items: center;
+	}
+	.option-wrapper .item {
+		margin-left: 0.5rem;
+	}
+	.option-wrapper .item:first-child {
+		margin-left: 0;
+	}
 </style>
 
 <section class="products main-container">
@@ -117,39 +108,31 @@
 
 	<!-- TODO: fix GET -->
 	<form action="<?= URL ?>products/list">
-		<table class="options-table">
-			<tr>
-				<td style="text-align: left;">
-					<span class="opt">
-						<span class="option" style="display: flex; align-items: center;">
-							<input id="select-all" type="checkbox" name="select-all" onclick="toggleSelectCheckboxes(this);">
-							<label for="select-all" style="margin-left: 0.5rem;">Marcar tudo</label>
-						</span>
-					</span>
-				</td>
-				<td>
-					<div class="input-group">
-						<select id="select-categories" name="category" title="Mostrar por Categoria" name="filter" onchange="this.form.submit()">
-							<option value="0" <?= ($category == 0) ? "selected='true'" : "" ?>>Todas as Categorias</option>
-							<option value="-1" <?= ($category == -1) ? "selected='true'" : "" ?>>Sem Categoria<?= " (" .$noCategoryProducts .")" ?></option>
-							<?php foreach ($categories as $c) : ?>
-								<?php $i++; ?>
-								<option value="<?= $i ?>" <?= ($category == $c["id"]) ? "selected='true'" : "" ?>><?= $c["name"] . " (" .$c["products"] .")" ?></option>
-							<?php endforeach; ?>
-						</select>
-					</div>
-				</td>
-				<td>
-					<div class="input-group">
-						<input type="search" title="Buscar Produtos" name="search" placeholder="Buscar" value="<?= $search ?>">
-					</div>
-					
-				</td>
-				<td style="text-align: right;">
-					<?php $this->loadViewPart("pagination", $data); ?>
-				</td>
-			</tr>
-		</table>
+		<div class="option-wrapper">
+			<span class="item" style="display: flex; align-items: center;">
+				<input id="select-all" type="checkbox" name="select-all" onclick="toggleSelectCheckboxes(this);">
+				<label for="select-all" style="margin-left: 0.5rem;">Marcar tudo</label>
+			</span>
+
+			<a id="delete-selected" class="item btn btn-default" href="#"><i class="fas fa-trash"></i></a>
+		</div>
+
+		<div class="input-group">
+			<select id="select-categories" name="category" title="Mostrar por Categoria" name="filter" onchange="this.form.submit()">
+				<option value="0" <?= ($category == 0) ? "selected='true'" : "" ?>>Todas as Categorias</option>
+				<option value="-1" <?= ($category == -1) ? "selected='true'" : "" ?>>Sem Categoria<?= " (" .$noCategoryProducts .")" ?></option>
+				<?php foreach ($categories as $c) : ?>
+					<?php $i++; ?>
+					<option value="<?= $i ?>" <?= ($category == $c["id"]) ? "selected='true'" : "" ?>><?= $c["name"] . " (" .$c["products"] .")" ?></option>
+				<?php endforeach; ?>
+			</select>
+		</div>
+
+		<div class="input-group">
+			<input type="search" title="Buscar Produtos" name="search" placeholder="Buscar" value="<?= $search ?>">
+		</div>
+
+		<?php $this->loadViewPart("pagination", $data); ?>
 	</form>
 
 	<table class="list-table">
@@ -180,19 +163,19 @@
 					<div class="options">
 						<a class="item" href="<?= URL ?>products/edit/<?= $product["id"] ?>">Editar</a>
 						<div class="item">|</div>
-						<a class="item" target="_blank" href="<?= URL ?>products/view/<?= $product["id"] ?>">Visualizar</a>
-						<div class="item">|</div>
+						<!-- <a class="item" target="_blank" href="<?= URL ?>products/view/<?= $product["id"] ?>">Visualizar</a>
+						<div class="item">|</div> -->
 						<a class="item" href="<?= URL ?>products/delete/<?= $product["id"] ?>">Apagar</a>
 					</div>
 				</td>
 
-				<td><?= $product["category_id"] ?></td>
+				<td><?= $product["category_name"] ?></td>
 
 				<td><?= $product["stock"] ?></td>
 
-				<td>R$ <?= number_format((float) $product["price_sell"], 2, ",", "") ?></td>
+				<!-- <td>R$ <?= number_format((float) $product["price_sell"], 2, ",", "") ?></td>
 
-				<td><?= date("d/m/Y", strtotime($product["created_at"])) ?></td>
+				<td><?= date("d/m/Y", strtotime($product["created_at"])) ?></td> -->
 
 			</tr>
 			<?php endforeach; ?>

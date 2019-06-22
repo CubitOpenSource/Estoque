@@ -26,8 +26,8 @@ class ProductsController extends Controller
 			"Produto",
 			"Categoria",
 			"Estoque",
-			"Preço de Venda",
-			"Data de Cadastro",
+			// "Preço de Venda",
+			// "Data de Cadastro",
 		);
 
 		$data = array(
@@ -36,7 +36,7 @@ class ProductsController extends Controller
 			"columns" => $columns,
 			"search" => $search,
 			"products" => $products,
-			"noCategoryProducts" => count($this->dbAdmin->findTable("products")->getAll("", "", -1)),
+			"noCategoryProducts" => count($this->dbAdmin->findTable("products")->getAll($this->dbAdmin, "", "", -1)),
 			"categories" => $categories,
 			"category" => $category,
 			"maxPages" => $maxPages,
