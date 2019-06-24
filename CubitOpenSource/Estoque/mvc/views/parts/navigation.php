@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="<?= URL ?>CubitOpenSource/Estoque/mvc/views/parts/css/navigation.css">
 
-<div class="main-container">
+<div class="mcontainer">
 	<nav class="breadcrumb-nav">
 		<ul>
 			<?php if (count($pages) > 1) : ?>

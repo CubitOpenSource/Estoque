@@ -1,5 +1,3 @@
-<?php $this->loadViewPart("navigation", array("pages" => $pages)); ?>
-
 <script>
 	function toggleSelectCheckboxes(source) {
 		var checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -99,42 +97,107 @@
 	.option-wrapper .item:first-child {
 		margin-left: 0;
 	}
+
+	.filter, .order {
+		display: flex;
+		align-items: center;
+	}
+
+	.filter > div,
+	.order > div {
+		margin-right: 1em;
+	}
 </style>
 
-<section class="products main-container">
-	<h1>Produtos</h1>
+<section class="products">
+	<div class="main-container">
+		<h1>Produtos</h1>
+		
+		<a class="btn btn-default" href="<?= URL ?>products/new">Cadastrar Produto</a>
+
+		<br>
+		<label>Filtrar por:</label>
+
+		<div class="filter">
+			<div class="input-group">
+				<select id="select-categories" name="category" title="Mostrar por Categoria" name="filter" onchange="this.form.submit()">
+					<option value="0" <?= ($category == 0) ? "selected='true'" : "" ?>>Categoria</option>
+					<option value="-1" <?= ($category == -1) ? "selected='true'" : "" ?>>Sem Categoria<?= " (" .$noCategoryProducts .")" ?></option>
+					<?php foreach ($categories as $c) : ?>
+						<?php $i++; ?>
+						<option value="<?= $i ?>" <?= ($category == $c["id"]) ? "selected='true'" : "" ?>><?= $c["name"] . " (" .$c["products"] .")" ?></option>
+					<?php endforeach; ?>
+				</select>
+			</div>
+
+			<div class="input-group">
+				<select name="brand">
+					<option value="0">Marca</option>
+				</select>
+			</div>
+
+			<div class="input-group">
+				<select name="unity">
+					<option value="0">Unidade</option>
+				</select>
+			</div>
+
+			<button class="btn btn-default">Limpar</button>
+		</div>
+
+		<br>
+		<label>Ordenar por:</label>
+
+		<div class="order">
+			<div class="input-group">
+				<select name="price">
+					<option value="0">Preço</option>
+					<option value="1">Menor Preço</option>
+					<option value="2">Maior Preço</option>
+				</select>
+			</div>
+
+			<div class="input-group">
+				<select name="stock">
+					<option value="0">Estoque</option>
+					<option value="1">Estoque Baixo</option>
+					<option value="2">Estoque Normal</option>
+					<option value="3">Estoque Alto</option>
+				</select>
+			</div>
+
+			<button class="btn btn-default">Limpar</button>
+		</div>
+
+		<form action="<?= URL ?>products/list">
+			<div class="option-wrapper">
+				<span class="item" style="display: flex; align-items: center;">
+					<input id="select-all" type="checkbox" name="select-all" onclick="toggleSelectCheckboxes(this);">
+					<label for="select-all" style="margin-left: 0.5rem;">Marcar tudo</label>
+				</span>
+
+				<a id="delete-selected" class="item btn btn-default" href="#"><i class="fas fa-trash"></i></a>
+			</div>
+
+			<div class="input-group">
+				<select id="select-categories" name="category" title="Mostrar por Categoria" name="filter" onchange="this.form.submit()">
+					<option value="0" <?= ($category == 0) ? "selected='true'" : "" ?>>Todas as Categorias</option>
+					<option value="-1" <?= ($category == -1) ? "selected='true'" : "" ?>>Sem Categoria<?= " (" .$noCategoryProducts .")" ?></option>
+					<?php foreach ($categories as $c) : ?>
+						<?php $i++; ?>
+						<option value="<?= $i ?>" <?= ($category == $c["id"]) ? "selected='true'" : "" ?>><?= $c["name"] . " (" .$c["products"] .")" ?></option>
+					<?php endforeach; ?>
+				</select>
+			</div>
+
+			<div class="input-group">
+				<input type="search" title="Buscar Produtos" name="search" placeholder="Buscar" value="<?= $search ?>">
+			</div>
+
+			<?php $this->loadViewPart("pagination", $data); ?>
+		</form>
+	</div>
 	
-	<a class="btn btn-default" href="<?= URL ?>products/new">Cadastrar Produto</a>
-
-	<!-- TODO: fix GET -->
-	<form action="<?= URL ?>products/list">
-		<div class="option-wrapper">
-			<span class="item" style="display: flex; align-items: center;">
-				<input id="select-all" type="checkbox" name="select-all" onclick="toggleSelectCheckboxes(this);">
-				<label for="select-all" style="margin-left: 0.5rem;">Marcar tudo</label>
-			</span>
-
-			<a id="delete-selected" class="item btn btn-default" href="#"><i class="fas fa-trash"></i></a>
-		</div>
-
-		<div class="input-group">
-			<select id="select-categories" name="category" title="Mostrar por Categoria" name="filter" onchange="this.form.submit()">
-				<option value="0" <?= ($category == 0) ? "selected='true'" : "" ?>>Todas as Categorias</option>
-				<option value="-1" <?= ($category == -1) ? "selected='true'" : "" ?>>Sem Categoria<?= " (" .$noCategoryProducts .")" ?></option>
-				<?php foreach ($categories as $c) : ?>
-					<?php $i++; ?>
-					<option value="<?= $i ?>" <?= ($category == $c["id"]) ? "selected='true'" : "" ?>><?= $c["name"] . " (" .$c["products"] .")" ?></option>
-				<?php endforeach; ?>
-			</select>
-		</div>
-
-		<div class="input-group">
-			<input type="search" title="Buscar Produtos" name="search" placeholder="Buscar" value="<?= $search ?>">
-		</div>
-
-		<?php $this->loadViewPart("pagination", $data); ?>
-	</form>
-
 	<table class="list-table">
 		<thead>
 			<tr>

@@ -1,8 +1,3 @@
-.main-container {
-	width: 100%;
-	margin: 0 auto;
-}
-
 .card-shadow {
 	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 	   -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -164,11 +159,4 @@
 
 .error-icon {
 	color: red;
-}
-
-@media(min-width: 420px) {
-	.main-container {
-		width: 90%;
-		margin: 0 auto;
-	}
 }

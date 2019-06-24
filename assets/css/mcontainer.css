@@ -1,0 +1,11 @@
+.main-container {
+	width: 95%;
+	margin: 0 auto;
+}
+
+@media(min-width: 420px) {
+	.main-container {
+		width: 90%;
+		margin: 0 auto;
+	}
+}
