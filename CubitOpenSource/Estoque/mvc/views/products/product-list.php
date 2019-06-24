@@ -98,14 +98,18 @@
 		margin-left: 0;
 	}
 
-	.filter, .order {
-		display: flex;
-		align-items: center;
+
+	.list-options ul {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-gap: 0.5rem;
+		text-align: center;
 	}
 
-	.filter > div,
-	.order > div {
-		margin-right: 1em;
+	.list-options ul li a {
+		display: block;
+		padding: 1em;
+		background-color: whitesmoke;
 	}
 </style>
 
@@ -114,6 +118,13 @@
 		<h1>Produtos</h1>
 		
 		<a class="btn btn-default" href="<?= URL ?>products/new">Cadastrar Produto</a>
+
+		<nav class="list-options">
+			<ul>
+				<li><a href="#"><i class="fas fa-sliders-h"></i> Filtrar</a></li>
+				<li><a href="#"><i class="fas fa-sort"></i> Ordenar</a></li>
+			</ul>
+		</nav>
 
 		<br>
 		<label>Filtrar por:</label>
