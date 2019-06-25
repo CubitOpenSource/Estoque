@@ -50,6 +50,13 @@
 			}, 1);
 		}
 	}
+
+	function openSubMenu(e) {
+		if (e) {
+		e.preventDefault();}
+		alert("Abriu");
+
+	}
 </script>
 
 <style>
@@ -111,6 +118,10 @@
 		padding: 1em;
 		background-color: whitesmoke;
 	}
+
+	.sort-options ul li ul {
+		display: none;
+	}
 </style>
 
 <section class="products">
@@ -119,12 +130,29 @@
 		
 		<a class="btn btn-default" href="<?= URL ?>products/new">Cadastrar Produto</a>
 
-		<nav class="list-options">
+		<nav id="sort-options">
 			<ul>
-				<li><a href="#"><i class="fas fa-sliders-h"></i> Filtrar</a></li>
-				<li><a href="#"><i class="fas fa-sort"></i> Ordenar</a></li>
+				<li>
+					<a href="#" onclick="openSubMenu()">Preço</a>
+					<ul>
+						<li><a href="#">Menor Preço</a></li>
+						<li><a href="#">Maior Preço</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Estoque</a>
+					<ul>
+						<li><a href="#">Estoque Baixo</a></li>
+						<li><a href="#">Estoque Alto</a></li>
+					</ul>
+				</li>
 			</ul>
 		</nav>
+
+		<div class="list-options">
+			<button><i class="fas fa-sliders-h"></i> Filtrar</button>
+			<button><i class="fas fa-sort"></i> Ordenar</button>
+		</div>
 
 		<br>
 		<label>Filtrar por:</label>
