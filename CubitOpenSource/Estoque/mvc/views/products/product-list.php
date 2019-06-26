@@ -51,11 +51,20 @@
 		}
 	}
 
-	function openSubMenu(e) {
-		if (e) {
-		e.preventDefault();}
-		alert("Abriu");
+	function toggleSubMenu(e, sub) {
+		e = e || window.event;
+		e.preventDefault();
+		sub.style.display = (sub.style.display != "block") ? "block" : "none";
+	}
 
+	function togglePriceSubmenu(e) {
+		var sub = document.getElementById("submenu-price");
+		toggleSubMenu(e, sub);
+	}
+
+	function toggleStockSubmenu(e) {
+		var sub = document.getElementById("submenu-stock");
+		toggleSubMenu(e, sub);
 	}
 </script>
 
@@ -105,7 +114,6 @@
 		margin-left: 0;
 	}
 
-
 	.list-options ul {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
@@ -119,8 +127,33 @@
 		background-color: whitesmoke;
 	}
 
-	.sort-options ul li ul {
+	#submenu-price,
+	#submenu-stock {
 		display: none;
+	}
+
+	.submenu {
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background: black;
+	}
+
+	.submenu .close {
+		margin: 1em;
+	}
+
+	.submenu li {
+		margin: 1em 0;
+		text-align: center;
+	}
+
+	.submenu li a {
+		display: block;
+		font-size: 1.5rem;
+		color: white;
 	}
 </style>
 
@@ -130,18 +163,20 @@
 		
 		<a class="btn btn-default" href="<?= URL ?>products/new">Cadastrar Produto</a>
 
-		<nav id="sort-options">
+		<nav class="list-options">
 			<ul>
 				<li>
-					<a href="#" onclick="openSubMenu()">Preço</a>
-					<ul>
+					<a href="#" onclick="togglePriceSubmenu()">Preço</a>
+					<ul class="submenu" id="submenu-price">
+						<button class="close btn" onclick="togglePriceSubmenu()"><i class="fas fa-times"></i></button>
 						<li><a href="#">Menor Preço</a></li>
 						<li><a href="#">Maior Preço</a></li>
 					</ul>
 				</li>
 				<li>
-					<a href="#">Estoque</a>
-					<ul>
+					<a href="#" onclick="toggleStockSubmenu()">Estoque</a>
+					<ul class="submenu" id="submenu-stock">
+						<button class="close btn" onclick="toggleStockSubmenu()"><i class="fas fa-times"></i></button>
 						<li><a href="#">Estoque Baixo</a></li>
 						<li><a href="#">Estoque Alto</a></li>
 					</ul>
