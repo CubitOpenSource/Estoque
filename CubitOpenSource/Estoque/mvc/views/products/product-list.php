@@ -34,8 +34,8 @@
 		}
 	}
 
-	window.onload = function() {
-		var as = document.getElementsByTagName("a");
+	/*window.onload = function() {
+		var as = document.getElementsByClassName("list-table")[0].getElementsByTagName("a");
 		for (var i = 0; i < as.length; i++) {
 			as[i].addEventListener("click", function() {
 				if (this.parentElement) {
@@ -49,7 +49,7 @@
 				}
 			}, 1);
 		}
-	}
+	}*/
 
 	function toggleSubMenu(e, sub) {
 		e = e || window.event;
@@ -132,28 +132,25 @@
 		display: none;
 	}
 
+	#submenu-price li a,
+	#submenu-stock li a {
+		border: 1px solid black;
+	}
+
+	#submenu-price li a,
+	#submenu-stock li a {
+		font-size: 1.5rem;
+		background: none;
+		color: black;
+	}
+
 	.submenu {
 		position: fixed;
 		left: 0;
 		right: 0;
 		top: 0;
 		bottom: 0;
-		background: black;
-	}
-
-	.submenu .close {
-		margin: 1em;
-	}
-
-	.submenu li {
-		margin: 1em 0;
-		text-align: center;
-	}
-
-	.submenu li a {
-		display: block;
-		font-size: 1.5rem;
-		color: white;
+		background: whitesmoke;
 	}
 </style>
 
