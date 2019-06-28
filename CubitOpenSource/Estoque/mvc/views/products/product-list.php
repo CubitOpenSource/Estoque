@@ -1,3 +1,5 @@
+<script src="<?= URL ?>assets/js/util.js"></script>
+
 <script>
 	function toggleSelectCheckboxes(source) {
 		var checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -66,6 +68,25 @@
 		var sub = document.getElementById("submenu-stock");
 		toggleSubMenu(e, sub);
 	}
+
+	var updateProducts = function updateProductList(data) {
+		if (data != "") {
+			alert(data);
+		}
+	}
+
+	window.onload = function() {
+		// get links to sort
+		var elements = document.getElementById("submenu-price").getElementsByTagName("a");
+		for (var i = 0; i < elements.length; i++) {
+			elements[i].addEventListener("click", function() {
+				var url = "<?= URL ."CubitOpenSource/Estoque/scripts/ajax/select-db.php" ?>";
+				url += "?table=products";
+				ajax(url, updateProducts);
+			}, 1);
+		}
+
+	}
 </script>
 
 <style>
@@ -130,11 +151,6 @@
 	#submenu-price,
 	#submenu-stock {
 		display: none;
-	}
-
-	#submenu-price li a,
-	#submenu-stock li a {
-		border: 1px solid black;
 	}
 
 	#submenu-price li a,
