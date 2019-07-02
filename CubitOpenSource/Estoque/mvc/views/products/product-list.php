@@ -72,6 +72,7 @@
 	var updateProducts = function updateProductList(data) {
 		if (data != "") {
 			alert(data);
+			console.log(data);
 		}
 	}
 

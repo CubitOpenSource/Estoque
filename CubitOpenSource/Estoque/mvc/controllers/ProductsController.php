@@ -4,7 +4,7 @@ class ProductsController extends Controller
 {
 	public function __construct()
 	{
-		parent::__construct("Product", "products/product-list", "default");
+		parent::__construct("Product", "products/product-list-simple", "default");
 	}
 
 	public function index()

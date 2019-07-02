@@ -1,0 +1,21 @@
+.list-table .selected {
+	background-color: #fff9e7;
+}
+
+.list-table tr:hover .options { visibility: visible; }
+.list-table tr:first-child td { border-top: 1px solid #ebebeb; }
+
+.post-title { font-weight: 600; color: dodgerblue; }
+
+.options {
+	visibility: hidden;
+	display: inline-flex;
+	margin-top: 0.5rem;
+	font-size: 0.8rem;
+	color: dodgerblue;
+}
+.options a { color: dodgerblue; }
+.options .item { margin-right: 0.25rem; }
+.options .item:last-child { margin-right: 0; }
+
+.draft { margin: 0 0.5em; font-style: italic; color: red; }
