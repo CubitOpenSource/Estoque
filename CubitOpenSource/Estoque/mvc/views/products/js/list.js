@@ -8,6 +8,7 @@ function toggleSelectRow(row) {
 		}
 		var cb = src.getElementsByClassName("checkbox")[0];
 		cb.checked = (src.className == "selected") ? true : false;
+		cb.style.visibility = (src.className == "selected") ? "visible" : "hidden";
 		toggleOptions();
 	}
 }
@@ -20,7 +21,9 @@ function setSelectRow(src, value) {
 		} else {
 			src.removeAttribute("class");
 		}
-		src.getElementsByClassName("checkbox")[0].checked = value;
+		var cb = src.getElementsByClassName("checkbox")[0];
+		cb.checked = value;
+		cb.style.visibility = (value) ? "visible" : "hidden";
 	}
 }
 

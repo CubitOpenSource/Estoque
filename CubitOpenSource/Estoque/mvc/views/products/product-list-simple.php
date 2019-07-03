@@ -46,7 +46,7 @@
             <label id="toggle-select-label" for="select-all" style="margin-left: 0.5rem;">Marcar tudo</label>
         </span>
 
-        <button id="delete-selected" class="item btn btn-default" onclick="deleteAllProducts('<?= URL ?>')"><i class="fas fa-trash"></i></button>
+        <button id="delete-selected" class="item btn btn-default" title="Apagar Produtos Selecionados" onclick="deleteAllProducts('<?= URL ?>')"><i class="fas fa-trash"></i></button>
     </div>
     
     <table class="list-table">

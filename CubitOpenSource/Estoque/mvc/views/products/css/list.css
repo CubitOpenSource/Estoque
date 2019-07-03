@@ -3,7 +3,7 @@
 }
 
 .list-table tr:hover .options { visibility: visible; }
-.list-table tr:hover .checkbox { visibility: visible; }
+/*.list-table tr:hover .checkbox { visibility: visible; }*/
 .list-table tr:first-child td { border-top: 1px solid #ebebeb; }
 
 .post-title { font-weight: 600; color: dodgerblue; }
