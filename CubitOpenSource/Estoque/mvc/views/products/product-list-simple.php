@@ -43,10 +43,10 @@
     <div class="option-wrapper">
         <span class="item" style="display: flex; align-items: center;">
             <input id="select-all" type="checkbox" name="select-all" onclick="toggleSelectCheckboxes(this);">
-            <label for="select-all" style="margin-left: 0.5rem;">Marcar tudo</label>
+            <label id="toggle-select-label" for="select-all" style="margin-left: 0.5rem;">Marcar tudo</label>
         </span>
 
-        <a id="delete-selected" class="item btn btn-default" href="#" onclick="deleteAllProducts('<?= URL ?>')"><i class="fas fa-trash"></i></a>
+        <button id="delete-selected" class="item btn btn-default" onclick="deleteAllProducts('<?= URL ?>')"><i class="fas fa-trash"></i></button>
     </div>
     
     <table class="list-table">

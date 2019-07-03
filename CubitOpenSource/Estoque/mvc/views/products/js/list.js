@@ -1,48 +1,54 @@
 function toggleSelectRow(row) {
-	if (this) {
-		if (this.className == "") {
-			this.setAttribute("class", "selected");
-			this.getElementsByClassName("checkbox")[0].setAttribute("checked", "true");
-			toggleOptions();
+	var src = (row) ? row : this;
+	if (src) {
+		if (src.className == "") {
+			src.setAttribute("class", "selected");
 		} else {
-			this.removeAttribute("class");
-			this.getElementsByClassName("checkbox")[0].removeAttribute("checked");
-			toggleOptions();
+			src.removeAttribute("class");
 		}
+		var cb = src.getElementsByClassName("checkbox")[0];
+		cb.checked = (src.className == "selected") ? true : false;
+		toggleOptions();
+	}
+}
+
+function setSelectRow(src, value) {
+	src = (src) ? src : this;
+	if (src) {
+		if (value) {
+			src.setAttribute("class", "selected");			
+		} else {
+			src.removeAttribute("class");
+		}
+		src.getElementsByClassName("checkbox")[0].checked = value;
 	}
 }
 
 function toggleSelectCheckboxes(source) {
-	var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-	for (var i = 0; i < checkboxes.length; i++) {
-	    if (checkboxes[i] != source) {
-	        checkboxes[i].checked = source.checked;
-
-	        // bug below
-
-	        var parent = checkboxes[i].parentElement.parentElement;
-	        // alert(checkboxes[i].checked + " " +parent.className);
-	        if (parent) {
-	        	if (parent.className == "") {
-	        		if (checkboxes[i].checked) {
-	        			parent.setAttribute("class", "selected");
-	        		}		        		
-	        	} else {
-	        		parent.removeAttribute("class");
-	        	}
-	        }
-	    }
+	var cbs = document.getElementById("products-tbody").getElementsByClassName("checkbox");
+	for (var i = 0; i < cbs.length; i++) {
+		setSelectRow(cbs[i].parentElement.parentElement, source.checked);
 	}
+	toggleOptions();
+
+	var count = 0;
+	var label = document.getElementById("toggle-select-label");
+	for (var i = 0; i < cbs.length; i++) {
+		count += (cbs[i].checked) ? 1 : 0;
+	}
+	label.innerHTML = (count > 0) ? "Desmarcar Tudo" : "Marcar Tudo";
 }
 
 function toggleOptions() {
+	var cbs = document.getElementById("products-tbody").getElementsByClassName("checkbox");
 	var d = document.getElementById("delete-selected");
+	var count = 0;
 
-	if (d.style.visibility != "visible") {
-		d.style.visibility = "visible";
-	} else {
-		d.style.visibility = "hidden";
+	for (var i = 0; i < cbs.length; i++) {
+		count += (cbs[i].checked) ? 1 : 0;
 	}
+
+	d.style.visibility = (count > 0) ? "visible" : "hidden";
 }
 
 function deleteAllProducts(baseUrl) {
