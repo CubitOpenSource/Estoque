@@ -3,6 +3,7 @@
 }
 
 .list-table tr:hover .options { visibility: visible; }
+.list-table tr:hover .checkbox { visibility: visible; }
 .list-table tr:first-child td { border-top: 1px solid #ebebeb; }
 
 .post-title { font-weight: 600; color: dodgerblue; }
@@ -19,3 +20,22 @@
 .options .item:last-child { margin-right: 0; }
 
 .draft { margin: 0 0.5em; font-style: italic; color: red; }
+
+.checkbox {
+	visibility: hidden;
+}
+
+.option-wrapper {
+	display: flex;
+	align-items: center;
+}
+.option-wrapper .item {
+	margin-left: 0.5rem;
+}
+.option-wrapper .item:first-child {
+	margin-left: 0;
+}
+
+#delete-selected {
+	visibility: hidden;
+}

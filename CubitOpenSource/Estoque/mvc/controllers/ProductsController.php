@@ -79,7 +79,7 @@ class ProductsController extends Controller
 		$this->saveEdit($id);
 	}
 
-	public function delete($id)
+	public function delete($ids)
 	{
 		include "./CubitOpenSource/Estoque/scripts/product/delete.php";
 	}

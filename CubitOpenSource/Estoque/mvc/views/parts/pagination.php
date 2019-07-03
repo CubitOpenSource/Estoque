@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="<?= URL ?>CubitOpenSource/Estoque/mvc/views/parts/css/pagination.css">
+
 <div class="pagination">
 	<a href="<?= URL ?>products/list?p=<?= $currentPage - 1 ?>" title="Página Anterior" class="btn btn-default <?= ($currentPage <= 1 || $maxPages <= 1) ? "disabled" : "" ?>"><i class="fa fa-angle-left"></i></a>
 
@@ -37,31 +39,3 @@
 		window.location.href = url;
 	}
 </script>
-
-<style>
-	.pagination {
-		display: flex;
-		/*margin-left: 1rem;*/
-	}
-
-	.disabled {
-		pointer-events: none;
-		cursor: default;
-		color: #ccc;
-	}
-
-	.pagination .btn {
-		font-size: 0.9rem;
-		padding: 0.5rem 1rem;
-		text-transform: lowercase;
-	}
-
-	select.btn-default {
-		padding-left: 0.35rem;
-		padding-right: 0.35rem;
-	}
-
-	#select-max {
-		cursor: pointer;
-	}
-</style>
