@@ -77,3 +77,16 @@ function deleteAllProducts(baseUrl) {
 		}
 	}
 }
+
+function filterByName() {
+	var filter = document.getElementById("filter-name").value.toUpperCase();
+	var tr = document.getElementById("products-tbody").getElementsByTagName("tr");
+
+	for (let i = 0; i < tr.length; i++) {
+		let td = tr[i].getElementsByTagName("td")[2];
+		if (td) {
+			let value = td.textContent || td.innerText;
+			tr[i].style.display = (value.toUpperCase().indexOf(filter) > -1) ? "" : "none";
+		}
+	}
+}

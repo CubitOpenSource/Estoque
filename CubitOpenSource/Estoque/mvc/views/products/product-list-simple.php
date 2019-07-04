@@ -48,6 +48,8 @@
 
         <button id="delete-selected" class="item btn btn-default" title="Apagar Produtos Selecionados" onclick="deleteAllProducts('<?= URL ?>')"><i class="fas fa-trash"></i></button>
     </div>
+
+    <input id="filter-name" type="search" name="filter" placeholder="Filtrar" onkeyup="filterByName()">
     
     <table class="list-table">
         <thead>
@@ -90,3 +92,13 @@
     </table>
 <?php endif; ?>
 </section>
+
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js
+"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script>
+    $(document).ready( function () {
+        $('.list-table').DataTable();
+    } );
+</script> -->
