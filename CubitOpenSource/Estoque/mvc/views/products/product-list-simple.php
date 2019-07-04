@@ -42,7 +42,8 @@
 <?php else : ?>
     <div class="option-wrapper">
         <span class="item" style="display: flex; align-items: center;">
-            <input id="select-all" type="checkbox" name="select-all" onclick="toggleSelectCheckboxes(this);">
+            <!-- <input id="select-all" type="checkbox" name="select-all" onclick="toggleSelectCheckboxes(this);"> -->
+            <input id="select-all" type="checkbox" name="select-all" onclick="selectAllCheckboxes(this);">
             <label id="toggle-select-label" for="select-all" style="margin-left: 0.5rem;">Marcar tudo</label>
         </span>
 

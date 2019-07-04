@@ -42,6 +42,22 @@ function toggleSelectCheckboxes(source) {
 	label.innerHTML = (count > 0) ? "Desmarcar Tudo" : "Marcar Tudo";
 }
 
+function selectAllCheckboxes(source, value = null) {
+	var cbs = document.getElementById("products-tbody").getElementsByClassName("checkbox");
+	source.checked = (value != null) ? value : source.checked;
+	for (var i = 0; i < cbs.length; i++) {
+		setSelectRow(cbs[i].parentElement.parentElement, source.checked);
+	}
+	toggleOptions();
+
+	var count = 0;
+	var label = document.getElementById("toggle-select-label");
+	for (var i = 0; i < cbs.length; i++) {
+		count += (cbs[i].checked) ? 1 : 0;
+	}
+	label.innerHTML = (count > 0) ? "Desmarcar Tudo" : "Marcar Tudo";
+}
+
 function toggleOptions() {
 	var cbs = document.getElementById("products-tbody").getElementsByClassName("checkbox");
 	var d = document.getElementById("delete-selected");
@@ -89,4 +105,6 @@ function filterByName() {
 			tr[i].style.display = (value.toUpperCase().indexOf(filter) > -1) ? "" : "none";
 		}
 	}
+
+	selectAllCheckboxes(document.getElementById("select-all"), false);
 }
