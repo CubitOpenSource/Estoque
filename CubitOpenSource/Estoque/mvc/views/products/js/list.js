@@ -94,12 +94,22 @@ function deleteAllProducts(baseUrl) {
 	}
 }
 
+function findTableDataByType(tr, type) {
+	let tds = tr.getElementsByTagName("td");
+	for (let j = 0; j < tds.length; j++) {
+		if (tds[j].getAttribute("data-type") == type) {
+			return tds[j];
+		}
+	}
+	return null;
+}
+
 function filterByName() {
 	var filter = document.getElementById("filter-name").value.toUpperCase();
 	var tr = document.getElementById("products-tbody").getElementsByTagName("tr");
 
 	for (let i = 0; i < tr.length; i++) {
-		let td = tr[i].getElementsByTagName("td")[2];
+		let td = findTableDataByType(tr[i], "description");
 		if (td) {
 			let value = td.textContent || td.innerText;
 			tr[i].style.display = (value.toUpperCase().indexOf(filter) > -1) ? "" : "none";
@@ -107,4 +117,24 @@ function filterByName() {
 	}
 
 	selectAllCheckboxes(document.getElementById("select-all"), false);
+}
+
+function filterStock(type) {
+	var minStock = 10;
+	var tr = document.getElementById("products-tbody").getElementsByTagName("tr");
+
+	for (var i = 0; i < tr.length; i++) {
+		let td = findTableDataByType(tr[i], "stock");
+		if (td) {
+			let value = td.textContent || td.innerText;
+			if (type == 1) {
+				tr[i].style.display = (value <= minStock) ? "" : "none";
+			} else if (type == 2)  {
+				tr[i].style.display = (value > minStock) ? "" : "none";
+			} else {
+				tr[i].style.display = "";
+			}
+			
+		}
+	}
 }

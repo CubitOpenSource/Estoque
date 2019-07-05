@@ -51,6 +51,12 @@
     </div>
 
     <input id="filter-name" type="search" name="filter" placeholder="Filtrar" onkeyup="filterByName()">
+
+    <select onchange="filterStock(this[this.selectedIndex].value)">
+        <option value="0">Todos</option>
+        <option value="1">Baixo Estoque</option>
+        <option value="2">Alto Estoque</option>
+    </select>
     
     <table class="list-table">
         <thead>
@@ -66,11 +72,11 @@
             <tr onclick="toggleSelectRow.call(this)">
                 <input type="hidden" name="id" value="<?= $product["id"] ?>">
 
-                <td style="width: 64px"><input class="checkbox" type="checkbox" name="selected[]"></td>
+                <td data-type="checkbox" style="width: 64px"><input class="checkbox" type="checkbox" name="selected[]"></td>
 
-                <td><?= $product["id"] ?></td>
+                <td data-type="id"><?= $product["id"] ?></td>
 
-                <td style="text-align: left;">
+                <td data-type="description" style="text-align: left;">
                     <div>
                         <a class="post-title" href="<?= URL ?>products/edit/<?= $product["id"] ?>" title="<?= $product["description"] ?>"><?= (strlen($product["description"]) <= 40) ? $product["description"] : substr($product["description"], 0, 40) ."..." ?></a>
                     </div>
@@ -84,9 +90,9 @@
                     </div>
                 </td>
 
-                <td><?= $product["category_name"] ?></td>
+                <td data-type="cetegory"><?= $product["category_name"] ?></td>
 
-                <td><?= $product["stock"] ?></td>
+                <td data-type="stock"><?= $product["stock"] ?></td>
             </tr>
             <?php endforeach; ?>
         </tbody>
