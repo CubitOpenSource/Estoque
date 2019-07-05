@@ -50,9 +50,22 @@
         <button id="delete-selected" class="item btn btn-default" title="Apagar Produtos Selecionados" onclick="deleteAllProducts('<?= URL ?>')"><i class="fas fa-trash"></i></button>
     </div>
 
-    <input id="filter-name" type="search" name="filter" placeholder="Filtrar" onkeyup="filterByName()">
 
-    <select onchange="filterStock(this[this.selectedIndex].value)">
+    <label>Por nome:</label>
+    <input id="filter-name" type="search" name="filter" placeholder="Nome do Produto" onkeyup="filterByName()">
+    <br>
+
+    <label>Por Categoria:</label>
+    <select onchange="filterByCategory(this[this.selectedIndex].value)">
+        <option value="0">Todas</option>
+        <?php foreach ($categories as $category) : ?>
+        <option><?= $category["name"] ?></option>
+        <?php endforeach ?>
+    </select>
+    <br>
+
+    <label>Por Estoque:</label>
+    <select onchange="filterByStock(this[this.selectedIndex].value)">
         <option value="0">Todos</option>
         <option value="1">Baixo Estoque</option>
         <option value="2">Alto Estoque</option>
@@ -90,7 +103,7 @@
                     </div>
                 </td>
 
-                <td data-type="cetegory"><?= $product["category_name"] ?></td>
+                <td data-type="category"><?= $product["category_name"] ?></td>
 
                 <td data-type="stock"><?= $product["stock"] ?></td>
             </tr>

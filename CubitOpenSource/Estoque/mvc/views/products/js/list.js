@@ -119,7 +119,7 @@ function filterByName() {
 	selectAllCheckboxes(document.getElementById("select-all"), false);
 }
 
-function filterStock(type) {
+function filterByStock(mode) {
 	var minStock = 10;
 	var tr = document.getElementById("products-tbody").getElementsByTagName("tr");
 
@@ -127,14 +127,26 @@ function filterStock(type) {
 		let td = findTableDataByType(tr[i], "stock");
 		if (td) {
 			let value = td.textContent || td.innerText;
-			if (type == 1) {
+			if (mode == 1) {
 				tr[i].style.display = (value <= minStock) ? "" : "none";
-			} else if (type == 2)  {
+			} else if (mode == 2)  {
 				tr[i].style.display = (value > minStock) ? "" : "none";
 			} else {
 				tr[i].style.display = "";
 			}
 			
+		}
+	}
+}
+
+function filterByCategory(name) {
+	var tr = document.getElementById("products-tbody").getElementsByTagName("tr");
+
+	for (var i = 0; i < tr.length; i++) {
+		let td = findTableDataByType(tr[i], "category");
+		if (td) {
+			let value = td.textContent || td.innerText;
+			tr[i].style.display = (value == name || name == "0") ? "" : "none";			
 		}
 	}
 }
