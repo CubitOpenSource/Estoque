@@ -90,7 +90,7 @@
                 <td data-type="id"><?= $product["id"] ?></td>
 
                 <td data-type="description" style="text-align: left;">
-                    <div>
+                    <div data-type="description">
                         <a class="post-title" href="<?= URL ?>products/edit/<?= $product["id"] ?>" title="<?= $product["description"] ?>"><?= (strlen($product["description"]) <= 40) ? $product["description"] : substr($product["description"], 0, 40) ."..." ?></a>
                     </div>
                     
