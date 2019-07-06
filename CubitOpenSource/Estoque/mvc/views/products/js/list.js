@@ -105,48 +105,43 @@ function findTableDataByType(tr, type) {
 }
 
 function filterByName() {
-	var filter = document.getElementById("filter-name").value.toUpperCase();
-	var tr = document.getElementById("products-tbody").getElementsByTagName("tr");
-
-	for (let i = 0; i < tr.length; i++) {
-		let td = findTableDataByType(tr[i], "description");
-		if (td) {
-			let value = td.textContent || td.innerText;
-			tr[i].style.display = (value.toUpperCase().indexOf(filter) > -1) ? "" : "none";
-		}
-	}
-
-	selectAllCheckboxes(document.getElementById("select-all"), false);
-}
-
-function filterByStock(mode) {
-	var minStock = 10;
-	var tr = document.getElementById("products-tbody").getElementsByTagName("tr");
-
-	for (var i = 0; i < tr.length; i++) {
-		let td = findTableDataByType(tr[i], "stock");
-		if (td) {
-			let value = td.textContent || td.innerText;
-			if (mode == 1) {
-				tr[i].style.display = (value <= minStock) ? "" : "none";
-			} else if (mode == 2)  {
-				tr[i].style.display = (value > minStock) ? "" : "none";
-			} else {
-				tr[i].style.display = "";
-			}
-			
-		}
-	}
+	let query = document.getElementById("filter-name").value.toUpperCase();
+	let callback = function(tr, value) {
+		tr.style.display = (value.toUpperCase().indexOf(query) > -1) ? "" : "none";
+	};
+	filter("description", callback);	
 }
 
 function filterByCategory(name) {
-	var tr = document.getElementById("products-tbody").getElementsByTagName("tr");
+	let callback = function(tr, value) {
+		tr.style.display = (value == name || name == "0") ? "" : "none";
+	};
+	filter("category", callback);
+}
 
-	for (var i = 0; i < tr.length; i++) {
-		let td = findTableDataByType(tr[i], "category");
+function filterByStock(mode) {
+	let minStock = 10;
+	let callback = function(tr, value) {
+		if (mode == 1) {
+			tr.style.display = (value <= minStock) ? "" : "none";
+		} else if (mode == 2)  {
+			tr.style.display = (value > minStock) ? "" : "none";
+		} else {
+			tr.style.display = "";
+		}
+	};
+	filter("stock", callback);
+}
+
+function filter(type, callback) {
+	let tr = document.getElementById("products-tbody").getElementsByTagName("tr");
+
+	for (let i = 0; i < tr.length; i++) {
+		let td = findTableDataByType(tr[i], type);
 		if (td) {
 			let value = td.textContent || td.innerText;
-			tr[i].style.display = (value == name || name == "0") ? "" : "none";			
+			callback(tr[i], value);
 		}
 	}
+	selectAllCheckboxes(document.getElementById("select-all"), false);
 }
