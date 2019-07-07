@@ -124,11 +124,17 @@ function filterByCategory(name) {
 }
 
 function filterByStock(mode) {
-    let minStock = 10;
+    console.log("Mode: " + mode);
+
+    let minStock = 2;
     let callback = function(tr, value) {
+        console.log("TR display: " + tr.style.display);
+
+        if (tr.style.display != "" && mode != 0) return;
+
         if (mode == 1) {
-            tr.style.display = (value <= minStock && tr.style.display != "none") ? "" : "none";
-        } else if (mode == 2)  {
+            tr.style.display = (value <= minStock) ? "" : "none";
+        } else if (mode == 2) {
             tr.style.display = (value > minStock) ? "" : "none";
         } else {
             tr.style.display = "";
