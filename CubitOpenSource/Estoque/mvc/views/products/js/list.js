@@ -94,6 +94,10 @@ function deleteAllProducts(baseUrl) {
     }
 }
 
+fName = false;
+fStock = false;
+fCategory = false;
+
 function findTableDataByType(tr, type) {
     let tds = tr.getElementsByTagName("td");
     for (let j = 0; j < tds.length; j++) {
@@ -111,12 +115,18 @@ function findTableDataByType(tr, type) {
 function filterByName() {
     let query = document.getElementById("filter-name").value.toUpperCase();
     let callback = function(tr, value) {
-        tr.style.display = (value.toUpperCase().indexOf(query) > -1) ? "" : "none";
+        let index = value.toUpperCase().indexOf(query);
+        tr.style.display = (index > -1) ? "" : "none";
+        fName = (index > -1) ? true : false;
     };
     filter("description", callback);
 }
 
 function filterByCategory(name) {
+    if (name == "0") {
+        fCategory = false;
+    }
+
     let callback = function(tr, value) {
         tr.style.display = (value == name || name == "0") ? "" : "none";
     };
@@ -126,11 +136,14 @@ function filterByCategory(name) {
 function filterByStock(mode) {
     console.log("Mode: " + mode);
 
+    if (mode == 0) {
+        fStock = false;
+        document.getElementById("filter-stock").selectedIndex = 0;
+    }
+
     let minStock = 2;
     let callback = function(tr, value) {
         console.log("TR display: " + tr.style.display);
-
-        if (tr.style.display != "" && mode != 0) return;
 
         if (mode == 1) {
             tr.style.display = (value <= minStock) ? "" : "none";
@@ -139,6 +152,8 @@ function filterByStock(mode) {
         } else {
             tr.style.display = "";
         }
+
+        fStock = (mode != 0) ? true : false;
     };
     filter("stock", callback);
 }
@@ -147,6 +162,8 @@ function filter(type, callback) {
     let tr = document.getElementById("products-tbody").getElementsByTagName("tr");
 
     for (let i = 0; i < tr.length; i++) {
+        // if (tr[i].style.display != "") continue;
+
         let td = findTableDataByType(tr[i], type);
         if (td) {
             let value = td.textContent || td.innerText;
@@ -154,4 +171,8 @@ function filter(type, callback) {
         }
     }
     selectAllCheckboxes(document.getElementById("select-all"), false);
+    console.log("Filters:");
+    console.log("Name -> " + fName);
+    console.log("Stock -> " + fStock);
+    console.log("Category -> " + fCategory);
 }

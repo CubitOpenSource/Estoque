@@ -65,11 +65,12 @@
     <br>
 
     <label>Por Estoque:</label>
-    <select onchange="filterByStock(this[this.selectedIndex].value)">
+    <select id="filter-stock" onchange="filterByStock(this[this.selectedIndex].value)">
         <option value="0">Todos</option>
         <option value="1">Baixo Estoque</option>
         <option value="2">Alto Estoque</option>
     </select>
+    <a href="javascript:void(0)" title="Remover Filtragem por Estoque" onclick="filterByStock(0)"><i class="fa fa-times"></i></a>
     
     <table class="list-table">
         <thead>
@@ -93,7 +94,7 @@
                     <div data-type="description">
                         <a class="post-title" href="<?= URL ?>products/edit/<?= $product["id"] ?>" title="<?= $product["description"] ?>"><?= (strlen($product["description"]) <= 40) ? $product["description"] : substr($product["description"], 0, 40) ."..." ?></a>
                     </div>
-                    
+
                     <div class="options">
                         <a class="item" href="<?= URL ?>products/edit/<?= $product["id"] ?>">Editar</a>
                         <div class="item">|</div>
