@@ -94,9 +94,9 @@ function deleteAllProducts(baseUrl) {
     }
 }
 
-fName = false;
-fStock = false;
-fCategory = false;
+var fName = false;
+var fStock = false;
+var fCategory = false;
 
 function findTableDataByType(tr, type) {
     let tds = tr.getElementsByTagName("td");
@@ -112,10 +112,11 @@ function findTableDataByType(tr, type) {
     return null;
 }
 
-function filterByName() {
-    let query = document.getElementById("filter-name").value.toUpperCase();
+function filterByName(clear = false) {
+    let query = document.getElementById("filter-name");
+    query.value = (clear) ? "" : query.value;
     let callback = function(tr, value) {
-        let index = value.toUpperCase().indexOf(query);
+        let index = value.toUpperCase().indexOf(query.value.toUpperCase());
         tr.style.display = (index > -1) ? "" : "none";
         fName = (index > -1) ? true : false;
     };
@@ -125,10 +126,15 @@ function filterByName() {
 function filterByCategory(name) {
     if (name == "0") {
         fCategory = false;
+        document.getElementById("filter-category").selectedIndex = 0;
     }
 
     let callback = function(tr, value) {
-        tr.style.display = (value == name || name == "0") ? "" : "none";
+        if (name == "-1" &&  value == "") {
+            tr.style.display = "";
+        } else {
+            tr.style.display = (value == name || name == "0") ? "" : "none";
+        }        
     };
     filter("category", callback);
 }

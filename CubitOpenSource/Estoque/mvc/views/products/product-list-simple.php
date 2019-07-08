@@ -40,28 +40,22 @@
         <span>Nenhum Produto</span>
     </div>
 <?php else : ?>
-    <div class="option-wrapper">
-        <span class="item" style="display: flex; align-items: center;">
-            <!-- <input id="select-all" type="checkbox" name="select-all" onclick="toggleSelectCheckboxes(this);"> -->
-            <input id="select-all" type="checkbox" name="select-all" onclick="selectAllCheckboxes(this);">
-            <label id="toggle-select-label" for="select-all" style="margin-left: 0.5rem;">Marcar tudo</label>
-        </span>
-
-        <button id="delete-selected" class="item btn btn-default" title="Apagar Produtos Selecionados" onclick="deleteAllProducts('<?= URL ?>')"><i class="fas fa-trash"></i></button>
-    </div>
-
-
+    <h3>Filtros</h3>
     <label>Por nome:</label>
-    <input id="filter-name" type="search" name="filter" placeholder="Nome do Produto" onkeyup="filterByName()">
+    <input id="filter-name" type="text" name="filter" placeholder="Nome do Produto" onkeyup="filterByName()">
+    <a href="javascript:void(0)" title="Remover Filtragem por Nome" onclick="filterByName(true)"><i class="fa fa-times"></i></a>
     <br>
 
     <label>Por Categoria:</label>
-    <select onchange="filterByCategory(this[this.selectedIndex].value)">
+    <select id="filter-category" onchange="filterByCategory(this[this.selectedIndex].value)">
         <option value="0">Todas</option>
-        <?php foreach ($categories as $category) : ?>
-        <option><?= $category["name"] ?></option>
-        <?php endforeach ?>
+        <option value="-1">Sem Categoria<?= " (" .$noCategoryProducts .")" ?></option>
+        <?php foreach ($categories as $c) : ?>
+            <?php $i++; ?>
+            <option value="<?= $c["name"] ?>"><?= $c["name"] ." (" .$c["products"] .")" ?></option>
+        <?php endforeach; ?>
     </select>
+    <a href="javascript:void(0)" title="Remover Filtragem por Categoria" onclick="filterByCategory('0')"><i class="fa fa-times"></i></a>
     <br>
 
     <label>Por Estoque:</label>
@@ -71,6 +65,19 @@
         <option value="2">Alto Estoque</option>
     </select>
     <a href="javascript:void(0)" title="Remover Filtragem por Estoque" onclick="filterByStock(0)"><i class="fa fa-times"></i></a>
+
+    <h3>Ordenar</h3>
+    todo
+
+    <div class="option-wrapper">
+        <span class="item" style="display: flex; align-items: center;">
+            <!-- <input id="select-all" type="checkbox" name="select-all" onclick="toggleSelectCheckboxes(this);"> -->
+            <input id="select-all" type="checkbox" name="select-all" onclick="selectAllCheckboxes(this);">
+            <label id="toggle-select-label" for="select-all" style="margin-left: 0.5rem;">Marcar tudo</label>
+        </span>
+
+        <button id="delete-selected" class="item btn btn-default" title="Apagar Produtos Selecionados" onclick="deleteAllProducts('<?= URL ?>')"><i class="fas fa-trash"></i></button>
+    </div>
     
     <table class="list-table">
         <thead>
