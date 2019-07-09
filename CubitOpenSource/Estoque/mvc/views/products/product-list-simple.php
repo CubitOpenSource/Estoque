@@ -1,7 +1,8 @@
 <link rel="stylesheet" href="<?= URL ?>assets/css/headers/headers.css">
 <link rel="stylesheet" href="<?= URL ?>assets/css/tables/stripped-table-a.css">
 <link rel="stylesheet" href="<?= URL ?>CubitOpenSource/Estoque/mvc/views/products/css/list.css">
-<script src="<?= URL ?>CubitOpenSource/Estoque/mvc/views/products/js/list.js"></script>
+<!-- <script src="<?= URL ?>CubitOpenSource/Estoque/mvc/views/products/js/list.js"></script> -->
+<script src="<?= URL ?>CubitOpenSource/Estoque/mvc/views/products/js/filter-products.js"></script>
 
 <header class="header card-shadow">
     <div class="main-container">
