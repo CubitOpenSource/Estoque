@@ -35,8 +35,9 @@ function findTableDataByType(tr, type) {
 }
 
 function getFilterList(type, callback) {
+	let list = [];
     let tr = document.getElementById("products-tbody").getElementsByTagName("tr");
-    let list = [];
+    
 
     for (let i = 0; i < tr.length; i++) {
         let td = findTableDataByType(tr[i], type);
@@ -161,6 +162,8 @@ function filter() {
 function filterByName(clear=false) {
 	let query = document.getElementById("filter-name");
     query.value = (clear) ? "" : query.value;
+    let clr = document.getElementById("clear-name-filter");
+	clr.style.display = (query.value != "") ? "inline-block" : "none";
     let callback = function(value) {
     	let index = value.toUpperCase().indexOf(query.value.toUpperCase());
     	return (index > -1) ? true : false;
@@ -170,6 +173,9 @@ function filterByName(clear=false) {
 }
 
 function filterByCategory(name) {
+	let clr = document.getElementById("clear-category-filter");
+	clr.style.display = (name != "0") ? "inline-block" : "none";
+
     if (name == "0") {
         document.getElementById("filter-category").selectedIndex = 0;
     }
@@ -181,6 +187,8 @@ function filterByCategory(name) {
 }
 
 function filterByStock(mode) {
+	let clr = document.getElementById("clear-stock-filter");
+	clr.style.display = (mode != 0) ? "inline-block" : "none";
     if (mode == 0) {
         document.getElementById("filter-stock").selectedIndex = 0;
     }

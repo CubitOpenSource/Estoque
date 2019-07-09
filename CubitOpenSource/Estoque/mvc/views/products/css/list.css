@@ -36,6 +36,10 @@
 	margin-left: 0;
 }
 
+.clear-filter {
+	display: none;
+}
+
 #delete-selected {
 	visibility: hidden;
 }

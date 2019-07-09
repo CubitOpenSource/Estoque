@@ -44,7 +44,7 @@
     <h3>Filtros</h3>
     <label>Por nome:</label>
     <input id="filter-name" type="text" name="filter" placeholder="Nome do Produto" onkeyup="filterByName()">
-    <a href="javascript:void(0)" title="Remover Filtragem por Nome" onclick="filterByName(true)"><i class="fa fa-times"></i></a>
+    <a id="clear-name-filter" class="clear-filter" href="javascript:void(0)" title="Remover Filtragem por Nome" onclick="filterByName(true)"><i class="fa fa-times"></i></a>
     <br>
 
     <label>Por Categoria:</label>
@@ -56,7 +56,7 @@
             <option value="<?= $c["name"] ?>"><?= $c["name"] ." (" .$c["products"] .")" ?></option>
         <?php endforeach; ?>
     </select>
-    <a href="javascript:void(0)" title="Remover Filtragem por Categoria" onclick="filterByCategory('0')"><i class="fa fa-times"></i></a>
+    <a id="clear-category-filter" class="clear-filter" href="javascript:void(0)" title="Remover Filtragem por Categoria" onclick="filterByCategory('0')"><i class="fa fa-times"></i></a>
     <br>
 
     <label>Por Estoque:</label>
@@ -65,7 +65,7 @@
         <option value="1">Baixo Estoque</option>
         <option value="2">Alto Estoque</option>
     </select>
-    <a href="javascript:void(0)" title="Remover Filtragem por Estoque" onclick="filterByStock(0)"><i class="fa fa-times"></i></a>
+    <a id="clear-stock-filter" class="clear-filter" href="javascript:void(0)" title="Remover Filtragem por Estoque" onclick="filterByStock(0)"><i class="fa fa-times"></i></a>
 
     <h3>Ordenar</h3>
     todo
