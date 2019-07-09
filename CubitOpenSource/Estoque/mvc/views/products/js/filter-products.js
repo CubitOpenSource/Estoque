@@ -34,21 +34,11 @@ function findTableDataByType(tr, type) {
     return null;
 }
 
-function bigger(n1, n2, n3) {
-	if (n1 > n2 && n1 > n3) return n1;
-	else if (n2 > n1 && n2 > n3) return n2;
-	else if (n3 > n1 && n3 > n2) return n3;
-	else return -1; 
-}
-
 function getFilterList(type, callback) {
     let tr = document.getElementById("products-tbody").getElementsByTagName("tr");
     let list = [];
 
     for (let i = 0; i < tr.length; i++) {
-    	// when on, bugs the clear function of each filter.
-        if (tr[i].style.display == "none") continue;
-
         let td = findTableDataByType(tr[i], type);
         if (td && td != null && typeof td != typeof undefined) {
             let value = td.textContent || td.innerText;
@@ -176,11 +166,7 @@ function filterByName(clear=false) {
     	return (index > -1) ? true : false;
     };
     fName = (query.value == "") ? false : true;
-    // listName = 
     getFilterList("description", callback);
-    // console.log("List of Products (" + query.value + "): " + listName.length);
-    /*showVariables();
-    filter();*/
 }
 
 function filterByCategory(name) {
@@ -191,11 +177,7 @@ function filterByCategory(name) {
     	return (name == "-1" &&  value == "") ? true : ((name == value || name == "0") ? true : false);
     };
     fCategory = (name == "0") ? false : true;
-    // listCat = 
     getFilterList("category", callback);
-	// console.log("List of Products (" + name + "): " + listCat.length);
-	/*showVariables();
-	filter();*/
 }
 
 function filterByStock(mode) {
@@ -214,9 +196,5 @@ function filterByStock(mode) {
         }
     };
     fStock = (mode == 0) ? false : true;
-    // listStock = 
     getFilterList("stock", callback);
-    // console.log("List of Products (" + mode + "): " + listStock.length);
-    /*showVariables();
-    filter();*/
 }
