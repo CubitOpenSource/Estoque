@@ -40,3 +40,31 @@ function ajax(url, callback, form="") {
 		xmlhttp.send();
 	}
 }
+
+
+// FIXED HEADER
+var header = null;
+
+function initStickyHeader(id) {
+    header = document.getElementById(id);
+    header.style.top = 0;
+    header.style.left = 0;
+    header.style.right = 0;
+}
+
+function stickyHeader() {
+    let body = document.getElementById("parent-div");
+    // console.log(window.scrollY, header.offsetTop);
+    // console.log(header.offsetHeight);
+
+    /*header.offsetTop*/
+
+    if (window.scrollY >= 0) {
+        header.style.position = "fixed";
+        body.style.paddingTop = header.offsetHeight + "px";
+    } else {
+        header.style.position = "relative";
+        body.style.paddingTop = 0;
+    }
+}
+window.addEventListener("scroll", stickyHeader);

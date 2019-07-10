@@ -43,3 +43,33 @@
 #delete-selected {
 	visibility: hidden;
 }
+
+
+
+
+
+/* Main Elements */
+
+.header {
+	position: relative;
+}
+
+.products {
+	display: grid;
+	grid-template-areas:
+	"sidebar list";
+	grid-template-columns: 0.5fr 1fr;
+	grid-gap: 0.5rem;
+}
+
+.sidebar {
+	/*height: 100vh;*/
+	grid-area: sidebar;
+	padding: 0 2em;
+	background-color: whitesmoke;
+}
+
+.product-list {
+	grid-area: list;
+	background-color: white;
+}
