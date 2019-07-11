@@ -37,7 +37,7 @@
 </header>
 
 <section class="products">
-    <sidebar class="sidebar">
+    <aside class="sidebar">
         <div class="filters">
             <h3>Filtros</h3>
             <label>Por nome:</label>
@@ -70,7 +70,7 @@
             <h3>Ordenar</h3>
             todo
         </div>
-    </sidebar>
+    </aside>
 
     <section class="product-list">
         <?php if (count($products) <= 0) : ?>
