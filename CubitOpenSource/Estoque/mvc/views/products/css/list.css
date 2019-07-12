@@ -1,17 +1,8 @@
-.list-table .selected {
-	background-color: #fff9e7;
-}
-
-.list-table tbody tr { transition: 1s; background-color: unset; }
+.list-table .selected { background-color: #fff9e7; }
 .list-table tbody tr:hover .options { visibility: visible; }
 
-.list-table tbody tr:hover {
-	box-shadow: 0px 10px 20px 0px #ccc;
-	transition: 0.2s;
-}
-
 /*.list-table tr:hover .checkbox { visibility: visible; }*/
-.list-table tr:first-child td { border-top: 1px solid #ebebeb; }
+/*.list-table tr:first-child td { border-top: 1px solid #ebebeb; }*/
 
 .post-title { font-weight: 600; color: dodgerblue; }
 

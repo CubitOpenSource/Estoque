@@ -3,17 +3,25 @@ table {
 	border-collapse: collapse;
 }
 
+thead {
+	background-color: #1c96b2;
+}
+
 thead th {
 	padding: 1em 0;
 	text-align: left;
 	font-size: 14px;
 	font-weight: bold;
-	color: #777;
+	color: white;
 }
 
 tbody {
 	background-color: white; 
 }
+
+tbody tr { border-bottom: 1px solid #1c96b2; }
+tbody tr:nth-child(odd) { background-color: #ffffff; }
+tbody tr:nth-child(even) { background-color: #efeeed; }
 
 td {
 	padding: 0.5rem;
