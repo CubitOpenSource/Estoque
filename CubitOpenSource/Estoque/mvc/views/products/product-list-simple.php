@@ -79,13 +79,13 @@
             </div>
         <?php else : ?>
             <div class="option-wrapper">
-                <span class="item">
+                <span class="item" style="display: flex; align-items: center;">
                     <!-- <input id="select-all" type="checkbox" name="select-all" onclick="toggleSelectCheckboxes(this);"> -->
                     <input id="select-all" type="checkbox" name="select-all" onclick="selectAllCheckboxes(this);">
                     <label id="toggle-select-label" for="select-all" style="margin-left: 0.5rem;">Marcar tudo</label>
                 </span>
 
-                <button id="delete-selected" class="item btn btn-default" title="Apagar Produtos Selecionados" onclick="deleteAllProducts('<?= URL ?>')"><i class="fas fa-trash"></i></button>
+                <button id="delete-selected" class="item btn btn-default" title="Apagar Produtos Selecionados" onclick="deleteAllProducts('<?= URL ?>')"><i class="fas fa-trash"></i>Apagar Tudo</button>
             </div>
             
             <table class="list-table">
@@ -108,17 +108,7 @@
                         <td data-type="id"><?= $product["id"] ?></td>
 
                         <td data-type="description">
-                            <div data-type="description">
-                                <a class="post-title" href="<?= URL ?>products/edit/<?= $product["id"] ?>" title="<?= $product["description"] ?>"><?= (strlen($product["description"]) <= 40) ? $product["description"] : substr($product["description"], 0, 40) ."..." ?></a>
-                            </div>
-
-                            <div class="options" style="display: none;">
-                                <a class="item" href="<?= URL ?>products/edit/<?= $product["id"] ?>">Editar</a>
-                                <div class="item">|</div>
-                                <!-- <a class="item" target="_blank" href="<?= URL ?>products/view/<?= $product["id"] ?>">Visualizar</a>
-                                <div class="item">|</div> -->
-                                <a class="item" href="<?= URL ?>products/delete/<?= $product["id"] ?>">Apagar</a>
-                            </div>
+                            <a class="post-title" href="<?= URL ?>products/edit/<?= $product["id"] ?>" title="<?= $product["description"] ?>"><?= (strlen($product["description"]) <= 40) ? $product["description"] : substr($product["description"], 0, 40) ."..." ?></a>
                         </td>
 
                         <td data-type="category"><?= $product["category_name"] ?></td>
@@ -127,9 +117,6 @@
 
                         <td width="100px">
                             <div class="options">
-                                <!-- <a class="item" href="<?= URL ?>products/edit/<?= $product["id"] ?>">Editar</a>
-                                <div class="item">|</div>
-                                <a class="item" href="<?= URL ?>products/delete/<?= $product["id"] ?>">Apagar</a> -->
                                 <a class="item" href="<?= URL ?>products/edit/<?= $product["id"] ?>" title="Editar Produto"><i class="fa fa-pen"></i></a>
                                 <a class="item" href="<?= URL ?>products/delete/<?= $product["id"] ?>" title="Apagar Produto"><i class="fa fa-trash"></i></a>
                             </div>

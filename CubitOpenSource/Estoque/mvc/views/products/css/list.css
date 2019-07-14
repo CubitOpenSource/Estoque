@@ -22,9 +22,24 @@
 
 .product-list {
 	grid-area: list;
+	padding: 1rem;
 	background-color: whitesmoke;
 }
 
+/* TABLE OPTIONS */
+.option-wrapper {
+	display: flex;
+	align-items: center;
+	/*justify-content: center;*/
+}
+.option-wrapper .item {
+	margin-left: 0.5rem;
+}
+.option-wrapper .item:first-child {
+	margin-left: 0;
+}
+
+/* FILTERS */
 .clear-filter {
 	display: none;
 }
@@ -42,27 +57,14 @@
 
 .checkbox { visibility: hidden; }
 
-.option-wrapper {
-	display: flex;
-	align-items: center;
-}
-.option-wrapper .item {
-	margin-left: 0.5rem;
-}
-.option-wrapper .item:first-child {
-	margin-left: 0;
-}
-
 .options {
 	visibility: hidden;
 	display: inline-flex;
-	margin-top: 0.5rem;
-	font-size: 0.8rem;
-	color: dodgerblue;
+	align-items: center;
+	justify-content: center;
 }
 
 .options .item {
-	font-size: 1rem;
 	margin-right: 1rem;
 	color: #888;
 

@@ -2,6 +2,12 @@ table {
 	width: 100%;
 	margin: auto;
 	border-collapse: collapse;
+	color: #666;
+}
+
+table a {
+	color: #777;
+	font-weight: bold;
 }
 
 thead {
