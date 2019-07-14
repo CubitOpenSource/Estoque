@@ -12,7 +12,7 @@
 
         <a class="btn btn-default" href="<?= URL ?>products/new">Cadastrar Produto</a>
 
-        <form>
+        <form style="display: none;">
             <div class="input-group">
                 <input type="search" title="Buscar Produtos" name="search" placeholder="Buscar Produtos" value="<?= $search ?>">
             </div>
