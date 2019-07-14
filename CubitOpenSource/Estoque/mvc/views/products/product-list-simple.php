@@ -79,7 +79,7 @@
             </div>
         <?php else : ?>
             <div class="option-wrapper">
-                <span class="item" style="display: flex; align-items: center;">
+                <span class="item">
                     <!-- <input id="select-all" type="checkbox" name="select-all" onclick="toggleSelectCheckboxes(this);"> -->
                     <input id="select-all" type="checkbox" name="select-all" onclick="selectAllCheckboxes(this);">
                     <label id="toggle-select-label" for="select-all" style="margin-left: 0.5rem;">Marcar tudo</label>
@@ -95,6 +95,7 @@
                         <?php foreach ($columns as $th) : ?>
                         <th><?= $th ?></th>
                         <?php endforeach; ?>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody id="products-tbody">
@@ -102,16 +103,16 @@
                     <tr onclick="toggleSelectRow.call(this)">
                         <input type="hidden" name="id" value="<?= $product["id"] ?>">
 
-                        <td data-type="checkbox" style="width: 64px"><input class="checkbox" type="checkbox" name="selected[]"></td>
+                        <td data-type="checkbox" align="center" width="10px"><input class="checkbox" type="checkbox" name="selected[]"></td>
 
                         <td data-type="id"><?= $product["id"] ?></td>
 
-                        <td data-type="description" style="text-align: left;">
+                        <td data-type="description">
                             <div data-type="description">
                                 <a class="post-title" href="<?= URL ?>products/edit/<?= $product["id"] ?>" title="<?= $product["description"] ?>"><?= (strlen($product["description"]) <= 40) ? $product["description"] : substr($product["description"], 0, 40) ."..." ?></a>
                             </div>
 
-                            <div class="options">
+                            <div class="options" style="display: none;">
                                 <a class="item" href="<?= URL ?>products/edit/<?= $product["id"] ?>">Editar</a>
                                 <div class="item">|</div>
                                 <!-- <a class="item" target="_blank" href="<?= URL ?>products/view/<?= $product["id"] ?>">Visualizar</a>
@@ -123,6 +124,16 @@
                         <td data-type="category"><?= $product["category_name"] ?></td>
 
                         <td data-type="stock"><?= $product["stock"] ?></td>
+
+                        <td width="100px">
+                            <div class="options">
+                                <!-- <a class="item" href="<?= URL ?>products/edit/<?= $product["id"] ?>">Editar</a>
+                                <div class="item">|</div>
+                                <a class="item" href="<?= URL ?>products/delete/<?= $product["id"] ?>">Apagar</a> -->
+                                <a class="item" href="<?= URL ?>products/edit/<?= $product["id"] ?>" title="Editar Produto"><i class="fa fa-pen"></i></a>
+                                <a class="item" href="<?= URL ?>products/delete/<?= $product["id"] ?>" title="Apagar Produto"><i class="fa fa-trash"></i></a>
+                            </div>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

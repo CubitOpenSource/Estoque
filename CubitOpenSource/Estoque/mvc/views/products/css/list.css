@@ -1,52 +1,4 @@
-.list-table .selected { background-color: #fff9e7; }
-.list-table tbody tr:hover .options { visibility: visible; }
-
-/*.list-table tr:hover .checkbox { visibility: visible; }*/
-/*.list-table tr:first-child td { border-top: 1px solid #ebebeb; }*/
-
-.post-title { font-weight: 600; color: dodgerblue; }
-
-.options {
-	visibility: hidden;
-	display: inline-flex;
-	margin-top: 0.5rem;
-	font-size: 0.8rem;
-	color: dodgerblue;
-}
-.options a { color: dodgerblue; }
-.options .item { margin-right: 0.25rem; }
-.options .item:last-child { margin-right: 0; }
-
-.draft { margin: 0 0.5em; font-style: italic; color: red; }
-
-.checkbox {
-	visibility: hidden;
-}
-
-.option-wrapper {
-	display: flex;
-	align-items: center;
-}
-.option-wrapper .item {
-	margin-left: 0.5rem;
-}
-.option-wrapper .item:first-child {
-	margin-left: 0;
-}
-
-.clear-filter {
-	display: none;
-}
-
-#delete-selected {
-	visibility: hidden;
-}
-
-
-
-
-
-/* Main Elements */
+/* MAIN ELEMENTS */
 
 .header {
 	position: relative;
@@ -72,3 +24,47 @@
 	grid-area: list;
 	background-color: whitesmoke;
 }
+
+.clear-filter {
+	display: none;
+}
+
+#delete-selected {
+	visibility: hidden;
+}
+
+
+/* PRODUCTS TABLE */
+
+.list-table tbody tr:hover .options { visibility: visible; }
+.list-table .selected { background-color: #fff9e7; }
+.list-table .selected .options { visibility: visible; }
+
+.checkbox { visibility: hidden; }
+
+.option-wrapper {
+	display: flex;
+	align-items: center;
+}
+.option-wrapper .item {
+	margin-left: 0.5rem;
+}
+.option-wrapper .item:first-child {
+	margin-left: 0;
+}
+
+.options {
+	visibility: hidden;
+	display: inline-flex;
+	margin-top: 0.5rem;
+	font-size: 0.8rem;
+	color: dodgerblue;
+}
+
+.options .item {
+	font-size: 1rem;
+	margin-right: 1rem;
+	color: #888;
+
+}
+.options .item:last-child { margin-right: 0; }
